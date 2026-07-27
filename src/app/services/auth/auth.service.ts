@@ -15,11 +15,6 @@ export class AuthService {
   isLoggedIn = signal<boolean>(false);
   currentUser = signal<User | null>(null);
 
-  // -> signUp()
-  // es kann eine URL angegeben werden, zu der der Benutzer weitergeleitet werden soll -> Summary!
-  // Diese URL muss als Weiterleitungs URL konfiguriert sein.
-  // Wenn Sie keine Weiterleitungs-URL angeben, wird der Benutzer automatisch zur URL Ihrer Website weitergeleitet. Standardmäßig ist dies „localhost:3000“, kann konfiguriert werden.
-
   async signUpNewUser(fullName: string, email: string, password: string): Promise<boolean> {
     const { firstname, lastname } = splitFullName(fullName);
     const exists = await this.contactService.contactExists(fullName);
@@ -32,7 +27,7 @@ export class AuthService {
       email: email,
       password: password,
       options: {
-        emailRedirectTo: 'https://example.com/welcome', // hier muss die Login URL rein
+        emailRedirectTo: 'http://localhost:4200/login',
       },
     });
 
