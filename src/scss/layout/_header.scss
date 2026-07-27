@@ -125,6 +125,10 @@
     margin-left: 16px;
 }
 
+.show-mobil {
+    display: none;
+}
+
 @include mobile-tablet {
 
     .show-mobil {

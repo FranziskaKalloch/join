@@ -13,6 +13,19 @@
   color: styles.$black;
 }
 
+.legal-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.legal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.legal-content::-webkit-scrollbar-thumb {
+  background: styles.$dark-grey-color;
+  border-radius: 3px;
+}
+
 .legal-content h1 {
   font-family: 'Inter', sans-serif;
   font-weight: 700;
