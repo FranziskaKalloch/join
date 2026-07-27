@@ -1,28 +1,50 @@
 <nav class="navbar" aria-label="Main navigation">
   <img class="navbar-logo" src="assets/img/logo/logo-join-white.svg" alt="Join-logo" />
 
-  <div class="navbar-main">
-    @for (item of navItems; track item.route) {
-      <a
-        class="navbar-link"
-        [routerLink]="item.route"
-        routerLinkActive="navbar-link-active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
+  <div class="navbar-main" [class.navbar-main-guest]="!isLoggedIn()">
+    @if (isLoggedIn()) {
+      @for (item of navItems; track item.route) {
+        <a
+          class="navbar-link"
+          [routerLink]="item.route"
+          routerLinkActive="navbar-link-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <span class="navbar-icon-wrapper" aria-hidden="true">
+            <img class="navbar-icon navbar-icon-normal" [src]="item.icon" alt="" />
+            <img class="navbar-icon navbar-icon-active" [src]="item.activeIcon" alt="" />
+          </span>
+          <span class="navbar-label">{{ item.label }}</span>
+        </a>
+      }
+    } @else {
+      <a class="navbar-link navbar-link-login" routerLink="/home">
         <span class="navbar-icon-wrapper" aria-hidden="true">
-          <img class="navbar-icon navbar-icon-normal" [src]="item.icon" alt="" />
-
-          <img class="navbar-icon navbar-icon-active" [src]="item.activeIcon" alt="" />
+          <img class="navbar-icon" src="assets/img/navigation/log-in.svg" alt="" />
         </span>
-
-        <span class="navbar-label">{{ item.label }}</span>
+        <span class="navbar-label">Log In</span>
       </a>
+      <div class="navbar-mobile-footer-group">
+        @for (link of footerLinks; track link.route) {
+          <a
+            class="navbar-footer-link navbar-mobile-footer-links"
+            [routerLink]="link.route"
+            routerLinkActive="navbar-footer-link-active"
+          >
+            {{ link.label }}
+          </a>
+        }
+      </div>
     }
   </div>
 
   <div class="navbar-footer">
     @for (link of footerLinks; track link.route) {
-      <a class="navbar-footer-link" [routerLink]="link.route">
+      <a
+        class="navbar-footer-link"
+        [routerLink]="link.route"
+        routerLinkActive="navbar-footer-link-active"
+      >
         {{ link.label }}
       </a>
     }
