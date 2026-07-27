@@ -71,6 +71,7 @@ export const routes: Routes = [
         path: 'help',
         component: Help,
         title: 'Help',
+        canActivate: [authGuard],
       },
       // ,
       // {
