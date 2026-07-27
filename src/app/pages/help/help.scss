@@ -1,0 +1,86 @@
+@use '../../../scss/abstract' as styles;
+
+:host {
+  display: block;
+  height: 100%;
+  overflow: hidden;
+}
+
+.legal-content {
+  height: 100%;
+  overflow-y: auto;
+  padding: 40px;
+  color: styles.$black;
+}
+
+.legal-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.legal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.legal-content::-webkit-scrollbar-thumb {
+  background: styles.$dark-grey-color;
+  border-radius: 3px;
+}
+
+.legal-content h1 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 61px;
+  line-height: 120%;
+  margin: 0;
+
+  @include styles.mobile {
+    font-size: 47px;
+    overflow-wrap: break-word;
+  }
+}
+
+.legal-content h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 27px;
+  line-height: 120%;
+  margin-top: 35px;
+}
+
+.legal-content h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 120%;
+  margin-top: 30px;
+}
+
+.legal-content p,
+.legal-content li {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+}
+
+.legal-content ol {
+  padding-left: 20px;
+}
+
+.legal-content li {
+  margin-bottom: 16px;
+}
+
+.legal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.back-button {
+  background: none;
+  border: unset;
+  cursor: pointer;
+  font-size: 24px;
+}
