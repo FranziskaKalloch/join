@@ -14,6 +14,9 @@
             @if(menuOpen) {
             <div class="user-menu" (click)="$event.stopPropagation()">
 
+                <a routerLink="/help" class="show-mobil" (click)="closeMenu()">
+                    Help
+                </a>
                 <a routerLink="/legal-notice" (click)="closeMenu()">
                     Legal Notice
                 </a>
