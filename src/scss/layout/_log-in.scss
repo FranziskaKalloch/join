@@ -26,6 +26,7 @@
 .main-login {
     flex: 1;
     min-width: 0;
+    padding-top: 64px;
     // display: flex;
     // flex-direction: column;
     // overflow-y: auto;
@@ -58,51 +59,83 @@
     width: auto;
 }
 
-.header-right-login{
-display: flex;
-justify-content: space-between;
-align-items: center;
+.header-right-login {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.header-right-login-text{
+.header-right-login-text {
     padding-right: 24px;
     font-size: 20px;
 }
 
-.wrapper-content-login{
- border-radius: 30px;
- box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.14);
- padding: 32px;
- display: flex;
- flex-direction: column;
- justify-content: center;
- align-items: center;
- width: 652px;
+.wrapper-content-login {
+    border-radius: 30px;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.14);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 652px;
 
 }
 
-.headline-login{
+.headline-login {
     font-size: 61px;
     font-weight: 700;
 }
 
-.headline-stroke{
+.headline-stroke {
     width: 150px;
     height: 3px;
     background: $ligth-blue-color;
     margin: 16px 0 32px;
 }
 
-.input-password {
-    width: 24px;
-    height: 24px;
-    background: url('/assets/img/forms/lock.svg') 95% no-repeat;
-    object-fit: contain;
-    padding-right: 21px;
+.form-cell--password {
+    position: relative;
+    padding-bottom: 0px;
+    margin-bottom: 12px;
 }
 
-.login-buttons{
+.form-cell--email {
+    position: relative;
+    padding-bottom: 0px;
+    margin-bottom: 12px;
+}
+
+.input-login-img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-80%);
+}
+
+.login-buttons {
     display: flex;
     justify-content: center;
     gap: 32px;
+    padding-bottom: 8px;
+}
+
+.login-legal {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    color: $grey-task-stroke;
+}
+
+.login-legal a{
+    cursor: pointer;
+    text-decoration: none;
+    color: $grey-task-stroke;
+
+    &:hover{
+        font-weight: bold;
+    }
 }

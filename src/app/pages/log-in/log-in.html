@@ -16,21 +16,39 @@
                 <div class="headline-stroke"></div>
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="form-scroll">
-                        <div class="form-cell">
-                            <input id="email" class="input-mail" type="text" name="email" formControlName="email"
+                        <div class="form-cell form-cell--email">
+                            <input id="email" class="input-email" type="text" name="email" formControlName="email"
                                 placeholder="Email" />
-                            <div class="form-error-placeholder"></div>
+                                 <img class="input-login-img" src="/assets/img/forms/mail.svg" />
+                            <div class="form-error-placeholder">
+                                @if (email.touched) {
+                                @if ( email.hasError('required')) {
+                                <p class="form-error">
+                                    Your email is required.
+                                </p>
+                                }
+                                @else if ( !loginForm.controls.email.hasError('required') &&
+                                loginForm.controls.email.hasError('invalidEmail')) {
+                                <p class="form-error">
+                                    Wrong email address.
+                                </p>
+                                }
+                                }
+                            </div>
                         </div>
-                        <div class="form-cell">
+                        <div class="form-cell form-cell--password">
                             <input id="password" class="input-password" type="text" name="password"
                                 formControlName="password" placeholder="Password" />
-                            <div class="form-error-placeholder"></div>
+                                <img class="input-login-img" src="/assets/img/forms/lock.svg" />
+                            <div class="form-error-placeholder">
+
+                            </div>
                         </div>
                         <div class="login-buttons">
-                            <button class="btn-primary btn-primary--login" type="button">
+                            <button class="btn-primary btn-primary--login" type="submit">
                                 Log in
                             </button>
-                            <button class="btn-primary btn-primary--guest" type="button">
+                            <button class="btn-primary btn-primary--guest" type="button" (click)="guestLogin()">
                                 Guest Log in
                             </button>
                         </div>
@@ -40,6 +58,9 @@
         </main>
         <section class="wrapper-footer-login">
             <div class="login-legal">
+
+                <div class="login-policy"><a routerLink="">Privacy Policy</a></div>
+                <div class="login-legal"><a routerLink="">Legal notice</a></div>
 
             </div>
         </section>
