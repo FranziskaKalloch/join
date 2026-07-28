@@ -1,3 +1,68 @@
-<p>log-in works!</p>
+<section id="wrapper-join-login">
+    <div class="layout-login">
+        <section class="wrapper-header-login">
+            <div class="logo-login">
+                <img class="img-logo-login" src="/assets/img/logo/logo-join.svg" />
+            </div>
+            <div class="header-right-login">
+                <div class="header-right-login-text">Not a Join user?</div>
+                <div class="header-right-sign-up"><button class="btn-primary btn-primary--signup" type="button">Sign
+                        up</button></div>
+            </div>
+        </section>
+        <main class="main-login">
+            <section class="wrapper-content-login">
+                <h1 class="headline-login">Log in</h1>
+                <div class="headline-stroke"></div>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div class="form-scroll">
+                        <div class="form-cell form-cell--email">
+                            <input id="email" class="input-email" type="text" name="email" formControlName="email"
+                                placeholder="Email" />
+                                 <img class="input-login-img" src="/assets/img/forms/mail.svg" />
+                            <div class="form-error-placeholder">
+                                @if (email.touched) {
+                                @if ( email.hasError('required')) {
+                                <p class="form-error">
+                                    Your email is required.
+                                </p>
+                                }
+                                @else if ( !loginForm.controls.email.hasError('required') &&
+                                loginForm.controls.email.hasError('invalidEmail')) {
+                                <p class="form-error">
+                                    Wrong email address.
+                                </p>
+                                }
+                                }
+                            </div>
+                        </div>
+                        <div class="form-cell form-cell--password">
+                            <input id="password" class="input-password" type="text" name="password"
+                                formControlName="password" placeholder="Password" />
+                                <img class="input-login-img" src="/assets/img/forms/lock.svg" />
+                            <div class="form-error-placeholder">
 
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()"></form>
+                            </div>
+                        </div>
+                        <div class="login-buttons">
+                            <button class="btn-primary btn-primary--login" type="submit">
+                                Log in
+                            </button>
+                            <button class="btn-primary btn-primary--guest" type="button" (click)="guestLogin()">
+                                Guest Log in
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </main>
+        <section class="wrapper-footer-login">
+            <div class="login-legal">
+
+                <div class="login-policy"><a routerLink="">Privacy Policy</a></div>
+                <div class="login-legal"><a routerLink="">Legal notice</a></div>
+
+            </div>
+        </section>
+    </div>
+</section>

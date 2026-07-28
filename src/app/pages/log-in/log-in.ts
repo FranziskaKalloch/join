@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { emailValidator } from '../../utils/email.util/email.util';
 
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-log-in',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './log-in.html',
   styleUrl: './log-in.scss',
 })
@@ -17,7 +18,7 @@ export class LogIn {
   loginForm = new FormGroup({
     email: new FormControl('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.email],
+      validators: [Validators.required, emailValidator()],
     }),
     password: new FormControl('', {
       nonNullable: true,
@@ -34,6 +35,7 @@ export class LogIn {
    */
   async onSubmit(): Promise<void> {
     if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
       return;
     }
 
@@ -48,5 +50,23 @@ export class LogIn {
     }
 
     await this.router.navigate(['/summary']);
+  }
+
+  async guestLogin(): Promise<void> {
+    const loginSuccessful = await this.authService.signInAnonymously();
+
+    if (!loginSuccessful) {
+      return;
+    }
+
+    await this.router.navigate(['/summary']);
+  }
+
+  get email() {
+    return this.loginForm.controls.email;
+  }
+
+  get password() {
+    return this.loginForm.controls.password;
   }
 }
