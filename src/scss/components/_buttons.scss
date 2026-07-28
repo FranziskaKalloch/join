@@ -21,7 +21,7 @@
 
   @include landscape {
     padding: 8px 10px;
-  }
+  } 
 
 
   &:hover {
@@ -67,7 +67,6 @@
     &:hover::after {
       background: url("/assets/img/forms/cancel-hover.svg") center / contain no-repeat;
     }
-
   }
 
   &--signup {
@@ -82,6 +81,11 @@
   &--login {
     font-size: 21px;
     font-weight: bold;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
 
     &:hover {
       background-color: $light-blue-button;
@@ -135,7 +139,6 @@
     font-size: 18px;
   }
 
-
   &:hover {
     border-color: $light-blue-button;
     outline: 1px solid $light-blue-button;
@@ -166,7 +169,7 @@
   gap: 8px;
   border: 1px solid $blue-color;
   box-shadow: none;
-  
+
   @include small-mobile {
     font-size: 18px;
   }

@@ -96,14 +96,37 @@
 
 .form-cell--password {
     position: relative;
-    padding-bottom: 0px;
-    margin-bottom: 12px;
+
+    input {
+        padding-right: 52px;
+    }
+
+    .password-icon {
+        position: absolute;
+        top: 14px;
+        right: 18px;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        user-select: none;
+    }
 }
 
 .form-cell--email {
     position: relative;
-    padding-bottom: 0px;
-    margin-bottom: 12px;
+
+    input {
+        padding-right: 52px;
+    }
+
+    .email-icon {
+        position: absolute;
+        top: 14px;
+        right: 18px;
+        width: 24px;
+        height: 24px;
+        user-select: none;
+    }
 }
 
 .input-login-img {
@@ -130,12 +153,27 @@
     color: $grey-task-stroke;
 }
 
-.login-legal a{
+.login-legal a {
     cursor: pointer;
     text-decoration: none;
     color: $grey-task-stroke;
 
-    &:hover{
-        font-weight: bold;
+    span {
+        position: relative;
+        display: inline-block;
+
+        &::after {
+            content: attr(data-text);
+            font-weight: 700;
+            visibility: hidden;
+            height: 0;
+            overflow: hidden;
+            display: block;
+        }
+    }
+
+    &:hover span {
+        color: $blue-color;
+        font-weight: 700;
     }
 }
