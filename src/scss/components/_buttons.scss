@@ -21,7 +21,7 @@
 
   @include landscape {
     padding: 8px 10px;
-  } 
+  }
 
 
   &:hover {
@@ -81,6 +81,10 @@
   &--login {
     font-size: 21px;
     font-weight: bold;
+
+    @include small-mobile {
+      font-size: 16px;
+    }
 
     &:disabled {
       opacity: 0.5;
@@ -170,14 +174,17 @@
   border: 1px solid $blue-color;
   box-shadow: none;
 
-  @include small-mobile {
+  @include mobile {
+    font-size: 16px;
+  }
+
+    @include tablet {
     font-size: 18px;
   }
 
   @include landscape {
     font-size: 18px;
   }
-
 
   &:hover {
     border-color: $light-blue-button;
