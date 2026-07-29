@@ -86,6 +86,10 @@
         right: anchor(right);
 
         translate: 0px 26px;
+
+        @include landscape {
+            translate: 0px 10px;
+        }
     }
 
     @supports not (anchor-name: --user-menu-anchor) {
@@ -100,8 +104,14 @@
     border-bottom-right-radius: 20px;
     display: flex;
     flex-direction: column;
-    z-index: 1000;
+    z-index: 1021;
     padding: 14px 0;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+
+
+    @include landscape {
+          padding: 0px 0;
+    }
 }
 
 .user-menu a {
@@ -109,6 +119,10 @@
     text-decoration: none;
     color: $light-grey-color;
     margin: 0 8px;
+
+        @include landscape {
+          padding: 10px 16px;
+    }
 
     &:hover {
         background: $blue-usermenu-hover-color;
@@ -144,13 +158,13 @@
     }
 
     .header-content {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    height: 80px;
-    background-color: white;
-    box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        height: 80px;
+        background-color: white;
+        box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
     }
 }
