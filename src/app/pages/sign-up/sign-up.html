@@ -1,1 +1,123 @@
-<p>sign-up works!</p>
+<div class="signup-container">
+  <header class="logo-header">
+    <img src="assets/img/logo/logo-join.svg" alt="Join Logo" class="logo">
+  </header>
+
+  <main class="signup-card">
+    <div class="card-header">
+      <button type="button" routerLink="/login" class="back-btn" [disabled]="isSubmitting">
+        <img src="assets/img/navigation/arrow-alt.svg" alt="Back">
+      </button>
+      <h1>Sign up</h1>
+      <div class="underline"></div>
+    </div>
+
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+      
+      <div class="input-container">
+        <div class="input-group" [class.error-border]="signUpForm.controls.fullName.invalid && signUpForm.controls.fullName.touched">
+          <input type="text" formControlName="fullName" placeholder="Name">
+          <img src="assets/img/forms/person.svg" class="icon" alt="Person">
+        </div>
+        <span class="error-msg">
+          @if(signUpForm.controls.fullName.invalid && signUpForm.controls.fullName.touched) {
+            Please enter a first and last name.
+          }
+        </span>
+      </div>
+
+      <div class="input-container">
+        <div class="input-group" [class.error-border]="signUpForm.controls.email.invalid && signUpForm.controls.email.touched">
+          <input type="email" formControlName="email" placeholder="Email">
+          <img src="assets/img/forms/mail.svg" class="icon" alt="Mail">
+        </div>
+        <span class="error-msg">
+          @if(signUpForm.controls.email.invalid && signUpForm.controls.email.touched) {
+            Valid email is required.
+          }
+        </span>
+      </div>
+
+      <div class="input-container">
+        <div class="input-group" [class.error-border]="signUpForm.controls.password.invalid && signUpForm.controls.password.touched">
+          <input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Password">
+          
+          @if (!signUpForm.controls.password.value) {
+            <img src="assets/img/forms/lock.svg" class="icon" alt="Lock">
+          } @else {
+            <img [src]="showPassword ? 'assets/img/forms/visibility.svg' : 'assets/img/forms/visibility-off.svg'" 
+                 class="icon clickable" 
+                 (click)="togglePasswordVisibility()" 
+                 alt="Toggle Visibility">
+          }
+        </div>
+        <span class="error-msg">
+          @if(signUpForm.controls.password.hasError('required') && signUpForm.controls.password.touched) {
+            Password is required.
+          } @else if (signUpForm.controls.password.hasError('minlength') && signUpForm.controls.password.touched) {
+            Password must be at least 6 characters.
+          }
+        </span>
+      </div>
+
+      <div class="input-container">
+        <div class="input-group" [class.error-border]="(signUpForm.controls.confirmedPassword.invalid || signUpForm.controls.confirmedPassword.hasError('mismatch')) && signUpForm.controls.confirmedPassword.touched">
+          <input [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmedPassword" placeholder="Confirm Password">
+          
+          @if (!signUpForm.controls.confirmedPassword.value) {
+            <img src="assets/img/forms/lock.svg" class="icon" alt="Lock">
+          } @else {
+            <img [src]="showConfirmPassword ? 'assets/img/forms/visibility.svg' : 'assets/img/forms/visibility-off.svg'" 
+                 class="icon clickable" 
+                 (click)="toggleConfirmPasswordVisibility()" 
+                 alt="Toggle Visibility">
+          }
+        </div>
+        <span class="error-msg">
+          @if(signUpForm.controls.confirmedPassword.hasError('mismatch') && signUpForm.controls.confirmedPassword.touched) {
+            Your passwords don't match. Please try again.
+          } @else if (signUpForm.controls.confirmedPassword.hasError('required') && signUpForm.controls.confirmedPassword.touched) {
+            Password confirmation is required.
+          } @else if (signUpForm.controls.confirmedPassword.hasError('minlength') && signUpForm.controls.confirmedPassword.touched) {
+            Password must be at least 6 characters.
+          }
+        </span>
+      </div>
+
+      <div class="global-error-container">
+        @if (errorMessage) {
+          <span class="error-msg global-error">{{ errorMessage }}</span>
+        }
+      </div>
+
+      <div class="checkbox-group">
+        <label class="custom-checkbox">
+          <input type="checkbox" formControlName="privacyPolicy">
+          <img src="assets/img/components/general/checked-empty.svg" class="cb-empty" alt="Checkbox empty">
+          <img src="assets/img/components/general/checked-empty-hover.svg" class="cb-empty-hover" alt="Checkbox empty hover">
+          <img src="assets/img/components/general/checked.svg" class="cb-checked" alt="Checkbox checked">
+          <img src="assets/img/components/general/checked-hover.svg" class="cb-checked-hover" alt="Checkbox checked hover">
+        </label>
+        <span class="checkbox-label-text">I accept the <a routerLink="/privacy-policy" class="link">Privacy policy</a></span>
+      </div>
+
+      <div class="btn-container">
+        <button type="submit" [disabled]="signUpForm.invalid || isSubmitting" class="submit-btn">Sign up</button>
+      </div>
+      
+    </form>
+  </main>
+
+  <footer class="footer-links">
+    <a routerLink="/privacy-policy">Privacy Policy</a>
+    <a routerLink="/legal-notice">Legal notice</a>
+  </footer>
+
+  @if (showSuccessPopup) {
+    <div class="popup-overlay">
+      <div class="success-popup">
+        You Signed Up successfully
+      </div>
+    </div>
+  }
+</div>
