@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 // This function returns a ValidatorFn that checks if the selected date is in the past. It compares the selected date with today's date and returns a validation error if the selected date is earlier than today. If the control value is empty, it returns null, indicating no validation error.
-export function noPastDateValidator(): ValidatorFn {
+export function noPastDateValidator(originalDate?: Date): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     if (!control.value) {
       return null;
@@ -11,6 +11,10 @@ export function noPastDateValidator(): ValidatorFn {
 
     const selectedDate = new Date(control.value);
     selectedDate.setHours(0, 0, 0, 0);
+
+    if (originalDate && control.value === originalDate) {
+      return null;
+    }
 
     return selectedDate < today ? { pastDate: true } : null;
   };

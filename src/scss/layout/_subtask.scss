@@ -170,5 +170,26 @@
     display: flex;
     overflow-y: auto;
     flex-direction: column;
-    max-height: 140px;
+    min-height: 100px;
+    max-height: 100px;
+
+    @include widesscreen{
+    min-height: 100px;
+    max-height: 100px;
+    }
+
+    @include desktop-hd{
+    min-height: 100px;
+    max-height: 100px;
+    }
+
+@include desktop-s{
+    min-height: 100px;
+    max-height: 100px;
+    }
+
+    @include tablet{
+    min-height: 100px;
+    max-height: 100px;
+    }
 }

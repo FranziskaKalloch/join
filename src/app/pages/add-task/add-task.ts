@@ -247,11 +247,9 @@ export class AddTask {
 
   private loadTaskIntoForm(): void {
     const task = this.selectedTask();
-
     if (!task) {
       return;
     }
-
     this.addTaskForm.patchValue({
       title: task.title,
       description: task.description,
@@ -260,6 +258,15 @@ export class AddTask {
       category: task.category,
       assignedContactIds: task.assignedContactIds,
     });
+
+    const dueDateControl = this.addTaskForm.controls.dueDate;
+
+    dueDateControl.setValidators([
+      Validators.required,
+      noPastDateValidator(new Date(task.dueDate))
+    ]);
+
+    dueDateControl.updateValueAndValidity();
 
     this.initialSubtasks = [...task.subtasks];
     this.subtasks.set([...task.subtasks]);

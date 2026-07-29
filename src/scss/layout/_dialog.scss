@@ -22,19 +22,39 @@ dialog::backdrop {
     &--task {
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
         height: calc(100dvh - 50px);
-         height: fit-content;
+        height: fit-content;
+
+        @include widesscreen {
+            height: calc(67dvh - 80px);
+        }
     }
 
     &--task-view {
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
         height: calc(100dvh - 80px);
         width: 520px;
+
+        @include desktop-hd {
+            height: calc(100dvh - 80px);
+        }
+
+        @include widesscreen {
+            height: calc(60dvh - 80px);
+        }
     }
 
     &--task-view-edit {
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
         height: calc(100dvh - 80px);
         width: 520px;
+
+        @include desktop-hd {
+            height: calc(100dvh - 80px);
+        }
+
+        @include widesscreen {
+            height: calc(60dvh - 80px);
+        }
     }
 
 
@@ -74,9 +94,7 @@ dialog::backdrop {
         bottom: 80px;
 
     }
-    @include widesscreen{
-        height: calc(60dvh - 80px);
-    }
+
 }
 
 .user-dialog--task>app-add-task,
@@ -256,8 +274,20 @@ dialog::backdrop {
         display: flex;
         align-items: stretch;
 
+        @include desktop-s {
+            align-items: center;
+        }
+
+        @include desktop-md {
+            align-items: center;
+        }
+
+        @include desktop-hd {
+            align-items: center;
+        }
+
         @include landscape {
-         align-items: flex-start;
+            align-items: flex-start;
 
         }
 
@@ -896,9 +926,9 @@ input.ng-invalid.ng-touched {
             max-height: calc(100dvh - 340px);
         }
 
-         @include small-mobile-high {
+        @include small-mobile-high {
             flex-direction: column;
-             max-height: calc(100dvh - 360px);
+            max-height: calc(100dvh - 360px);
         }
 
         @include widesscreen {
@@ -919,7 +949,7 @@ input.ng-invalid.ng-touched {
         //  gap: 24px;
         margin: 30px 0;
 
-             @include small-mobile {
+        @include small-mobile {
             flex-direction: column;
             max-height: calc(100dvh - 200px);
         }

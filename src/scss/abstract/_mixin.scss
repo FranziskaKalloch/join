@@ -40,7 +40,7 @@
 }
 
 @mixin desktop-md {
-  @media (min-width: 1201px) and (max-width: 1320px) {
+  @media (min-width: 1201px) and (max-width: 1919px) {
     @content;
   }
 }

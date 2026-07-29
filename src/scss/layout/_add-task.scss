@@ -8,7 +8,7 @@
     min-height: 0;
     width: 100%;
 
-    @include desktop-plus {
+    @include desktop-hd {
         max-width: 60dvw;
     }
 
@@ -20,8 +20,11 @@
         height: unset;
     }
 
-
     &--page {
+        @include desktop-md {
+            max-width: 80dvw;
+        }
+
         @include tablet {
             padding-top: 96px;
         }
@@ -31,7 +34,6 @@
         }
     }
 }
-
 
 .add-task-top {
     display: flex;
@@ -110,7 +112,7 @@
 
     @include desktop-s {
         margin: 0 16px;
-      
+
     }
 }
 
