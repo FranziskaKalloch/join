@@ -100,7 +100,8 @@
     min-height: auto;
     
     > *:not(.task-column__empty) {
-      flex: 0 0 auto;
+      flex: 0 0 260px;
+      width: 260px;
       display: flex;
     }
     
