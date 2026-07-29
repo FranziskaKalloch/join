@@ -1,35 +1,35 @@
-<section class="summary">
-  <div class="summary__headline">
-    <h1 class="summary__title">Join 360</h1>
-    <span class="summary__separator"></span>
-    <p class="summary__subtitle">Key Metrics at a Glance</p>
+<section class="summary-wrapper">
+  <div class="summary-headline">
+    <h1 class="summary-title">Join 360</h1>
+    <span class="summary-separator"></span>
+    <p class="summary-subtitle">Key Metrics at a Glance</p>
   </div>
 
   <!-- NUR PLATZHALTE -->
 
-  <div class="summary__metrics">
-    <div class="summary__metrics-firstLine">
-      <div class="summary__metrics-toDo">
+  <div class="summary-metrics">
+    <div class="summary-metrics-firstLine">
+      <div class="summary-metrics-toDo">
         <span> {{ todoTasks }}</span>
       </div>
-      <div class="summary__metrics-done">
+      <div class="summary-metrics-done">
         {{ doneTasks }}
       </div>
     </div>
-    <div class="summary__metrics-secondLine">
-      <span class="summary__metrics-urgent">
+    <div class="summary-metrics-secondLine">
+      <span class="summary-metrics-urgent">
         {{ urgentTasks }}
       </span>
-      <span class="summary__metrics-date">
+      <span class="summary-metrics-date">
         <p>{{ currentDate | date: 'dd.MM.yyyy' }}</p>
       </span>
     </div>
-    <div class="summary__metrics-thirdLine">
-      <div class="summary__metrics-taskBoard">
+    <div class="summary-metrics-thirdLine">
+      <div class="summary-metrics-taskBoard">
         <span>{{ tasksInBoard }}</span>
       </div>
-      <div class="summary__metrics-taskInProgress"></div>
-      <div class="summary__metrics-awaitFeedback"></div>
+      <div class="summary-metrics-taskInProgress"></div>
+      <div class="summary-metrics-awaitFeedback"></div>
     </div>
   </div>
 

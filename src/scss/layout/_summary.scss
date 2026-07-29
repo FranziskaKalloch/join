@@ -1,0 +1,60 @@
+@use '../abstract/' as *;
+
+.summary-wrapper {
+    padding: 48px;
+
+}
+
+.summary-metrics {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.summary-headline {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    min-height: 73px;
+}
+
+.summary-title {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 120%;
+    color: #000000;
+
+    @include desktop-s {
+        font-size: 48px;
+    }
+
+    @include mobile-tablet {
+        font-size: 36px;
+    }
+}
+
+.summary-separator {
+    width: 0;
+    height: 59px;
+    border-left: 3px solid $ligth-blue-color;
+    flex-shrink: 0;
+}
+
+.summary-subtitle {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 120%;
+    color: $blue-color;
+    white-space: nowrap;
+
+    @include desktop-s {
+        font-size: 22px;
+        white-space: normal;
+    }
+
+}
