@@ -170,14 +170,25 @@
     display: flex;
     overflow-y: auto;
     flex-direction: column;
-    min-height: 75px;
+    min-height: 100px;
     max-height: 100px;
 
     @include widesscreen{
     min-height: 100px;
     max-height: 100px;
     }
-        @include desktop-hd{
+
+    @include desktop-hd{
+    min-height: 100px;
+    max-height: 100px;
+    }
+
+@include desktop-s{
+    min-height: 100px;
+    max-height: 100px;
+    }
+
+    @include tablet{
     min-height: 100px;
     max-height: 100px;
     }

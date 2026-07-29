@@ -24,12 +24,8 @@ dialog::backdrop {
         height: calc(100dvh - 50px);
         height: fit-content;
 
-        @include desktop-hd {
-            height: 100dvh;
-        }
-
         @include widesscreen {
-            height: calc(70dvh - 80px);
+            height: calc(75dvh - 80px);
         }
     }
 
