@@ -20,6 +20,20 @@
 
     @include mobile-tablet {
         flex-direction: column;
+
+    }
+
+    @include tablet {
+        padding: 20px 16px;
+    }
+
+    @include mobile {
+        padding: 20px 8px;
+    }
+
+    
+    @include landscape {
+        padding: 20px 8px;
     }
 }
 
@@ -32,18 +46,24 @@
     // overflow-y: auto;
     // min-height: 0;
 
-    @include mobile-tablet {
+    @include tablet {
         order: 1;
         flex: 1;
+        padding-top: 64px;
     }
-}
-
-.wrapper-content-login {
-    flex: 1;
-    min-height: 0;
 
     @include mobile {
-        padding-top: 80px;
+        order: 1;
+        flex: 1;
+        padding-top: 44px;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    @include landscape {
+        padding-top: 0px;
+        position: absolute;
+        bottom: 0;
     }
 }
 
@@ -54,20 +74,104 @@
     width: 100%;
 }
 
+.wrapper-footer-login {
+    @include mobile-tablet {
+        order: 3;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 32px;
+    }
+
+    @include small-mobile {
+        order: 3;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+    }
+
+    @include landscape {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+        position: absolute;
+        bottom: 8px;
+        left: 8px;
+    }
+}
+
 .img-logo-login {
     height: 122px;
     width: auto;
+
+    @include mobile-tablet {
+        height: 78px;
+        padding-left: 20px;
+    }
+
+    @include small-mobile {
+        height: 62px;
+        padding-left: 20%;
+    }
+
+    @include landscape {
+        height: 46px;
+        padding-left: 20%;
+    }
 }
 
-.header-right-login {
+.header-signup {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @include mobile-tablet {
+        display: none;
+    }
+
+    @include landscape {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+    }
 }
 
-.header-right-login-text {
+.login-signup-text {
     padding-right: 24px;
     font-size: 20px;
+
+
+    @include small-mobile {
+        font-size: 18px;
+    }
+
+        @include landscape {
+        font-size: 16px;
+         padding-right: 0px;
+         padding-bottom: 8px;;
+    }
+
+}
+
+.footer-signup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include desktop-min {
+        display: none;
+    }
+
+    @include landscape {
+        display: none;
+    }
 }
 
 .wrapper-content-login {
@@ -79,12 +183,37 @@
     justify-content: center;
     align-items: center;
     width: 652px;
+    flex: 1;
+    min-height: 0;
 
+    @include tablet {
+        width: 100%;
+        padding: 20px 16px 20px;
+    }
+
+    @include mobile {
+        width: 100%;
+        padding: 20px 8px 20px;
+        ;
+    }
 }
+
 
 .headline-login {
     font-size: 61px;
     font-weight: 700;
+
+    @include mobile-tablet {
+        font-size: 47px;
+    }
+
+    @include small-mobile {
+        font-size: 42px;
+    }
+
+    @include landscape {
+        font-size: 36px;
+    }
 }
 
 .headline-stroke {
@@ -92,18 +221,68 @@
     height: 3px;
     background: $ligth-blue-color;
     margin: 16px 0 32px;
+
+    @include small-mobile {
+        margin: 16px 0 20px;
+    }
+
+    @include landscape {
+        margin: 8px 0 8px;
+    }
 }
 
 .form-cell--password {
     position: relative;
-    padding-bottom: 0px;
-    margin-bottom: 12px;
+
+    input {
+        padding-right: 52px;
+    }
+
+    .password-icon {
+        position: absolute;
+        top: 14px;
+        right: 18px;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        user-select: none;
+
+
+        @include mobile-tablet {
+            top: 8px;
+        }
+
+        @include small-mobile {
+            top: 7px;
+        }
+    }
 }
 
 .form-cell--email {
     position: relative;
-    padding-bottom: 0px;
-    margin-bottom: 12px;
+    padding-bottom: 16px;
+
+
+    input {
+        padding-right: 52px;
+    }
+
+    .email-icon {
+        position: absolute;
+        top: 14px;
+        right: 18px;
+        width: 24px;
+        height: 24px;
+        user-select: none;
+
+        @include mobile-tablet {
+            top: 8px;
+        }
+
+        @include small-mobile {
+            top: 7px;
+        }
+    }
 }
 
 .input-login-img {
@@ -116,11 +295,31 @@
     transform: translateY(-80%);
 }
 
+.wrapper-login-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    @include landscape {
+        position: relative;
+    }
+}
+
 .login-buttons {
     display: flex;
     justify-content: center;
     gap: 32px;
-    padding-bottom: 8px;
+    padding: 8px 0px;
+
+    @include mobile {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    @include landscape {
+        gap: 16px;
+
+    }
 }
 
 .login-legal {
@@ -128,14 +327,41 @@
     justify-content: center;
     gap: 32px;
     color: $grey-task-stroke;
+    @include landscape{
+        flex-direction: column;
+        gap: 12px;
+    }
 }
 
-.login-legal a{
+.login-legal a {
     cursor: pointer;
     text-decoration: none;
     color: $grey-task-stroke;
 
-    &:hover{
-        font-weight: bold;
+    @include small-mobile {
+        font-size: 16px;
     }
+
+    span {
+        position: relative;
+        display: inline-block;
+
+        &::after {
+            content: attr(data-text);
+            font-weight: 700;
+            visibility: hidden;
+            height: 0;
+            overflow: hidden;
+            display: block;
+        }
+    }
+
+    &:hover span {
+        color: $blue-color;
+        font-weight: 700;
+    }
+}
+
+input.login-error {
+    border-color: $red-form-color;
 }

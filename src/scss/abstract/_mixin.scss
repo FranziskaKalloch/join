@@ -51,6 +51,13 @@
   }
 }
 
+@mixin desktop-min {
+  @media (min-width: 921px) {
+    @content;
+  }
+}
+
+
 @mixin small-mobile {
   @media (width <=380px) {
     @content;
