@@ -3,14 +3,47 @@
 .summary-wrapper {
     padding: 48px;
 
+    @include tablet {
+        padding: 16px;
+    }
+
+    @include mobile {
+        padding: 8px;
+    }
 }
 
 .summary-metrics {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
 }
 
+.summary-metrics-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+    width: 50%;
+}
+
+.summary-greetings-wrapper {
+    width: 33%;
+}
+
+.summary-metrics-firstLine {
+    display: flex;
+    gap: 18px;
+    padding-top: 32px;
+}
+
+.summary-metrics-secondLine {
+    display: flex;
+    gap: 18px;
+}
+
+.summary-metrics-thirdLine {
+    display: flex;
+    gap: 18px;
+}
 
 .summary-headline {
     display: flex;
@@ -57,4 +90,111 @@
         white-space: normal;
     }
 
+}
+
+.summary-metrics-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.1;
+
+    span {
+        font-size: 20px;
+        font-weight: 400;
+    }
+}
+
+.summary-metrics-badges {
+    border-radius: 30px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+    padding: 38px 58px;
+    font-size: 64px;
+    font-weight: 600;
+    cursor: pointer;
+    color: $black;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    &:hover {
+        background-color: $blue-color;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        color: $white;
+
+    }
+    &--third{
+        padding: 25px;
+    }
+}
+
+.summary-urgent-stroke{
+background: $grey-form-color;
+width: 2px;
+height: 100%;
+}
+
+.summary-metrics-badges:hover .summary-urgent-stroke{
+background: $white;
+}
+.summary-metrics-badges:hover .summary-metrics-toDo-icon img {
+    content: url('/assets/img/components/summary/summary-edit-white.svg');
+}
+
+.summary-metrics-badges:hover .summary-metrics-doneTasks-icon img {
+    content: url('/assets/img/components/summary/summary-check-white.svg');
+}
+
+
+.summary-metrics-toDo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.summary-metrics-done {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.summary-badge-number {
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.summary-metrics-thirdLine-task {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    span{
+        font-size: 20px;
+        font-weight: 400;
+        text-align: center;
+    }
+}
+
+.summary-urgent-date{
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.summary-urgent-text{
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.greeting-headline{
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.greeting-name{
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 120%;
+    color: $header-avatar;
 }

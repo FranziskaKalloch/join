@@ -247,11 +247,9 @@ export class AddTask {
 
   private loadTaskIntoForm(): void {
     const task = this.selectedTask();
-
     if (!task) {
       return;
     }
-
     this.addTaskForm.patchValue({
       title: task.title,
       description: task.description,
