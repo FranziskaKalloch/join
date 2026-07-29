@@ -61,9 +61,13 @@
                   @if (addTaskForm.controls.dueDate.hasError('required')) {
                   <p class="form-error">This field is required.</p>
                   }
-                  @if (addTaskForm.controls.dueDate.hasError('pastDate')) {
+                  <!-- @if (addTaskForm.controls.dueDate.hasError('pastDate')) {
                   <p class="form-error">Please select today or a future date.</p>
+                  } -->
                   }
+                  @if (addTaskForm.controls.dueDate.hasError('pastDate')
+                  ) {
+                  <p class="form-error">Please select today or a future date.</p>
                   }
                 </div>
               </div>

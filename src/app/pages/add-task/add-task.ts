@@ -261,6 +261,15 @@ export class AddTask {
       assignedContactIds: task.assignedContactIds,
     });
 
+    const dueDateControl = this.addTaskForm.controls.dueDate;
+
+    dueDateControl.setValidators([
+      Validators.required,
+      noPastDateValidator(new Date(task.dueDate))
+    ]);
+
+    dueDateControl.updateValueAndValidity();
+
     this.initialSubtasks = [...task.subtasks];
     this.subtasks.set([...task.subtasks]);
   }

@@ -8,9 +8,14 @@
     min-height: 0;
     width: 100%;
 
-    @include desktop-plus {
+    @include desktop-hd {
         max-width: 60dvw;
     }
+
+    // @include desktop-md {
+    //     max-width: 80dvw;
+    // }
+
 
     @include widesscreen {
         max-width: 50dvw;
