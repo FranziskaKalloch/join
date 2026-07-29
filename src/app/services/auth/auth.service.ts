@@ -15,6 +15,19 @@ export class AuthService {
   isLoggedIn = signal<boolean>(false);
   currentUser = signal<User | null>(null);
 
+  /**
+   * Registers a new user with Supabase and creates a corresponding contact.
+   *
+   * The method first checks whether a contact with the given name already
+   * exists. If the registration succeeds, a new contact is created and
+   * linked to the authenticated user.
+   *
+   * @param fullName The full name of the user.
+   * @param email The email address used for registration.
+   * @param password The password for the new user account.
+   * @returns A promise that resolves with `true` if the user and contact
+   * were created successfully, otherwise `false`.
+   */
   async signUpNewUser(fullName: string, email: string, password: string): Promise<boolean> {
     const { firstname, lastname } = splitFullName(fullName);
     const exists = await this.contactService.contactExists(fullName);
@@ -73,34 +86,46 @@ export class AuthService {
   }
 
   /**
-   * Signs out the currently logged-in user via Supabase.
-   * Sets the `isLoggedIn` signal to false on successful sign-out.
+   * Signs out the current user and clears the local authentication state.
    *
-   * @returns true if sign-out was successful, false otherwise
+   * @returns A promise that resolves with true when the logout was successful.
    */
   async signOut(): Promise<boolean> {
     const { error } = await this.supabaseService.supabase.auth.signOut();
 
     if (error) {
-      console.log(error.message);
+      console.error('Logout failed:', error);
       return false;
     }
 
+    this.currentUser.set(null);
     this.isLoggedIn.set(false);
+
     return true;
   }
 
   /**
-   * Loads the currently logged-in user from Supabase and updates the `currentUser` signal.
+   * Retrieves the currently authenticated user from Supabase and updates
+   * the local authentication state.
    *
-   * @returns void
+   * If no authenticated user exists or an error occurs, the current user
+   * is cleared and the logged-in state is set to false.
+   *
+   * @returns A promise that resolves when the authentication state has been updated.
    */
   async getUser(): Promise<void> {
     const {
       data: { user },
+      error,
     } = await this.supabaseService.supabase.auth.getUser();
 
+    if (error || !user) {
+      this.currentUser.set(null);
+      this.isLoggedIn.set(false);
+      return;
+    }
     this.currentUser.set(user);
+    this.isLoggedIn.set(true);
   }
 
   /**
@@ -114,7 +139,7 @@ export class AuthService {
       data: { user },
       error,
     } = await this.supabaseService.supabase.auth.signInAnonymously({});
-    
+
     if (error) {
       return false;
     }

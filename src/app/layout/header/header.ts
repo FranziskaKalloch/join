@@ -16,15 +16,25 @@ export class Header {
   private router = inject(Router);
 
   selectedContact = this.contactService.selectedContact;
-
   menuOpen = false;
 
-  toggleMenu(event: MouseEvent) {
+  /**
+   * Toggles the visibility of the user menu.
+   *
+   * Stops the click event from propagating to prevent the menu
+   * from being closed immediately by the document click listener.
+   *
+   * @param event The mouse event triggered by clicking the menu button.
+   */
+  toggleMenu(event: MouseEvent): void {
     event.stopPropagation();
     this.menuOpen = !this.menuOpen;
   }
 
-  closeMenu() {
+  /**
+   * Closes the user menu.
+   */
+  closeMenu(): void {
     this.menuOpen = false;
   }
 
@@ -43,8 +53,12 @@ export class Header {
     }
   }
 
+  /**
+   * Closes the user menu when the user clicks anywhere
+   * outside of the menu.
+   */
   @HostListener('document:click')
-  onDocumentClick() {
+  onDocumentClick(): void {
     this.closeMenu();
   }
 }
