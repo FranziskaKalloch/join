@@ -1,9 +1,9 @@
-import { Component, inject, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { emailValidator } from '../../utils/email.util/email.util';
 
 import { AuthService } from '../../services/auth/auth.service';
+import { emailValidator } from '../../utils/email.util/email.util';
 
 @Component({
   selector: 'app-log-in',
@@ -56,6 +56,14 @@ export class LogIn {
     await this.router.navigate(['/summary']);
   }
 
+  /**
+   * Signs the user in anonymously as a guest.
+   *
+   * After a successful guest login, the user is redirected
+   * to the summary page.
+   *
+   * @returns A promise that resolves when the guest login process has finished.
+   */
   async guestLogin(): Promise<void> {
     const loginSuccessful = await this.authService.signInAnonymously();
 
@@ -66,10 +74,20 @@ export class LogIn {
     await this.router.navigate(['/summary']);
   }
 
+  /**
+   * Returns the email form control from the login form.
+   *
+   * @returns The email form control.
+   */
   get email() {
     return this.loginForm.controls.email;
   }
 
+  /**
+   * Returns the password form control from the login form.
+   *
+   * @returns The password form control.
+   */
   get password() {
     return this.loginForm.controls.password;
   }
@@ -77,28 +95,37 @@ export class LogIn {
   formMessage = '';
   messageType: 'success' | 'error' | '' = '';
 
-
+  /**
+   * Toggles the visibility of the password.
+   *
+   * The password visibility is only changed if the password
+   * field currently contains a value.
+   */
   togglePassword(): void {
     if (!this.password.value) {
       return;
     }
 
-    this.showPassword.update(value => !value);
+    this.showPassword.update((value) => !value);
   }
 
-  ngOnInit() {
+  /**
+   * Initializes subscriptions for the login form controls.
+   *
+   * Clears the login error when the user changes the password
+   * or enters a value in the email field.
+   */
+  ngOnInit(): void {
     this.password.valueChanges.subscribe(() => {
       if (this.loginError()) {
         this.loginError.set(false);
       }
     });
 
-    this.email.valueChanges.subscribe(value => {
+    this.email.valueChanges.subscribe((value) => {
       if (value) {
         this.loginError.set(false);
       }
     });
   }
-
-
 }

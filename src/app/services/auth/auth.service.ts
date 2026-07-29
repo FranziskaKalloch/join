@@ -15,6 +15,19 @@ export class AuthService {
   isLoggedIn = signal<boolean>(false);
   currentUser = signal<User | null>(null);
 
+  /**
+   * Registers a new user with Supabase and creates a corresponding contact.
+   *
+   * The method first checks whether a contact with the given name already
+   * exists. If the registration succeeds, a new contact is created and
+   * linked to the authenticated user.
+   *
+   * @param fullName The full name of the user.
+   * @param email The email address used for registration.
+   * @param password The password for the new user account.
+   * @returns A promise that resolves with `true` if the user and contact
+   * were created successfully, otherwise `false`.
+   */
   async signUpNewUser(fullName: string, email: string, password: string): Promise<boolean> {
     const { firstname, lastname } = splitFullName(fullName);
     const exists = await this.contactService.contactExists(fullName);

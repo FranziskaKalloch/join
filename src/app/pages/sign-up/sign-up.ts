@@ -40,7 +40,7 @@ export class SignUp {
       nonNullable: true,
       validators: [
         Validators.required,
-        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
       ],
     }),
     password: new FormControl('', {
@@ -57,14 +57,30 @@ export class SignUp {
     }),
   });
 
+  /**
+   * Toggles the visibility of the password field.
+   */
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
 
+  /**
+   * Toggles the visibility of the confirm password field.
+   */
   toggleConfirmPasswordVisibility(): void {
     this.showConfirmPassword = !this.showConfirmPassword;
   }
 
+  /**
+   * Attempts to register a new user using the values from the sign-up form.
+   *
+   * If the form is invalid or the passwords do not match, the registration
+   * is cancelled and the corresponding validation errors are displayed.
+   * After a successful registration, a success popup is shown before
+   * redirecting the user to the login page.
+   *
+   * @returns A promise that resolves when the registration process has finished.
+   */
   async onSubmit(): Promise<void> {
     this.errorMessage = '';
     this.isSubmitting = true;
