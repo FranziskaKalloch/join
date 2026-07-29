@@ -15,6 +15,9 @@
 .summary-metrics {
     display: flex;
     justify-content: space-between;
+
+
+
 }
 
 .summary-metrics-wrapper {
@@ -23,6 +26,31 @@
     justify-content: center;
     gap: 32px;
     width: 45%;
+
+    @include tablet {
+        width: 100%;
+        gap: 16px;
+    }
+
+    @include mobile {
+        width: 100%;
+        gap: 16px;
+    }
+
+    @include small-mobile {
+        width: 100%;
+        gap: 12px;
+    }
+
+    @include desktop-s {
+        width: 100%;
+        gap: 16px;
+    }
+
+    @include desktop-md {
+        width: 100%;
+        gap: 16px;
+    }
 }
 
 .summary-greetings-wrapper {
@@ -35,33 +63,80 @@
     @include mobile-tablet {
         display: none;
     }
+
+        @include desktop-s {
+        display: none;
+    }
 }
 
 .summary-metrics-firstLine {
     display: flex;
     gap: 32px;
     padding-top: 32px;
+
+    @include tablet {
+        gap: 16px;
+    }
+
+    @include mobile {
+        gap: 16px;
+    }
+
+    @include small-mobile {
+        gap: 8px;
+    }
 }
 
 .summary-metrics-secondLine {
     display: flex;
     gap: 32px;
+
+    @include tablet {
+        gap: 16px;
+    }
+
+    @include mobile {
+        gap: 16px;
+    }
+
+    @include small-mobile {
+        gap: 8px;
+    }
 }
 
 .summary-metrics-thirdLine {
     display: flex;
     gap: 32px;
+
+    @include tablet {
+        gap: 16px;
+    }
+
+    @include mobile {
+        gap: 16px;
+    }
+
+    @include small-mobile {
+        gap: 8px;
+    }
 }
 
 .summary-headline {
     display: flex;
     align-items: center;
     gap: 30px;
-    min-height: 73px;
 
     @include mobile {
         flex-direction: column;
         align-items: flex-start;
+        gap: 8px;
+    }
+
+    @include tablet {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-top: 80px
     }
 }
 
@@ -78,20 +153,28 @@
     }
 
     @include mobile-tablet {
-        font-size: 36px;
+        font-size: 32px;
     }
 }
 
 .summary-separator {
-    width: 0;
+    width: 3px;
     height: 59px;
-    border-left: 3px solid $ligth-blue-color;
+    background: $ligth-blue-color;
     flex-shrink: 0;
 
     @include mobile {
-        transform: rotate(90deg);
         order: 3;
-        padding-left: 8px;
+        width: 90px;
+        height: 3px;
+        margin-top: 8px;
+    }
+
+    @include tablet {
+        order: 3;
+        width: 90px;
+        height: 3px;
+        margin-top: 8px;
     }
 }
 
@@ -109,6 +192,10 @@
         white-space: normal;
     }
 
+    @include small-mobile {
+        font-size: 22px;
+    }
+
 }
 
 .summary-metrics-text {
@@ -120,6 +207,10 @@
     span {
         font-size: 20px;
         font-weight: 400;
+
+        @include mobile {
+            font-size: 16px;
+        }
     }
 }
 
@@ -134,6 +225,18 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    transition: all 80ms ease-in-out;
+
+    @include mobile-tablet {
+        padding: 19px 38px;
+        border-radius: 20px;
+    }
+
+    @include small-mobile {
+        padding: 8px 22px;
+        border-radius: 20px;
+    }
+
 
     &:hover {
         background-color: $blue-color;
@@ -141,8 +244,20 @@
         color: $white;
     }
 
+    &:active {
+        background-color: $white;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+        color: $black;
+    }
+
+
     &--third {
         padding: 25px;
+
+        @include small-mobile {
+            padding: 14px;
+        }
     }
 }
 
@@ -156,31 +271,150 @@
     background: $white;
 }
 
+.summary-metrics-toDo-icon {
+    width: 69px;
+    height: 69px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    @include mobile {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.summary-metrics-toDo-icon img {
+    width: 69px;
+    height: 69px;
+    transition: all 80ms ease-out;
+
+    @include mobile {
+        width: 40px;
+        height: 40px;
+    }
+}
+
 .summary-metrics-badges:hover .summary-metrics-toDo-icon img {
     content: url('/assets/img/components/summary/summary-edit-white.svg');
+
+    @include mobile {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.summary-metrics-doneTasks-icon {
+    width: 69px;
+    height: 69px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    @include mobile {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+
+.summary-metrics-doneTasks-icon img {
+    width: 69px;
+    height: 69px;
+    transition: all 80ms ease-out;
+
+    @include mobile {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 .summary-metrics-badges:hover .summary-metrics-doneTasks-icon img {
     content: url('/assets/img/components/summary/summary-check-white.svg');
+
+    @include mobile {
+        width: 50px;
+        height: 50px;
+    }
 }
 
+.summary-metrics-urgent-icon {
+    width: 69px;
+    height: 69px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    @include mobile {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+
+.summary-metrics-urgent-icon img {
+    width: 69px;
+    height: 69px;
+    transition: all 80ms ease-out;
+
+    @include mobile {
+        width: 40px;
+        height: 40px;
+
+
+    }
+}
+
+.summary-metrics-badges:hover .summary-metrics-urgent-icon img {
+    @include mobile {
+        width: 50px;
+        height: 50px;
+    }
+
+}
 
 .summary-metrics-toDo {
     display: flex;
     align-items: center;
     gap: 16px;
+
+    @include small-mobile {
+        gap: 8px;
+    }
+
 }
 
 .summary-metrics-done {
     display: flex;
     align-items: center;
     gap: 16px;
+
+    @include small-mobile {
+        gap: 8px;
+    }
 }
 
 .summary-badge-number {
     font-size: 64px;
     font-weight: 600;
     padding-bottom: 8px;
+
+    @include mobile {
+        font-size: 47px;
+    }
+
+    @include small-mobile {
+        font-size: 28px;
+    }
 }
 
 .summary-metrics-thirdLine-task {
@@ -194,6 +428,11 @@
         font-weight: 400;
         text-align: center;
         max-width: 50%;
+
+        @include mobile {
+            font-size: 16px;
+            max-width: 100%;
+        }
     }
 }
 
@@ -209,6 +448,10 @@
     justify-content: center;
     gap: 16px;
     width: 33%;
+
+    @include small-mobile {
+        gap: 8px;
+    }
 }
 
 .summary-urgent-date {
@@ -216,6 +459,11 @@
     font-weight: 700;
     line-height: 120%;
     padding-bottom: 16px;
+
+    @include small-mobile {
+        padding-bottom: 2px;
+    }
+
 }
 
 .summary-urgent-text {
@@ -228,6 +476,11 @@
     flex-direction: column;
     align-items: center;
     width: 50%;
+
+    @include mobile-tablet {
+        width: 50%;
+        align-items: flex-start;
+    }
 }
 
 .greeting-headline {
