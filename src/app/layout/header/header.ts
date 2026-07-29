@@ -1,7 +1,8 @@
 import { Component, HostListener, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { ContactService } from '../../services/contacts/contact.service';
+import { Router, RouterLink } from '@angular/router';
 
+import { AuthService } from '../../services/auth/auth.service';
+import { ContactService } from '../../services/contacts/contact.service';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +11,9 @@ import { ContactService } from '../../services/contacts/contact.service';
   styleUrl: './header.scss',
 })
 export class Header {
-
   private contactService = inject(ContactService);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   selectedContact = this.contactService.selectedContact;
 
@@ -26,9 +28,23 @@ export class Header {
     this.menuOpen = false;
   }
 
+  /**
+   * Signs the current user out, closes the user menu,
+   * and redirects to the login page.
+   *
+   * @returns A promise that resolves when the logout process has completed.
+   */
+  async logout(): Promise<void> {
+    const logoutSuccessful = await this.authService.signOut();
+
+    if (logoutSuccessful) {
+      this.closeMenu();
+      await this.router.navigate(['/login']);
+    }
+  }
+
   @HostListener('document:click')
   onDocumentClick() {
     this.closeMenu();
   }
 }
-

@@ -11,9 +11,9 @@ html {
 }
 
 body.dialog-open {
-  overflow: hidden;
-  width: 100%;
-  touch-action: none;
+    overflow: hidden;
+    width: 100%;
+    touch-action: none;
 }
 
 
@@ -22,8 +22,8 @@ body.dialog-open {
     // max-width: 1440px;
     margin: 0 auto;
 
-    @include widesscreen{
-         max-width: unset;
+    @include widesscreen {
+        max-width: unset;
     }
 }
 
@@ -41,8 +41,9 @@ body.dialog-open {
     background: white;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
     z-index: 10;
+
     @include mobile-tablet {
-        order: 0; 
+        order: 0;
     }
 }
 
@@ -55,11 +56,13 @@ body.dialog-open {
         flex: 0 0 80px;
         width: 100%;
     }
-        @include desktop-s {
+
+    @include desktop-s {
         flex: 0 0 140px;
         width: 100%;
     }
-            @include desktop-md {
+
+    @include desktop-md {
         flex: 0 0 180px;
         width: 100%;
     }

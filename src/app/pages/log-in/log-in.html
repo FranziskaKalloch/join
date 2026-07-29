@@ -1,3 +1,98 @@
-<p>log-in works!</p>
+<section id="wrapper-join-login">
+    <div class="layout-login">
+        <section class="wrapper-header-login">
+            <div class="logo-login">
+                <img class="img-logo-login" src="/assets/img/logo/logo-join.svg" />
+            </div>
+            <div class="header-signup">
+                <div class="login-signup-text">Not a Join user?</div>
+                <div class="login-signup-button"><button class="btn-primary btn-primary--signup" type="button" routerLink="/sign-up">Sign
+                        up</button></div>
+            </div>
+        </section>
+        <main class="main-login">
+            <section class="wrapper-content-login">
+                <h1 class="headline-login">Log in</h1>
+                <div class="headline-stroke"></div>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div class="login-form-scroll">
+                        <div class="form-cell form-cell--email">
+                            <input id="email" class="input-email" type="text" name="email" formControlName="email"
+                                placeholder="Email" [class.login-error]="loginError()">
+                            <img src="/assets/img/forms/mail.svg" class="email-icon" />
+                            <div class="form-error-placeholder">
+                                @if (email.touched) {
+                                @if ( email.hasError('required')) {
+                                <p class="form-error">
+                                    Your email is required.
+                                </p>
+                                }
+                                @else if ( !loginForm.controls.email.hasError('required') &&
+                                loginForm.controls.email.hasError('invalidEmail')) {
+                                <p class="form-error">
+                                    Wrong email address format.
+                                </p>
+                                }
+                                }
+                                @if (loginError()) {
+                                <p class="form-error">
+                                </p>
+                                }
+                            </div>
+                        </div>
+                        <div class="form-cell form-cell--password">
+                            <input formControlName="password" [type]="showPassword() ? 'text' : 'password'"
+                                placeholder="Password" [class.login-error]="loginError()">
+                            @if (!password.value) {
+                            <img src="/assets/img/forms/lock.svg" class="password-icon">
+                            } @else if (showPassword()) {
+                            <img src="/assets/img/forms/visibility.svg" class="password-icon"
+                                (click)="togglePassword()">
+                            } @else {
+                            <img src="/assets/img/forms/visibility-off.svg" class="password-icon"
+                                (click)="togglePassword()">
+                            }
+                            <div class="form-error-placeholder">
+                                @if (!loginError() && password.touched && password.hasError('required')) {
+                                <p class="form-error">
+                                    Password is required.
+                                </p>
+                                }
 
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()"></form>
+                                @if (loginError()) {
+                                <p class="form-error">
+                                    Check your email and password. Please try again.
+                                </p>
+                                }
+                            </div>
+                        </div>
+                        <div class="wrapper-login-buttons">
+                            <div class="login-buttons">
+                                <button class="btn-primary btn-primary--login password-toggle" type="submit"
+                                    [disabled]="loginForm.invalid">
+                                    Log in
+                                </button>
+                                <button class="btn-primary btn-primary--guest" type="button" (click)="guestLogin()">
+                                    Guest Log in
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </main>
+        <section class="wrapper-footer-login">
+            <div class="footer-signup">
+                <div class="login-signup-text">Not a Join user?</div>
+                <div class="login-signup-button"><button class="btn-primary btn-primary--signup" type="button" routerLink="/sign-up">Sign
+                        up</button></div>
+            </div>
+            <div class="login-legal">
+                <div class="login-policy"><a routerLink="/privacy-policy"><span data-text="Privacy Policy">Privacy
+                            Policy</span></a></div>
+                <div class="login-legal"><a routerLink="/legal-notice"><span data-text="Legal notice">Legal
+                            notice</span></a></div>
+            </div>
+        </section>
+    </div>
+</section>

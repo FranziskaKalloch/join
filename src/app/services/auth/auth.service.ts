@@ -114,6 +114,7 @@ export class AuthService {
       data: { user },
       error,
     } = await this.supabaseService.supabase.auth.signInAnonymously({});
+    
     if (error) {
       return false;
     }

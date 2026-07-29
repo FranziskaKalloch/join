@@ -67,15 +67,43 @@
     &:hover::after {
       background: url("/assets/img/forms/cancel-hover.svg") center / contain no-repeat;
     }
-
   }
+
+  &--signup {
+    font-size: 16px;
+    font-weight: bold;
+
+    &:hover {
+      background-color: $light-blue-button;
+    }
+  }
+
+  &--login {
+    font-size: 21px;
+    font-weight: bold;
+
+    @include small-mobile {
+      font-size: 16px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      background-color: $light-blue-button;
+    }
+  }
+
 }
 
 .btn-primary.btn-primary--hide {
   @include mobile {
     display: none;
   }
-    @include landscape {
+
+  @include landscape {
     display: none;
   }
 }
@@ -88,7 +116,7 @@
   }
 
   @include mobile-tablet {
-     font-size: 18px;
+    font-size: 18px;
   }
 
   @include landscape {
@@ -115,7 +143,6 @@
     font-size: 18px;
   }
 
-
   &:hover {
     border-color: $light-blue-button;
     outline: 1px solid $light-blue-button;
@@ -135,4 +162,34 @@
     background-color: $light-blue-button;
   }
 
+}
+
+.btn-primary.btn-primary--guest {
+  background-color: $white;
+  font-size: 21px;
+  color: $blue-color;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  gap: 8px;
+  border: 1px solid $blue-color;
+  box-shadow: none;
+
+  @include mobile {
+    font-size: 16px;
+  }
+
+    @include tablet {
+    font-size: 18px;
+  }
+
+  @include landscape {
+    font-size: 18px;
+  }
+
+  &:hover {
+    border-color: $light-blue-button;
+    outline: 1px solid $light-blue-button;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+  }
 }
