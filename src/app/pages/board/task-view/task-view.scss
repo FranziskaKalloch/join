@@ -1,12 +1,28 @@
 @use '../../../../scss/abstract' as *;
 
+:host {
+  display: block;
+  width: 25%;
+  max-width: 25%;
+  min-width: 230px;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  @include mobile-tablet {
+    width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
 .task-column {
-  width: 252px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   flex-shrink: 0;
   height: 100%;
+  width: 100%;
+  box-sizing: border-box;
 
   @include mobile-tablet {
     width: 100%;
@@ -76,11 +92,17 @@
 
   @include mobile-tablet {
     flex-direction: row;
+    align-items: stretch;
     overflow-x: auto;
     overflow-y: hidden;
     padding: 8px;
     padding-bottom: 16px;
     min-height: auto;
+    
+    > *:not(.task-column__empty) {
+      flex: 0 0 auto;
+      display: flex;
+    }
     
     &::-webkit-scrollbar {
       height: 6px;
