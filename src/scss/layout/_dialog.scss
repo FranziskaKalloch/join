@@ -24,6 +24,10 @@ dialog::backdrop {
         height: calc(100dvh - 50px);
         height: fit-content;
 
+        @include desktop-hd {
+            height: calc(75dvh - 80px);
+        }
+
         @include widesscreen {
             height: calc(70dvh - 80px);
         }
@@ -34,6 +38,10 @@ dialog::backdrop {
         height: calc(100dvh - 80px);
         width: 520px;
 
+        @include desktop-hd {
+            height: calc(75dvh - 80px);
+        }
+
         @include widesscreen {
             height: calc(60dvh - 80px);
         }
@@ -43,6 +51,10 @@ dialog::backdrop {
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
         height: calc(100dvh - 80px);
         width: 520px;
+
+        @include desktop-hd {
+            height: calc(75dvh - 80px);
+        }
 
         @include widesscreen {
             height: calc(60dvh - 80px);
