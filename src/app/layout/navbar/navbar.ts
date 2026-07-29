@@ -1,7 +1,6 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
-import { environment } from '../../../environments/environment';
 
 interface NavItem {
   label: string;
@@ -22,9 +21,7 @@ interface FooterLink {
 })
 export class Navbar {
   private authService = inject(AuthService);
-  protected readonly isLoggedIn = computed(
-    () => environment.forceLoggedInNav || this.authService.isLoggedIn()
-  );
+  protected readonly isLoggedIn = this.authService.isLoggedIn;
 
   protected readonly navItems: NavItem[] = [
     {
