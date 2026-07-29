@@ -1,0 +1,375 @@
+@use '../../../scss/abstract' as *;
+
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f6f7f8;
+  position: relative;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 100px 20px 80px 20px;
+
+  @include mobile {
+    justify-content: center;
+    padding: 90px 16px 65px 16px;
+  }
+}
+
+.logo-header {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+
+  @include mobile {
+    top: 20px;
+    left: 20px;
+  }
+
+  .logo {
+    height: 80px;
+
+    @include mobile {
+      height: 48px;
+    }
+  }
+}
+
+.signup-card {
+  background: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.2);
+  padding: 40px 60px;
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+
+  @include mobile {
+    padding: 16px 20px;
+    border-radius: 20px;
+    max-width: 100%;
+  }
+}
+
+.card-header {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+
+  @include mobile {
+    margin-bottom: 20px;
+  }
+
+  .back-btn {
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: #ebebeb;
+    }
+    
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+
+    @include mobile {
+      font-size: 36px;
+    }
+  }
+
+  .underline {
+    width: 100px;
+    height: 3px;
+    background-color: #29abe2;
+    margin: 10px auto 0 auto;
+
+    @include mobile {
+      width: 80px;
+    }
+  }
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  position: relative;
+  width: 100%;
+  border: 1px solid #696969;
+  border-radius: 10px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  transition: border-color 0.2s;
+  padding: 0 15px;
+  box-sizing: border-box;
+
+  &:focus-within {
+    border-color: #29abe2;
+  }
+
+  &.error-border {
+    border-color: #ff3d00;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 30px 12px 5px;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    outline: none;
+
+    &::placeholder {
+      color: #d1d1d1;
+    }
+    
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+
+    &.clickable {
+      cursor: pointer;
+      
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+.error-msg {
+  display: block;
+  min-height: 15px;
+  color: #ff3d00;
+  font-size: 12px;
+  margin-top: 2px;
+  padding-left: 5px;
+}
+
+.global-error-container {
+  min-height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .global-error {
+    text-align: center;
+    margin: 0;
+  }
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  .custom-checkbox {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      cursor: pointer;
+    }
+
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+
+    input:not(:checked) ~ .cb-empty { display: block; }
+    &:hover input:not(:checked) ~ .cb-empty { display: none; }
+    &:hover input:not(:checked) ~ .cb-empty-hover { display: block; }
+
+    input:checked ~ .cb-checked { display: block; }
+    &:hover input:checked ~ .cb-checked { display: none; }
+    &:hover input:checked ~ .cb-checked-hover { display: block; }
+
+    input:disabled ~ img {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .checkbox-label-text {
+    font-size: 14px;
+    color: #a8a8a8;
+
+    @include mobile {
+      font-size: 13px;
+    }
+
+    .link {
+      color: #124658;
+      text-decoration: none;
+      font-size: 14px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.submit-btn {
+  background-color: #2a3647;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 40px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  @include mobile {
+    padding: 12px 30px;
+    font-size: 16px;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: #29abe2;
+  }
+
+  &:disabled {
+    background-color: #a8a8a8;
+    cursor: not-allowed;
+  }
+}
+
+.footer-links {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+
+  @include mobile {
+    bottom: 20px;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  a {
+    color: #a8a8a8;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.1s ease-in-out;
+    display: inline-block;
+
+    &:hover {
+      color: #124658;
+      font-weight: 700;
+      transform: scale(1.05);
+    }
+  }
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.success-popup {
+  background-color: #2a3647;
+  color: #ffffff;
+  padding: 20px 40px;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 400;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  animation: slideUpIn 0.3s ease-out forwards;
+
+  @include mobile {
+    font-size: 16px;
+    padding: 15px 30px;
+  }
+}
+
+@keyframes slideUpIn {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
