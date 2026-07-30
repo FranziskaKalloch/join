@@ -164,5 +164,4 @@ export class Summary {
     if (hour < 18) return 'Good afternoon!';
     return 'Good evening!';
   }
-
 }
