@@ -39,6 +39,7 @@ export class TaskService {
         assignedContactIds: task.assigned_contact_ids,
         subtasks: task.subtasks,
         createdAt: task.created_at,
+        authUserId: task.auth_user_id,
       }));
 
       this.tasks.set(mappedTasks);
@@ -67,8 +68,10 @@ export class TaskService {
         status: task.status,
         assigned_contact_ids: task.assignedContactIds,
         subtasks: task.subtasks,
+        auth_user_id: task.authUserId,
       },
     ]);
+    console.log('insert result:', data, error);
     if (!error) {
       await this.loadTasks();
     }
@@ -97,6 +100,7 @@ export class TaskService {
         status: task.status,
         assigned_contact_ids: task.assignedContactIds,
         subtasks: task.subtasks,
+        auth_user_id: task.authUserId,
       })
       .eq('id', task.id);
 

@@ -36,11 +36,13 @@ export class AuthService {
       password: password,
       options: {
         emailRedirectTo: 'http://localhost:4200/login',
+        data: {
+          full_name: fullName,
+        },
       },
     });
 
     if (error) {
-      console.log(error); // ERROR MESSAGE
       return false;
     }
 
@@ -51,7 +53,6 @@ export class AuthService {
       authUserId: data.user?.id,
     });
     if (!contactAdded) {
-      console.log('Kontakt konnte nicht angelegt werden');
       return false;
     }
     return true;
