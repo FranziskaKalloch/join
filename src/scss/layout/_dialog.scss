@@ -341,7 +341,7 @@ dialog::backdrop {
             padding: 14px 12px;
         }
 
-        
+
         @include landscape {
             padding: 14px 12px;
         }
@@ -527,6 +527,7 @@ dialog::backdrop {
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
         justify-content: flex-start;
+        width: unset;
 
         @include mobile-tablet {
             height: 100%;
@@ -570,6 +571,7 @@ dialog::backdrop {
 
     &--task {
         flex-direction: column;
+          
 
         @include desktop-s {
             align-items: flex-start;
@@ -581,8 +583,8 @@ dialog::backdrop {
             width: 100%;
         }
 
-        @include small-mobile{
-       margin-top: 25px;
+        @include small-mobile {
+            margin-top: 25px;
         }
 
     }
@@ -855,11 +857,15 @@ dialog::backdrop {
 
 .form-cell {
     padding-bottom: 12px;
-    width: 100%;
 
     @include small-mobile {
         padding-bottom: 8px;
     }
+
+    @include desktop-s {
+        width: 100%;
+    }
+
 
     &--task {
         @include small-mobile {
@@ -908,7 +914,7 @@ dialog::backdrop {
 
     @include small-mobile {
         height: 36px;
-         padding: 13px 40px 13px 11px;
+        padding: 13px 40px 13px 11px;
 
     }
 
@@ -919,9 +925,11 @@ dialog::backdrop {
 
 
 }
+
 .form-cell--subtask input {
- padding: 13px 80px 13px 21px;
+    padding: 13px 80px 13px 21px;
 }
+
 .form-cell--task input {
 
     @include mobile {

@@ -251,7 +251,7 @@
         font-size: 16px;
         padding: 12px 12px;
     }
-
+    
     @include small-mobile {
         font-size: 14px;
         padding: 8px 16px;
@@ -275,6 +275,7 @@
             height: auto;
             padding-left: 6px;
         }
+
     }
 }
 
