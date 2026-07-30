@@ -30,11 +30,7 @@ export class AuthService {
    */
   async signUpNewUser(fullName: string, email: string, password: string): Promise<boolean> {
     const { firstname, lastname } = splitFullName(fullName);
-    const exists = await this.contactService.contactExists(fullName);
 
-    if (exists) {
-      return false;
-    }
     const { data, error } = await this.supabaseService.supabase.auth.signUp({
       email: email,
       password: password,

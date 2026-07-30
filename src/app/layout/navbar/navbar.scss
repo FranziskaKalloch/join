@@ -3,7 +3,9 @@
 :host {
   display: block;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  position: sticky;
+  top: 0;
 }
 
 .navbar {
@@ -12,9 +14,9 @@
   background-color: styles.$blue-color;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  padding: 64px 0;
+  padding: 40px 0;
   box-sizing: border-box;
 }
 
@@ -22,6 +24,7 @@
   width: 100px;
   height: 122px;
   object-fit: contain;
+  margin-bottom: 80px;
 }
 
 .navbar-link-login {
@@ -34,16 +37,16 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 4px;
 }
 
 .navbar-link {
   width: 100%;
-  min-height: 46px;
+  height: 56px;
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 8px 53px;
+  padding: 0 53px;
   box-sizing: border-box;
   color: #cdcdcd;
   text-decoration: none;
@@ -105,13 +108,21 @@
   white-space: nowrap;
 }
 
+@include styles.mobile {
+  .navbar-label {
+    font-size: 14px;
+  }
+}
+
 .navbar-footer {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  align-items: center;
+  gap: 12px;
+  align-items: flex-start;
+  padding-left: 53px;
   box-sizing: border-box;
+  margin-top: auto;
 }
 
 .navbar-footer-link {
@@ -121,8 +132,13 @@
   font-weight: 400;
   line-height: 120%;
   cursor: pointer;
-  padding: 8px;
+  padding: 4px 0;
   box-sizing: border-box;
+  transition: color 100ms ease;
+
+  &:hover {
+    color: #ffffff;
+  }
 }
 
 .navbar-footer-link-active {
@@ -142,6 +158,11 @@
 }
 
 @include styles.mobile-tablet {
+  :host {
+    height: auto;
+    position: static;
+  }
+
   .navbar {
     height: 80px;
     padding: 0 clamp(6px, 3vw, 12px);
