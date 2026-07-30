@@ -1,11 +1,15 @@
-<section class="summary-wrapper">
-  <div class="summary-headline">
-    <h1 class="summary-title">Join 360</h1>
-    <span class="summary-separator"></span>
-    <p class="summary-subtitle">Key Metrics at a Glance</p>
-  </div>
+@if (showGreetingAnimation()) {
+<div class="summary-greeting-overlay"
+     [class.animate-in]="showGreetingAnimation()">
+  <div class="greeting">
+          <h2 class="greeting-headline"> {{ greeting }}</h2>
 
-  <!-- NUR PLATZHALTE -->
+          @if (firstName) {
+          <h3 class="greeting-name">{{ firstName }}</h3>
+          }
+  </div>
+</div>
+}
 
   <div class="summary-metrics">
     <div class="summary-metrics-wrapper">
@@ -23,9 +27,22 @@
           <div class="summary-metrics-doneTasks-icon">
             <img src="/assets/img/components/summary/summary-check.svg" />
           </div>
-          <div class="summary-metrics-text">
-            <div class="summary-badge-number">{{ doneTasks }}</div>
-            <span>Done</span>
+        </div>
+        <div class="summary-metrics-secondLine">
+          <div class="summary-urgent-wrapper summary-metrics-badges">
+            <div class="summary-urgent-inner">
+              <div class="summary-metrics-urgent-icon"><img src="/assets/img/components/summary/summary-urgent.svg">
+              </div>
+              <div class="summary-metrics-text">
+                <div class="summary-badge-number">{{ urgentTasks }}</div>
+                <span class="summary-metrics-urgent"> Urgent</span>
+              </div>
+            </div>
+            <div class="summary-urgent-stroke"></div>
+            <div class="summary-urgent-list">
+              <div class="summary-urgent-date">{{ currentDate | date: 'dd.MM.yyyy' }}</div>
+              <span class="summary-urgent-text">Upcoming Deadline</span>
+            </div>
           </div>
         </div>
       </div>
@@ -39,6 +56,7 @@
               <div class="summary-badge-number">{{ urgentTasks }}</div>
               <span class="summary-metrics-urgent"> Urgent</span>
             </div>
+            <span>Tasks in Board</span>
           </div>
           <div class="summary-urgent-stroke"></div>
           <div class="summary-urgent-list">
@@ -67,10 +85,9 @@
           <span>Awaiting Feedback</span>
         </div>
       </div>
-    </div>
-    <div class="summary-greetings-wrapper">
-      <div class="greeting">
-        <h2 class="greeting-headline">Good morning!</h2>
+      <div class="summary-greetings-wrapper summary-greetings-wrapper--hide">
+        <div class="greeting">
+          <h2 class="greeting-headline"> {{ greeting }}</h2>
 
         @if (userName) {
           <h3 class="greeting-name">{{ userName }}</h3>

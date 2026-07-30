@@ -138,4 +138,32 @@ export class Summary {
 
     return fullName;
   }
+
+  /*Marc Test*/
+
+  showGreetingAnimation = this.authService.showSummaryGreeting;
+  isClosingGreeting = signal(false);
+
+  ngOnInit() {
+    if (!this.showGreetingAnimation()) {
+      return;
+    }
+
+    setTimeout(() => {
+      this.isClosingGreeting.set(true);
+
+      setTimeout(() => {
+        this.authService.hideSummaryGreeting();
+      }, 600);
+    }, 1200);
+  }
+
+  get greeting(): string {
+    const hour = new Date().getHours();
+
+    if (hour < 12) return 'Good morning!';
+    if (hour < 18) return 'Good afternoon!';
+    return 'Good evening!';
+  }
+
 }
