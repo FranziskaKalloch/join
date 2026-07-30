@@ -99,7 +99,7 @@ export class Subtasks {
     this.initialized = false;
   }
 
-  truncate(text: string, max = 20): string {
+  truncate(text: string, max = 30): string {
     return text.length > max ? text.slice(0, max) + '…' : text;
   }
 

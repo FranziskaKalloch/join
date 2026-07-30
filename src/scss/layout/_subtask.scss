@@ -68,6 +68,7 @@
 .subtasks__item {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 8px;
     min-height: 32px;
     position: relative;

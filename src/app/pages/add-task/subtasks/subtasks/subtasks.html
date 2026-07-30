@@ -54,7 +54,7 @@
       } @else {
       
       <span class="subtasks__item-title" (dblclick)="startEdit($index)">
-        {{ subtask.title }}
+         {{ truncate(subtask.title) }}
       </span>
           <div class="subtasks__actions">
       <button type="button" class="subtasks-icon subtasks-icon--edit" (click)="startEdit($index)">
