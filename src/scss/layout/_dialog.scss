@@ -921,7 +921,9 @@ dialog::backdrop {
 
 
 }
-
+.form-cell--subtask input {
+ padding: 13px 80px 13px 21px;
+}
 .form-cell--task input {
 
     @include mobile {
