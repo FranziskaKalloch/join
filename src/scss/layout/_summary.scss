@@ -3,12 +3,30 @@
 .summary-wrapper {
     padding: 48px;
 
+
     @include tablet {
         padding: 16px;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: summaryIn .5s ease forwards;
+        animation-delay: 1.6s;
+
     }
 
     @include mobile {
         padding: 8px;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: summaryIn .5s ease forwards;
+        animation-delay: 1.6s;
+
+    }
+}
+
+@keyframes summaryIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -64,7 +82,7 @@
         display: none;
     }
 
-        @include desktop-s {
+    @include desktop-s {
         display: none;
     }
 }
@@ -494,4 +512,40 @@
     font-weight: 700;
     line-height: 120%;
     color: $header-avatar;
+}
+
+.summary-greeting-overlay {
+    display: none;
+
+    @include mobile-tablet {
+        position: fixed;
+        inset: 0;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    @include desktop-s {
+        position: fixed;
+        inset: 0;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+}
+
+.summary-greeting-overlay.closing {
+    animation: greetingFadeOut .6s forwards;
+}
+
+@keyframes greetingFadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
 }
