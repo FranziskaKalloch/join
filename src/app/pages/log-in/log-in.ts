@@ -52,7 +52,7 @@ export class LogIn {
       this.password.markAsUntouched();
       return;
     }
-
+    this.authService.resetSummaryGreeting();
     await this.router.navigate(['/summary']);
   }
 
@@ -70,7 +70,7 @@ export class LogIn {
     if (!loginSuccessful) {
       return;
     }
-
+    this.authService.resetSummaryGreeting();
     await this.router.navigate(['/summary']);
   }
 

@@ -146,4 +146,14 @@ export class AuthService {
     this.currentUser.set(user);
     return true;
   }
+
+  showSummaryGreeting = signal(true);
+
+  resetSummaryGreeting(): void {
+    this.showSummaryGreeting.set(true);
+  }
+
+  hideSummaryGreeting(): void {
+    this.showSummaryGreeting.set(false);
+  }
 }

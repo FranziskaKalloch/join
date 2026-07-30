@@ -55,15 +55,20 @@ export class Summary {
   }
 
   /*Marc Test*/
-  showGreetingAnimation = signal(true);
+
+  showGreetingAnimation = this.authService.showSummaryGreeting;
   isClosingGreeting = signal(false);
 
   ngOnInit() {
+    if (!this.showGreetingAnimation()) {
+      return;
+    }
+
     setTimeout(() => {
       this.isClosingGreeting.set(true);
 
       setTimeout(() => {
-        this.showGreetingAnimation.set(false);
+        this.authService.hideSummaryGreeting();
       }, 600);
     }, 1200);
   }

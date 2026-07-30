@@ -1,5 +1,6 @@
 @if (showGreetingAnimation()) {
-<div class="summary-greeting-overlay">
+<div class="summary-greeting-overlay"
+     [class.animate-in]="showGreetingAnimation()">
   <div class="greeting">
           <h2 class="greeting-headline"> {{ greeting }}</h2>
 

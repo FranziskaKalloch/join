@@ -3,23 +3,19 @@
 .summary-wrapper {
     padding: 48px;
 
-
     @include tablet {
         padding: 16px;
-        opacity: 0;
-        transform: translateY(30px);
-        animation: summaryIn .5s ease forwards;
-        animation-delay: 1.6s;
-
     }
 
     @include mobile {
         padding: 8px;
+    }
+
+    &.animate-in {
         opacity: 0;
         transform: translateY(30px);
         animation: summaryIn .5s ease forwards;
         animation-delay: 1.6s;
-
     }
 }
 
@@ -33,9 +29,6 @@
 .summary-metrics {
     display: flex;
     justify-content: space-between;
-
-
-
 }
 
 .summary-metrics-wrapper {
