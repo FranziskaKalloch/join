@@ -8,7 +8,7 @@ import { ContactService } from '../../../../services/contacts/contact.service';
 import { DialogService } from '../../../../services/dialog/dialog.service';
 import { ToastService } from '../../../../services/toast/toast-service';
 import { fullNameValidator, splitFullName } from '../../../../utils/name.util/name.util';
-import { emailValidator } from '../../../../utils/email.util/email.util';
+import { emailValidator, emailExistsValidator } from '../../../../utils/email.util/email.util';
 
 @Component({
   selector: 'app-contact-dialog',
@@ -109,7 +109,12 @@ export class ContactDialog implements AfterViewInit, OnInit {
     }),
     email: new FormControl('', {
       validators: [Validators.required, emailValidator()],
-      asyncValidators: [this.emailValidator()],
+      asyncValidators: [
+        emailExistsValidator(
+          this.contactService,
+          () => this.selectedContact()?.id,
+        ),
+      ],
       updateOn: 'blur',
     }),
     phone: new FormControl('', {
@@ -132,21 +137,6 @@ export class ContactDialog implements AfterViewInit, OnInit {
 
   formMessage = '';
   messageType: 'success' | 'error' | '' = '';
-
-  emailValidator(): AsyncValidatorFn {
-    return (control: AbstractControl) => {
-      const value = (control.value ?? '').trim().toLowerCase();
-
-      if (!value || control.errors) {
-        return of(null);
-      }
-
-      return from(this.contactService.emailExists(value, this.selectedContact()?.id)).pipe(
-        map(exists => exists ? { emailExists: true } : null),
-        catchError(() => of(null)),
-      );
-    };
-  }
 
   async onSubmit(): Promise<void> {
     if (this.newUserForm.invalid) {
