@@ -105,11 +105,11 @@ export class ContactDialog implements AfterViewInit, OnInit {
         Validators.pattern(/^[A-Za-zÄÖÜäöüß\s'-]+$/),
         fullNameValidator(),
       ],
-      asyncValidators: [this.nameValidator()],
       updateOn: 'blur',
     }),
     email: new FormControl('', {
       validators: [Validators.required, emailValidator()],
+      asyncValidators: [this.emailValidator()],
       updateOn: 'blur',
     }),
     phone: new FormControl('', {
@@ -133,16 +133,16 @@ export class ContactDialog implements AfterViewInit, OnInit {
   formMessage = '';
   messageType: 'success' | 'error' | '' = '';
 
-  nameValidator(): AsyncValidatorFn {
+  emailValidator(): AsyncValidatorFn {
     return (control: AbstractControl) => {
-      const value = (control.value ?? '').trim();
+      const value = (control.value ?? '').trim().toLowerCase();
 
       if (!value || control.errors) {
         return of(null);
       }
 
-      return from(this.contactService.contactExists(value, this.selectedContact()?.id)).pipe(
-        map((exists) => (exists ? { nameExists: true } : null)),
+      return from(this.contactService.emailExists(value, this.selectedContact()?.id)).pipe(
+        map(exists => exists ? { emailExists: true } : null),
         catchError(() => of(null)),
       );
     };
