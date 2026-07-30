@@ -12,4 +12,5 @@ export interface Task {
   assignedContactIds: number[];
   subtasks: Subtask[];
   createdAt: string;
+  authUserId?: string;
 }

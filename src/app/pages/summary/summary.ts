@@ -17,33 +17,43 @@ export class Summary {
 
   currentDate = new Date();
 
+  get visibleTasks() {
+    const user = this.authService.currentUser();
+
+    if (!user || user.is_anonymous) {
+      return this.taskService.tasks();
+    }
+
+    return this.taskService.tasks().filter((task) => task.authUserId === user.id);
+  }
+
   get todoTasks(): number {
-    return this.taskService.getTasksByStatus('todo').length;
+    return this.visibleTasks.filter((task) => task.status === 'todo').length;
   }
 
   get doneTasks(): number {
-    return this.taskService.getTasksByStatus('done').length;
+    return this.visibleTasks.filter((task) => task.status === 'done').length;
   }
 
   get tasksInProgress(): number {
-    return this.taskService.getTasksByStatus('inProgress').length;
+    return this.visibleTasks.filter((task) => task.status === 'inProgress').length;
   }
 
   get awaitingFeedbackTasks(): number {
-    return this.taskService.getTasksByStatus('awaitFeedback').length;
+    return this.visibleTasks.filter((task) => task.status === 'awaitFeedback').length;
   }
 
   get urgentTasks(): number {
-    return this.taskService.tasks().filter((task) => {
+    return this.visibleTasks.filter((task) => {
       return task.priority === 'urgent';
     }).length;
   }
 
   get tasksInBoard(): number {
-    return this.taskService.tasks().length;
+    return this.visibleTasks.length;
   }
 
-  get firstName(): string {
+  get userName(): string {
     const user = this.authService.currentUser();
 
     if (!user || user.is_anonymous) {
@@ -52,6 +62,6 @@ export class Summary {
 
     const fullName = user.user_metadata?.['full_name'] ?? '';
 
-    return fullName.split('')[0];
+    return fullName;
   }
 }
