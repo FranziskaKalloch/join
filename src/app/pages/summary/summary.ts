@@ -1,6 +1,5 @@
-import { DatePipe, registerLocaleData } from '@angular/common';
-import localeDe from '@angular/common/locales/de';
-import { Component, inject, LOCALE_ID } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { ContactService } from '../../services/contacts/contact.service';
