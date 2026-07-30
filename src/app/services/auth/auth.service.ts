@@ -71,16 +71,18 @@ export class AuthService {
    * @returns true if login was successful, false if credentials were invalid
    */
   async signIn(email: string, password: string): Promise<boolean> {
-    const { error } = await this.supabaseService.supabase.auth.signInWithPassword({
+    const { data, error } = await this.supabaseService.supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
 
-    if (error) {
+    if (error || !data.user) {
       return false;
     }
 
     this.isLoggedIn.set(true);
+    this.currentUser.set(data.user);
+
     return true;
   }
 
