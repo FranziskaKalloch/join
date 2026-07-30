@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { TaskService } from '../../services/tasks/task.service';
@@ -53,4 +53,32 @@ export class Summary {
 
     return fullName.split('')[0];
   }
+
+  /*Marc Test*/
+
+  showGreetingAnimation = this.authService.showSummaryGreeting;
+  isClosingGreeting = signal(false);
+
+  ngOnInit() {
+    if (!this.showGreetingAnimation()) {
+      return;
+    }
+
+    setTimeout(() => {
+      this.isClosingGreeting.set(true);
+
+      setTimeout(() => {
+        this.authService.hideSummaryGreeting();
+      }, 600);
+    }, 1200);
+  }
+
+  get greeting(): string {
+    const hour = new Date().getHours();
+
+    if (hour < 12) return 'Good morning!';
+    if (hour < 18) return 'Good afternoon!';
+    return 'Good evening!';
+  }
+
 }

@@ -143,25 +143,26 @@
     padding: 4px 16px;
 }
 
-.subtasks{
+.subtasks {
     flex: 1;
     min-height: 0;
     display: flex;
     flex-direction: column;
 }
 
-.subtasks-wrapper{
+.subtasks-wrapper {
     flex: 1;
     min-height: 0;
     display: flex;
-    max-height: 250px;;
-    
+    max-height: 250px;
+    ;
 
-      app-subtasks {
-    flex: 1;
-    min-height: 0;
-    display: flex;
-  }
+
+    app-subtasks {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+    }
 }
 
 .subtask-scroll {
@@ -173,23 +174,43 @@
     min-height: 100px;
     max-height: 100px;
 
-    @include widesscreen{
-    min-height: 100px;
-    max-height: 100px;
+    @include widesscreen {
+        min-height: 100px;
+        max-height: 100px;
     }
 
-    @include desktop-hd{
-    min-height: 100px;
-    max-height: 100px;
+    @include desktop-hd {
+        min-height: 100px;
+        max-height: 100px;
     }
 
-@include desktop-s{
-    min-height: 100px;
-    max-height: 100px;
+    @include desktop-s {
+        min-height: 100px;
+        max-height: 100px;
     }
 
-    @include tablet{
-    min-height: 100px;
-    max-height: 100px;
+    @include tablet {
+        min-height: 100px;
+        max-height: 100px;
     }
+
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $white;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $dark-grey-color;
+        border-radius: 6px;
+        border: 4px solid $white;
+        background-clip: content-box;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: darken($dark-grey-color, 10%);
+    }
+
 }

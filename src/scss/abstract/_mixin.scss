@@ -94,6 +94,12 @@
   }
 }
 
+@mixin widesscreen-plus {
+  @media (min-width: 3000px) {
+    @content;
+  }
+}
+
 @mixin landscape {
     @media (hover: none) and (orientation: landscape) and (max-height: 420px){
         @content;
