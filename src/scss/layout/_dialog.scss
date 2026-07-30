@@ -183,6 +183,25 @@ dialog::backdrop {
     min-height: 0;
 }
 
+.form-scroll::-webkit-scrollbar {
+    width: 12px;
+}
+
+.form-scroll::-webkit-scrollbar-track {
+    background: $white;
+}
+
+.form-scroll::-webkit-scrollbar-thumb {
+    background: $dark-grey-color;
+    border-radius: 6px;
+    border: 4px solid $white;
+    background-clip: content-box;
+}
+
+.form-scroll::-webkit-scrollbar-thumb:hover {
+    background: darken($dark-grey-color, 10%);
+}
+
 .user-dialog.closing {
 
     animation: dialogOut .3s ease forwards;
@@ -276,7 +295,6 @@ dialog::backdrop {
             transform: translate(-50%, 0%);
             opacity: 1;
         }
-
     }
 }
 
@@ -372,10 +390,7 @@ dialog::backdrop {
             align-items: flex-start;
 
         }
-
     }
-
-
 }
 
 .backdrop {
@@ -417,6 +432,17 @@ dialog::backdrop {
     &--task {
         top: 64px;
         right: 60px;
+
+        @include mobile {
+            top: 30px;
+            right: 30px;
+        }
+
+        @include tablet {
+            top: 74px;
+            right: 64px;
+        }
+
     }
 }
 
@@ -1053,6 +1079,6 @@ input.ng-invalid.ng-touched {
     }
 }
 
-.assign-wrapper{
+.assign-wrapper {
     width: 100%;
 }

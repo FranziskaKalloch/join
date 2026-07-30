@@ -16,6 +16,10 @@
         max-width: 40dvw;
     }
 
+    @include widesscreen-plus {
+        max-width: 35dvw;
+    }
+
     @include tablet-high {
         height: unset;
     }

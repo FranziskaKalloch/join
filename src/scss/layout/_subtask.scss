@@ -193,3 +193,22 @@
     max-height: 100px;
     }
 }
+
+.subtask-scroll::-webkit-scrollbar {
+    width: 12px;
+}
+
+.subtask-scroll::-webkit-scrollbar-track {
+    background: $white;
+}
+
+.subtask-scroll::-webkit-scrollbar-thumb {
+    background: $dark-grey-color;
+    border-radius: 6px;
+    border: 4px solid $white;
+    background-clip: content-box;
+}
+
+.subtask-scroll::-webkit-scrollbar-thumb:hover {
+    background: darken($dark-grey-color, 10%);
+}
