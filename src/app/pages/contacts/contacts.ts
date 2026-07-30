@@ -40,14 +40,6 @@ export class Contacts implements OnInit {
     this.contactService.selectedContact.set(contact);
   }
 
-  // clearSelectedContact(): void {
-  //   this.selectedContact.set(null);
-  // }
-
-  //   clearSelectedContact(): void {
-  //   this.contactService.selectedContact.set(null);
-  // }
-
   clearSelectedContact(): void {
     this.contactService.deleteSelectedContact();
   }

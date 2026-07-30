@@ -58,6 +58,7 @@ export class ContactService {
         phone: contact.user_phone,
         initials: this.getInitials(contact.user_firstname, contact.user_lastname),
         colors: this.getBubbleColors(contact.id || 0),
+        authUserId: contact.auth_user_id,
       }));
       this.contacts.set(mappedContacts);
       const selectedContact = this.selectedContact();

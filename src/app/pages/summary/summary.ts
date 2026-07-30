@@ -3,6 +3,7 @@ import localeDe from '@angular/common/locales/de';
 import { Component, inject, LOCALE_ID } from '@angular/core';
 
 import { AuthService } from '../../services/auth/auth.service';
+import { ContactService } from '../../services/contacts/contact.service';
 import { TaskService } from '../../services/tasks/task.service';
 
 @Component({
@@ -14,6 +15,7 @@ import { TaskService } from '../../services/tasks/task.service';
 export class Summary {
   taskService = inject(TaskService);
   authService = inject(AuthService);
+  contactService = inject(ContactService);
 
   currentDate = new Date();
 
@@ -24,7 +26,17 @@ export class Summary {
       return this.taskService.tasks();
     }
 
-    return this.taskService.tasks().filter((task) => task.authUserId === user.id);
+    const myContact = this.contactService
+      .contacts()
+      .find((contact) => contact.authUserId === user.id);
+
+    if (!myContact) {
+      return [];
+    }
+
+    return this.taskService
+      .tasks()
+      .filter((task) => task.assignedContactIds?.includes(myContact.id!));
   }
 
   get todoTasks(): number {

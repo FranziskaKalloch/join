@@ -40,6 +40,9 @@ export class AuthService {
       password: password,
       options: {
         emailRedirectTo: 'http://localhost:4200/login',
+        data: {
+          full_name: fullName,
+        },
       },
     });
 
