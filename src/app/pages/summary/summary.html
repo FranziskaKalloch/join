@@ -11,14 +11,17 @@
     <div class="summary-metrics-wrapper">
       <div class="summary-metrics-firstLine">
         <div class="summary-metrics-toDo summary-metrics-badges">
-          <div class="summary-metrics-toDo-icon"><img src="/assets/img/components/summary/summary-edit.svg"></div>
+          <div class="summary-metrics-toDo-icon">
+            <img src="/assets/img/components/summary/summary-edit.svg" />
+          </div>
           <div class="summary-metrics-text">
-            <div class="summary-badge-number"> {{ todoTasks }}</div>
+            <div class="summary-badge-number">{{ todoTasks }}</div>
             <span>To-do</span>
           </div>
         </div>
         <div class="summary-metrics-done summary-metrics-badges">
-          <div class="summary-metrics-doneTasks-icon"><img src="/assets/img/components/summary/summary-check.svg">
+          <div class="summary-metrics-doneTasks-icon">
+            <img src="/assets/img/components/summary/summary-check.svg" />
           </div>
           <div class="summary-metrics-text">
             <div class="summary-badge-number">{{ doneTasks }}</div>
@@ -29,7 +32,9 @@
       <div class="summary-metrics-secondLine">
         <div class="summary-urgent-wrapper summary-metrics-badges">
           <div class="summary-urgent-inner">
-            <div class="summary-metrics-urgent-icon"><img src="/assets/img/components/summary/summary-urgent.svg"></div>
+            <div class="summary-metrics-urgent-icon">
+              <img src="/assets/img/components/summary/summary-urgent.svg" />
+            </div>
             <div class="summary-metrics-text">
               <div class="summary-badge-number">{{ urgentTasks }}</div>
               <span class="summary-metrics-urgent"> Urgent</span>
@@ -37,22 +42,27 @@
           </div>
           <div class="summary-urgent-stroke"></div>
           <div class="summary-urgent-list">
-            <div class="summary-urgent-date">{{ currentDate | date: 'dd.MM.yyyy' }}</div>
+            <div class="summary-urgent-date">{{ currentDate | date: 'MMMM dd, yyyy' }}</div>
             <span class="summary-urgent-text">Upcoming Deadline</span>
           </div>
         </div>
       </div>
       <div class="summary-metrics-thirdLine">
-        <div class="summary-metrics-thirdLine-task summary-metrics-badges summary-metrics-badges--third">
-          <div class="summary-badge-number">{{ tasksInBoard }}
-          </div>
+        <div
+          class="summary-metrics-thirdLine-task summary-metrics-badges summary-metrics-badges--third"
+        >
+          <div class="summary-badge-number">{{ tasksInBoard }}</div>
           <span>Tasks in Board</span>
         </div>
-        <div class="summary-metrics-thirdLine-task summary-metrics-badges summary-metrics-badges--third">
+        <div
+          class="summary-metrics-thirdLine-task summary-metrics-badges summary-metrics-badges--third"
+        >
           <div class="summary-badge-number">XX</div>
           <span>Tasks in Progress</span>
         </div>
-        <div class="summary-metrics-thirdLine-task summary-metrics-badges summary-metrics-badges--third">
+        <div
+          class="summary-metrics-thirdLine-task summary-metrics-badges summary-metrics-badges--third"
+        >
           <div class="summary-badge-number">XX</div>
           <span>Awaiting Feedback</span>
         </div>
@@ -63,11 +73,9 @@
         <h2 class="greeting-headline">Good morning!</h2>
 
         @if (firstName) {
-        <h3 class="greeting-name">{{ firstName }}</h3>
+          <h3 class="greeting-name">{{ firstName }}</h3>
         }
       </div>
     </div>
   </div>
-
-
 </section>

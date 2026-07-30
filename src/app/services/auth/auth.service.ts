@@ -33,7 +33,6 @@ export class AuthService {
     const exists = await this.contactService.contactExists(fullName);
 
     if (exists) {
-      console.log('Kontakt existiert bereits');
       return false;
     }
     const { data, error } = await this.supabaseService.supabase.auth.signUp({
@@ -45,7 +44,6 @@ export class AuthService {
     });
 
     if (error) {
-      console.log(error); // ERROR MESSAGE
       return false;
     }
 
@@ -56,7 +54,6 @@ export class AuthService {
       authUserId: data.user?.id,
     });
     if (!contactAdded) {
-      console.log('Kontakt konnte nicht angelegt werden');
       return false;
     }
     return true;
