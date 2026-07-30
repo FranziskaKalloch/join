@@ -43,6 +43,9 @@ export class AddTask {
   assignedToComponent = viewChild(AssignedTo);
   private toastService = inject(ToastService);
   today = new Date();
+  readonly dialogService = inject(DialogService);
+  readonly DialogType = DialogType;
+  type = signal<DialogType | null>(null);
 
 
   addTaskForm = new FormGroup({
@@ -100,7 +103,7 @@ export class AddTask {
       if (this.isDialog) {
         this.close.emit();
       } else {
-        this.router.navigate(['/board']);
+        await this.router.navigate(['/board']);
       }
 
     } finally {
@@ -202,9 +205,7 @@ export class AddTask {
 
   // ab hier Marc
 
-  readonly dialogService = inject(DialogService);
-  readonly DialogType = DialogType;
-  type = signal<DialogType | null>(null);
+
 
 
   isTaskDialog = computed(() =>
