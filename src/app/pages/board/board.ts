@@ -29,12 +29,20 @@ export class BoardComponent implements OnInit {
     { title: 'Done', status: 'done' },
   ];
 
+  /**
+   * Lifecycle hook that is called after Angular has initialized all data-bound properties.
+   * Loads tasks, contacts, and sets up real-time task synchronization.
+   */
   ngOnInit(): void {
     this.taskService.loadTasks();
     this.contactService.loadContacts();
     this.taskService.subscribeToTaskChanges();
   }
 
+  /**
+   * Lifecycle hook that is called when the component is destroyed.
+   * Cleans up subscriptions to prevent memory leaks.
+   */
   ngOnDestroy(): void {
     this.taskService.unsubscribeFromTaskChanges();
   }
@@ -44,6 +52,9 @@ export class BoardComponent implements OnInit {
   readonly DialogType = DialogType;
   private router = inject(Router);
 
+  /**
+   * Opens the add task dialog on desktop viewports or navigates to the add-task route on mobile screens.
+   */
   openDialog(): void {
     const isDesktop = window.matchMedia('(min-width: 569px)').matches;
 

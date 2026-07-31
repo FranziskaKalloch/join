@@ -20,12 +20,21 @@ export class TaskView {
 
   private _searchTerm = signal('');
 
+  /**
+   * Sets the search term used to filter tasks in the column.
+   * Converts the value to lowercase for case-insensitive matching.
+   * 
+   * @param value The search string.
+   */
   @Input() set searchTerm(value: string) {
     this._searchTerm.set(value ? value.toLowerCase() : '');
   }
 
   private taskService = inject(TaskService);
 
+  /**
+   * Computed signal that returns the filtered tasks for this column based on their status and the search term.
+   */
   tasks = computed(() => {
     const search = this._searchTerm();
     let columnTasks = this.taskService.tasks().filter((task) => task.status === this.status);
@@ -41,6 +50,12 @@ export class TaskView {
     return columnTasks;
   });
 
+  /**
+   * Handles the drag-and-drop event when a task is moved into this column.
+   * Updates the task status via the task service if dropped into a different container.
+   * 
+   * @param event The CDK drag-and-drop event containing the task data and container details.
+   */
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer !== event.container) {
       const task = event.item.data as Task;
@@ -50,8 +65,10 @@ export class TaskView {
 
   readonly dialogService = inject(DialogService);
 
+  /**
+   * Opens the add task dialog pre-configured with the current column's status.
+   */
   openAddTask(): void {
-    // console.log(this.status);
     this.dialogService.open(DialogType.AddTask, {
       status: this.status,
     });
