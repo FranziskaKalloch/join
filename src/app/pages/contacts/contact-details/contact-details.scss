@@ -312,8 +312,8 @@
     position: relative;
     margin-bottom: 48px;
 
-    @include small-mobile{
-            margin-bottom: 10px;
+    @include small-mobile {
+      margin-bottom: 10px;
     }
   }
 
@@ -659,20 +659,29 @@
   }
 }
 
+.contact-details {
+    overflow-x: hidden;
+}
+
+.user-details__slider {
+    width: 100%;
+    min-width: 0;
+}
+
 .user-details__slider.animate {
-    animation: slideInRight 250ms ease-out;
+  animation: slideInRight 250ms ease-out;
 }
 
 @include mobile-tablet {
-    .user-details__slider.animate {
-        animation: none;
-    }
+  .user-details__slider.animate {
+    animation: none;
+  }
 }
 
 @keyframes slideInRight {
     from {
         opacity: 0;
-        transform: translateX(100%);
+         transform: translateX(100%);
     }
 
     to {
