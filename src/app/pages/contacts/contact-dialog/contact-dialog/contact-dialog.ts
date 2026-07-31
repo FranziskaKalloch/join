@@ -1,8 +1,5 @@
-import { from, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-
 import { AfterViewInit, Component, computed, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ContactService } from '../../../../services/contacts/contact.service';
 import { DialogService } from '../../../../services/dialog/dialog.service';
