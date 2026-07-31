@@ -3,12 +3,14 @@ import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validatio
 import { Router, RouterModule } from '@angular/router';
 
 import { AuthService } from '../../services/auth/auth.service';
+import { ContactService } from '../../services/contacts/contact.service';
+import { emailValidator, emailExistsValidator } from '../../utils/email.util/email.util';
 
 /**
- * Custom validator function that ensures the entered name consists of at least two words.
+ * Validates that the input control value contains at least two words.
  * 
- * @param control The abstract control containing the value to validate.
- * @returns A validation error object if the condition is not met, otherwise null.
+ * @param control The abstract control to validate.
+ * @returns An object with `notTwoWords: true` if invalid, otherwise null.
  */
 const twoWordsValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const value = control.value || '';
@@ -28,6 +30,7 @@ const twoWordsValidator: ValidatorFn = (control: AbstractControl): ValidationErr
 })
 export class SignUp {
   private authService = inject(AuthService);
+  private contactService = inject(ContactService);
   private router = inject(Router);
   private cdr = inject(ChangeDetectorRef);
 
@@ -44,10 +47,8 @@ export class SignUp {
     }),
     email: new FormControl('', {
       nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
-      ],
+      validators: [Validators.required, emailValidator()],
+      asyncValidators: [emailExistsValidator(this.contactService, () => undefined)],
     }),
     password: new FormControl('', {
       nonNullable: true,
@@ -64,28 +65,23 @@ export class SignUp {
   });
 
   /**
-   * Toggles the visibility of the password field.
+   * Toggles the visibility state of the password input field.
    */
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
 
   /**
-   * Toggles the visibility of the confirm password field.
+   * Toggles the visibility state of the confirmation password input field.
    */
   toggleConfirmPasswordVisibility(): void {
     this.showConfirmPassword = !this.showConfirmPassword;
   }
 
   /**
-   * Attempts to register a new user using the values from the sign-up form.
-   *
-   * If the form is invalid or the passwords do not match, the registration
-   * is cancelled and the corresponding validation errors are displayed.
-   * After a successful registration, a success popup is shown before
-   * redirecting the user to the login page.
-   *
-   * @returns A promise that resolves when the registration process has finished.
+   * Handles the form submission for registering a new user.
+   * Validates the form, checks for password matching, and attempts registration via the auth service.
+   * Shows a success message and redirects to login upon success, or displays an error message upon failure.
    */
   async onSubmit(): Promise<void> {
     this.errorMessage = '';

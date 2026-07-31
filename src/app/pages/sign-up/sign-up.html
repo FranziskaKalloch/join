@@ -38,7 +38,9 @@
                             <input id="email" type="email" formControlName="email" placeholder="Email" [class.signup-error]="signUpForm.controls.email.invalid && signUpForm.controls.email.touched">
                             <img src="assets/img/forms/mail.svg" class="input-icon" />
                             <div class="form-error-placeholder">
-                                @if (signUpForm.controls.email.invalid && signUpForm.controls.email.touched) {
+                                @if (signUpForm.controls.email.hasError('emailExists') && signUpForm.controls.email.touched) {
+                                    <p class="form-error">Email already exists.</p>
+                                } @else if (signUpForm.controls.email.invalid && signUpForm.controls.email.touched) {
                                     <p class="form-error">Valid email is required.</p>
                                 }
                             </div>
