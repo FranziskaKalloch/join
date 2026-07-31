@@ -1,16 +1,14 @@
 
 <div class="subtasks">
-  <!-- <label class="subtasks__label">Subtasks</label> -->
 
   <div class="subtasks__input-row">
-    <div class="form-cell form-cell--subtask form-cell--task">
+    <div class="form-cell form-cell--subtask form-cell--task form-cell--subtask">
 
     <input type="text" class="subtasks__input" placeholder="Add new subtask" [value]="newSubtaskTitle()"
       (input)="onInputChange($any($event.target).value)" (keydown.enter)="$event.preventDefault(); addSubtask()" />
     @if (newSubtaskTitle()) {
     <div class="buttons-new-subtask">
     <button type="button" class="subtasks-icon subtasks-icon--clear" (click)="clearInput()">
-      <!-- icon: general/close.svg + close-hover.svg -->
       <img [src]="isClearHover()
     ? '/assets/img/components/task/task-close-hover.svg'
     : '/assets/img/components/task/task-close.svg'">
@@ -39,7 +37,6 @@
       <input type="text" class="subtasks__edit-input" [value]="editingTitle()"
         (input)="onEditInputChange($any($event.target).value)"
         (keydown.enter)="$event.preventDefault(); saveEdit($index)" />
-        <!-- Schritt zwei-->
          <div class="subtasks__actions subtasks__actions--visible">
       <button type="button" class="subtasks-icon subtasks-icon--delete" (click)="deleteSubtask($index)">
                   <img [src]="isClearHover()
@@ -57,7 +54,7 @@
       } @else {
       
       <span class="subtasks__item-title" (dblclick)="startEdit($index)">
-        {{ subtask.title }}
+         {{ truncate(subtask.title) }}
       </span>
           <div class="subtasks__actions">
       <button type="button" class="subtasks-icon subtasks-icon--edit" (click)="startEdit($index)">

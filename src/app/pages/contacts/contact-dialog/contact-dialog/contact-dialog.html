@@ -60,11 +60,6 @@
                                                 First and last name must each contain at least 3 characters.
                                             </p>
                                             }
-                                            @else if (name.hasError('nameExists')) {
-                                            <p class="form-error">
-                                                Contact already exists.
-                                            </p>
-                                            }
                                             @else if (name.hasError('pattern')){
                                             <p class="form-error">
                                                 The name must not contain numbers.
@@ -90,6 +85,11 @@
                                             <p class="form-error">
                                                 Wrong email address.
                                             </p>
+                                            }
+                                            @else if (newUserForm.controls.email.hasError('emailExists')) {
+                                             <p class="form-error">
+                                                This email address already exists.
+                                             </p>
                                             }
                                             }
                                         </div>
