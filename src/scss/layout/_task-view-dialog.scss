@@ -18,7 +18,8 @@
     @include small-mobile {
         padding: 28px 20px;
     }
-       @include landscape {
+
+    @include landscape {
         padding: 28px 20px;
     }
 }
@@ -32,6 +33,7 @@
 .task-view-description {
     font-size: 20px;
     padding-bottom: 16px;
+    word-break: break-all;
 
     @include mobile {
         font-size: 16px;
@@ -56,10 +58,18 @@
 
 .task-view-priority>div {
     font-size: 20px;
+
+    @include small-mobile {
+        font-size: 16px;
+    }
 }
 
 .task-view-date>div {
     font-size: 20px;
+
+    @include small-mobile {
+        font-size: 16px;
+    }
 }
 
 .task-view-duedate {
@@ -98,8 +108,11 @@
         padding-left: 12px;
         text-overflow: ellipsis;
         white-space: nowrap;
-         overflow: hidden;
-        ;
+        overflow: hidden;
+
+        @include small-mobile {
+            font-size: 16px;
+        }
     }
 }
 
@@ -208,10 +221,11 @@
     right: 24px;
     z-index: 1001;
 
-    @include small-mobile{
-         top: 28px;
+    @include small-mobile {
+        top: 28px;
     }
-       @include landscape{
-         top: 28px;
+
+    @include landscape {
+        top: 28px;
     }
 }

@@ -1,39 +1,53 @@
-import { Component, inject, ElementRef, HostListener, signal, computed, Output, EventEmitter, Input, viewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { TaskService } from '../../services/tasks/task.service';
-import { noPastDateValidator, getTodayDateString } from '../../utils/date.util/date.util';
-import { AssignedTo } from './assigned-to/assigned-to';
-import { Contact } from '../../interfaces/contacts/contact';
-import { TaskPriority, TaskCategory, TaskStatus } from '../../interfaces/task/task.types';
-import { Subtasks } from './subtasks/subtasks/subtasks';
-import { Subtask } from '../../interfaces/task/subtask';
-import { DialogService, DialogType } from '../../services/dialog/dialog.service';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { Task } from '../../interfaces/task/task';
-import { ToastService } from '../../services/toast/toast-service';
+import {
+  Component,
+  computed,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  inject,
+  Input,
+  Output,
+  signal,
+  viewChild,
+} from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
 
+import { Contact } from '../../interfaces/contacts/contact';
+import { Subtask } from '../../interfaces/task/subtask';
+import { Task } from '../../interfaces/task/task';
+import { TaskCategory, TaskPriority, TaskStatus } from '../../interfaces/task/task.types';
+import { AuthService } from '../../services/auth/auth.service';
+import { DialogService, DialogType } from '../../services/dialog/dialog.service';
+import { TaskService } from '../../services/tasks/task.service';
+import { ToastService } from '../../services/toast/toast-service';
+import { getTodayDateString, noPastDateValidator } from '../../utils/date.util/date.util';
+import { AssignedTo } from './assigned-to/assigned-to';
+import { Subtasks } from './subtasks/subtasks/subtasks';
 
 @Component({
   selector: 'app-add-task',
-  imports: [ReactiveFormsModule,
+  imports: [
+    ReactiveFormsModule,
     AssignedTo,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
     Subtasks,
-    OverlayModule
+    OverlayModule,
   ],
   templateUrl: './add-task.html',
   styleUrl: './add-task.scss',
 })
 export class AddTask {
   private taskService = inject(TaskService);
+  private authService = inject(AuthService);
   private router = inject(Router);
   minDate = getTodayDateString();
   private elementRef = inject(ElementRef);
@@ -43,7 +57,9 @@ export class AddTask {
   assignedToComponent = viewChild(AssignedTo);
   private toastService = inject(ToastService);
   today = new Date();
-
+  readonly dialogService = inject(DialogService);
+  readonly DialogType = DialogType;
+  type = signal<DialogType | null>(null);
 
   addTaskForm = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -100,9 +116,8 @@ export class AddTask {
       if (this.isDialog) {
         this.close.emit();
       } else {
-        this.router.navigate(['/board']);
+        await this.router.navigate(['/board']);
       }
-
     } finally {
       this.isSaving = false;
     }
@@ -131,8 +146,7 @@ export class AddTask {
   selectedStatus: TaskStatus = 'todo';
 
   private buildCreateTask(): Omit<Task, 'id' | 'createdAt'> {
-    const { title, description, dueDate, priority, category } =
-      this.addTaskForm.getRawValue();
+    const { title, description, dueDate, priority, category } = this.addTaskForm.getRawValue();
 
     return {
       title: title!,
@@ -141,8 +155,9 @@ export class AddTask {
       priority: priority as TaskPriority,
       category: category as TaskCategory,
       status: this.selectedStatus,
-      assignedContactIds: this.selectedContacts.map(c => c.id!),
+      assignedContactIds: this.selectedContacts.map((c) => c.id!),
       subtasks: this.subtasks(),
+      authUserId: this.authService.currentUser()?.id,
     };
   }
   private buildUpdateTask(): Task {
@@ -152,8 +167,7 @@ export class AddTask {
       throw new Error('No task selected.');
     }
 
-    const { title, description, dueDate, priority, category } =
-      this.addTaskForm.getRawValue();
+    const { title, description, dueDate, priority, category } = this.addTaskForm.getRawValue();
 
     return {
       ...task,
@@ -162,7 +176,7 @@ export class AddTask {
       dueDate: dueDate!,
       priority: priority as TaskPriority,
       category: category as TaskCategory,
-      assignedContactIds: this.selectedContacts.map(c => c.id!),
+      assignedContactIds: this.selectedContacts.map((c) => c.id!),
       subtasks: this.subtasks(),
     };
   }
@@ -202,14 +216,9 @@ export class AddTask {
 
   // ab hier Marc
 
-  readonly dialogService = inject(DialogService);
-  readonly DialogType = DialogType;
-  type = signal<DialogType | null>(null);
 
 
-  isTaskDialog = computed(() =>
-    this.dialogService.current().type === DialogType.AddTask
-  );
+  isTaskDialog = computed(() => this.dialogService.current().type === DialogType.AddTask);
 
   @Input() isEditMode = false;
 
@@ -228,7 +237,6 @@ export class AddTask {
   get initialStatus(): TaskStatus | undefined {
     return (this.dialogService.current().data as { status: TaskStatus } | undefined)?.status;
   }
-
 
   getPriorityIcon(priority: 'urgent' | 'medium' | 'low'): string {
     const suffix = this.isPrioritySelected(priority) ? '-white' : '';
@@ -263,7 +271,7 @@ export class AddTask {
 
     dueDateControl.setValidators([
       Validators.required,
-      noPastDateValidator(new Date(task.dueDate))
+      noPastDateValidator(new Date(task.dueDate)),
     ]);
 
     dueDateControl.updateValueAndValidity();

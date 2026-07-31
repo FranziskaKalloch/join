@@ -58,6 +58,7 @@ export class ContactService {
         phone: contact.user_phone,
         initials: this.getInitials(contact.user_firstname, contact.user_lastname),
         colors: this.getBubbleColors(contact.id || 0),
+        authUserId: contact.auth_user_id,
       }));
       this.contacts.set(mappedContacts);
       const selectedContact = this.selectedContact();
@@ -112,25 +113,22 @@ export class ContactService {
   }
 
   /**
-   * Checks whether a contact with the given full name already exists
+   * Checks whether a contact with the given email already exists
    * in the database.
    *
    * When editing a contact, an optional contact ID can be excluded
    * from the duplicate check.
    *
-   * @param fullName The complete name of the contact.
+   * @param email The complete email of the contact.
    * @param excludeId Optional ID of a contact that should be excluded.
    * @returns A promise resolving to true if the contact exists,
    * otherwise false.
    */
-  async contactExists(fullName: string, excludeId?: number): Promise<boolean> {
-    const { firstname, lastname } = splitFullName(fullName);
-
+  async emailExists(email: string, excludeId?: number): Promise<boolean> {
     let query = this.supabaseService.supabase
       .from('user_join')
       .select('id')
-      .eq('user_firstname', firstname)
-      .eq('user_lastname', lastname);
+      .eq('user_mail', email.toLowerCase());
 
     if (excludeId !== undefined) {
       query = query.not('id', 'eq', excludeId);

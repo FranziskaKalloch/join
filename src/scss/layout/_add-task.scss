@@ -16,6 +16,10 @@
         max-width: 50dvw;
     }
 
+    @include widesscreen-plus {
+        max-width: 35dvw;
+    }
+
     @include tablet-high {
         height: unset;
     }
@@ -176,6 +180,7 @@
 
     @include small-mobile {
         font-size: 16px;
+        padding: 13px 40px 13px 11px;
 
     }
 
@@ -246,7 +251,7 @@
         font-size: 16px;
         padding: 12px 12px;
     }
-
+    
     @include small-mobile {
         font-size: 14px;
         padding: 8px 16px;
@@ -270,6 +275,7 @@
             height: auto;
             padding-left: 6px;
         }
+
     }
 }
 

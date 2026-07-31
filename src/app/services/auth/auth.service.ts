@@ -36,11 +36,13 @@ export class AuthService {
       password: password,
       options: {
         emailRedirectTo: 'http://localhost:4200/login',
+        data: {
+          full_name: fullName,
+        },
       },
     });
 
     if (error) {
-      console.log(error); // ERROR MESSAGE
       return false;
     }
 
@@ -51,7 +53,6 @@ export class AuthService {
       authUserId: data.user?.id,
     });
     if (!contactAdded) {
-      console.log('Kontakt konnte nicht angelegt werden');
       return false;
     }
     return true;
@@ -66,16 +67,18 @@ export class AuthService {
    * @returns true if login was successful, false if credentials were invalid
    */
   async signIn(email: string, password: string): Promise<boolean> {
-    const { error } = await this.supabaseService.supabase.auth.signInWithPassword({
+    const { data, error } = await this.supabaseService.supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
 
-    if (error) {
+    if (error || !data.user) {
       return false;
     }
 
     this.isLoggedIn.set(true);
+    this.currentUser.set(data.user);
+
     return true;
   }
 
@@ -140,5 +143,15 @@ export class AuthService {
     this.isLoggedIn.set(true);
     this.currentUser.set(user);
     return true;
+  }
+
+  showSummaryGreeting = signal(true);
+
+  resetSummaryGreeting(): void {
+    this.showSummaryGreeting.set(true);
+  }
+
+  hideSummaryGreeting(): void {
+    this.showSummaryGreeting.set(false);
   }
 }
