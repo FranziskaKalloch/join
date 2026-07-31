@@ -1,4 +1,4 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, computed, HostListener, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../services/auth/auth.service';
@@ -15,8 +15,17 @@ export class Header {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  selectedContact = this.contactService.selectedContact;
+  currentUser = this.authService.currentUser;
   menuOpen = false;
+
+  currentUserContact = computed(() => {
+    const user = this.currentUser();
+
+    if (!user) {
+      return null;
+    }
+    return this.contactService.contacts().find((contact) => contact.authUserId === user.id) ?? null;
+  });
 
   /**
    * Toggles the visibility of the user menu.

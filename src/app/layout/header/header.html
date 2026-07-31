@@ -6,7 +6,7 @@
     <div class="top-menu-right">
       <button class="user-menu-button" (click)="toggleMenu($event)">
         <div class="header-user-avatar">
-          @if (selectedContact(); as contact) {
+          @if (currentUserContact(); as contact) {
             {{ contact.initials }}
           }
         </div>
