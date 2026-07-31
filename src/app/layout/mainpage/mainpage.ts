@@ -16,6 +16,13 @@ export class MainPage implements OnInit {
   private contactService = inject(ContactService);
   private taskService = inject(TaskService);
 
+  /**
+   * Loads the initial application data required by the authenticated area.
+   *
+   * Fetches all contacts and tasks when the main layout is initialized,
+   * ensuring that shared components such as the header, board, and summary
+   * have access to the required data.
+   */
   ngOnInit(): void {
     this.taskService.loadTasks();
     this.contactService.loadContacts();
