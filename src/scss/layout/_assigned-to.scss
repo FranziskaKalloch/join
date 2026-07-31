@@ -1,5 +1,4 @@
 @use '../abstract/' as *;
-@use "sass:color";
 
 .assigned-to__list {
     width: 422px;
@@ -25,7 +24,7 @@
         width: calc(100% - 24px);
     }
 
-    @include desktop-s {}
+ 
 
 }
 
@@ -104,7 +103,7 @@
     }
 
     &::-webkit-scrollbar-thumb:hover {
-         background: color.scale($dark-grey-color, $lightness: -10%);
+        background: darken($dark-grey-color, 10%);
     }
 
 }

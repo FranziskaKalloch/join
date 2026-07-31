@@ -1,5 +1,4 @@
 @use '../abstract/' as *;
-@use "sass:color";
 
 dialog::backdrop {
     background: rgba(0, 0, 0, 0.1);
@@ -9,7 +8,6 @@ dialog::backdrop {
     position: fixed;
     top: 50%;
     left: 50%;
-    // display: grid;
     width: 1212px;
     height: 592px;
     background: $white;
@@ -41,6 +39,8 @@ dialog::backdrop {
 
         @include widesscreen {
             height: calc(70dvh - 80px);
+            width: 820px;
+     
         }
     }
 
@@ -55,6 +55,8 @@ dialog::backdrop {
 
         @include widesscreen {
             height: calc(70dvh - 80px);
+             width: 820px;
+     
         }
     }
 
@@ -90,9 +92,11 @@ dialog::backdrop {
 
     @include landscape {
         width: 100dvw;
-        height: calc(100dvh - 80px);
-        top: 0;
-        bottom: 80px;
+        // height: calc(100dvh - 80px);
+        animation: dialogInMobile 250ms ease-out forwards;
+        // bottom: 80px;
+        height: 100dvh;
+        position: fixed;
 
     }
 
@@ -107,7 +111,7 @@ dialog::backdrop {
 
     @include landscape {
         margin-top: 30px;
-        max-height: calc(100dvh - 240px);
+        max-height: calc(100dvh - 210px);
     }
 
     &--task {
@@ -137,8 +141,8 @@ dialog::backdrop {
         }
 
         @include landscape {
-            margin-top: 0px;
-            max-height: calc(100dvh - 245px);
+            margin-top: 10px;
+            max-height: calc(100dvh - 150px);
         }
 
     }
@@ -170,8 +174,8 @@ dialog::backdrop {
         }
 
         @include landscape {
-            margin-top: 0px;
-            max-height: calc(100dvh - 245px);
+            margin-top: 50px;
+            max-height: calc(100dvh - 170px);
         }
     }
 
@@ -191,7 +195,7 @@ dialog::backdrop {
     }
 
     &::-webkit-scrollbar-thumb:hover {
-         background: color.scale($dark-grey-color, $lightness: -10%);
+        background: darken($dark-grey-color, 10%);
     }
 
 
@@ -296,7 +300,7 @@ dialog::backdrop {
         }
 
         to {
-            transform: translate(-50%, 0%);
+            transform: translate(-50%, -50%);
             opacity: 1;
         }
     }
@@ -438,6 +442,11 @@ dialog::backdrop {
     right: 20px;
     z-index: 1001;
 
+    @include landscape {
+        top: 28px;
+        right: 20px;
+    }
+
     &--task {
         top: 64px;
         right: 60px;
@@ -452,6 +461,10 @@ dialog::backdrop {
             right: 64px;
         }
 
+        @include landscape {
+            top: 28px;
+            right: 20px;
+        }
     }
 }
 
@@ -547,6 +560,9 @@ dialog::backdrop {
             position: unset;
             padding: 0;
         }
+        @include widesscreen {
+            width: 100%;
+        }
     }
 }
 
@@ -572,7 +588,7 @@ dialog::backdrop {
 
     &--task {
         flex-direction: column;
-          
+
 
         @include desktop-s {
             align-items: flex-start;
@@ -586,6 +602,10 @@ dialog::backdrop {
 
         @include small-mobile {
             margin-top: 25px;
+        }
+
+            @include widesscreen {
+           width: 100%;
         }
 
     }
@@ -651,7 +671,7 @@ dialog::backdrop {
     font-weight: bold;
     font-size: 61px;
     color: $white;
-    word-break: break-all;
+    word-break: break-word;
 
 
     @include tablet {
@@ -836,8 +856,9 @@ dialog::backdrop {
     }
 
     @include landscape {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
+        font-size: 32px;
     }
 }
 
@@ -851,13 +872,14 @@ dialog::backdrop {
     }
 
     @include landscape {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
     }
 }
 
 .form-cell {
     padding-bottom: 12px;
+     width: 100%;
 
     @include small-mobile {
         padding-bottom: 8px;
@@ -917,6 +939,11 @@ dialog::backdrop {
         height: 36px;
         padding: 13px 40px 13px 11px;
 
+    }
+
+    @include widesscreen {
+        width: 100%;
+    
     }
 
     &:focus {
@@ -1046,9 +1073,9 @@ input.ng-invalid.ng-touched {
 
         @include landscape {
             position: fixed;
-            bottom: 85px;
             width: 100%;
             gap: 20px;
+            right: 0;
         }
     }
 }
