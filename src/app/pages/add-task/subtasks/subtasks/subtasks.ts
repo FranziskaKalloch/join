@@ -69,10 +69,6 @@ export class Subtasks {
   private initialized = false;
 
   constructor() {
-    // effect(() => {
-    //     console.log('Subtasks effect');
-    //   this.subtasks.set([...this.initialSubtasks()]);
-    // });
     effect(() => {
       if (this.initialized) {
         return;

@@ -1,4 +1,5 @@
 @use '../abstract/' as *;
+@use "sass:color";
 
 dialog::backdrop {
     background: rgba(0, 0, 0, 0.1);
@@ -190,7 +191,7 @@ dialog::backdrop {
     }
 
     &::-webkit-scrollbar-thumb:hover {
-        background: darken($dark-grey-color, 10%);
+         background: color.scale($dark-grey-color, $lightness: -10%);
     }
 
 
