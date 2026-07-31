@@ -1,14 +1,14 @@
+import { CdkDropListGroup } from '@angular/cdk/drag-drop';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CdkDropListGroup } from '@angular/cdk/drag-drop';
-import { TaskStatus } from '../../interfaces/task/task.types';
-import { TaskService } from '../../services/tasks/task.service';
-import { TaskView } from './task-view/task-view';
-import { DialogService, DialogType } from '../../services/dialog/dialog.service';
-import { ContactService } from '../../services/contacts/contact.service';
 import { Router } from '@angular/router';
-import { TaskDialog } from './task-dialog/task-dialog';
 
+import { TaskStatus } from '../../interfaces/task/task.types';
+import { ContactService } from '../../services/contacts/contact.service';
+import { DialogService, DialogType } from '../../services/dialog/dialog.service';
+import { TaskService } from '../../services/tasks/task.service';
+import { TaskDialog } from './task-dialog/task-dialog';
+import { TaskView } from './task-view/task-view';
 
 @Component({
   selector: 'app-board',
@@ -30,15 +30,12 @@ export class BoardComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.taskService.loadTasks();
-    this.contactService.loadContacts();
     this.taskService.subscribeToTaskChanges();
   }
 
   ngOnDestroy(): void {
     this.taskService.unsubscribeFromTaskChanges();
   }
-
 
   readonly dialogService = inject(DialogService);
   readonly DialogType = DialogType;

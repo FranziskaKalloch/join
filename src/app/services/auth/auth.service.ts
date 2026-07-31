@@ -76,8 +76,8 @@ export class AuthService {
       return false;
     }
 
-    this.isLoggedIn.set(true);
     this.currentUser.set(data.user);
+    this.isLoggedIn.set(true);
 
     return true;
   }

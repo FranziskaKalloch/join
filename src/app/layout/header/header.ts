@@ -18,6 +18,13 @@ export class Header {
   currentUser = this.authService.currentUser;
   menuOpen = false;
 
+  /**
+   * Returns the contact that belongs to the currently authenticated user.
+   *
+   * The contact is determined by matching the authenticated user's ID
+   * with the contact's authUserId. The computed signal updates
+   * automatically whenever the current user or the contacts list changes.
+   */
   currentUserContact = computed(() => {
     const user = this.currentUser();
 
