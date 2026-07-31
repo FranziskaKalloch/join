@@ -14,14 +14,15 @@ import { ContactService } from '../../../services/contacts/contact.service';
 export class ContactList {
   contacts = input<ContactInterface[]>([]);
   contactSelected = output<ContactInterface>();
-  // activeContactId: number | null = null;
 
   readonly contactService = inject(ContactService);
   readonly dialogService = inject(DialogService);
   selectedContact = this.contactService.selectedContact;
   readonly DialogType = DialogType;
 
-
+  /**
+   * Sorts the contact list alphabetically and groups them by the first letter of their first name.
+   */
   get groupedContacts(): { letter: string; contacts: ContactInterface[] }[] {
     const sorted = [...this.contacts()].sort((a, b) => {
       const nameA = `${a.firstname || ''} ${a.lastname || ''}`.trim();
@@ -43,11 +44,19 @@ export class ContactList {
     }));
   }
 
+  /**
+   * Selects the given contact and emits the selection event.
+   * 
+   * @param contact The contact to select.
+   */
   onSelectContact(contact: ContactInterface): void {
     this.contactService.selectedContact.set(contact);
     this.contactSelected.emit(contact);
   }
 
+  /**
+   * Resets the selected contact and opens the contact dialog for creation or editing.
+   */
   openDialog(): void {
     this.contactService.selectedContact.set(null);
     this.dialogService.open(DialogType.Contact);

@@ -20,34 +20,36 @@ export class Contacts implements OnInit {
   private contactService = inject(ContactService);
   private taskService = inject(TaskService);
   contacts = this.contactService.contacts;
-  // selectedContact = signal<Contact | null>(null);
   selectedContact = this.contactService.selectedContact;
 
+  /**
+   * Lifecycle hook that initializes the component by loading contacts 
+   * and subscribing to real-time contact changes.
+   */
   ngOnInit() {
     this.contactService.loadContacts();
     this.contactService.subscribeToContactChanges();
   }
 
+  /**
+   * Lifecycle hook that cleans up subscriptions when the component is destroyed.
+   */
   ngOnDestroy(): void {
     this.contactService.unsubscribeFromContactChanges();
   }
 
-  // selectContact(contact: Contact): void {
-  //   this.selectedContact.set(contact);
-  // }
-
+  /**
+   * Selects a contact and updates the selected contact state.
+   * 
+   * @param contact The contact to select.
+   */
   selectContact(contact: Contact): void {
     this.contactService.selectedContact.set(contact);
   }
 
-  // clearSelectedContact(): void {
-  //   this.selectedContact.set(null);
-  // }
-
-  //   clearSelectedContact(): void {
-  //   this.contactService.selectedContact.set(null);
-  // }
-
+  /**
+   * Deletes or clears the currently selected contact.
+   */
   clearSelectedContact(): void {
     this.contactService.deleteSelectedContact();
   }

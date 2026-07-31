@@ -4,6 +4,12 @@ import { Router, RouterModule } from '@angular/router';
 
 import { AuthService } from '../../services/auth/auth.service';
 
+/**
+ * Custom validator function that ensures the entered name consists of at least two words.
+ * 
+ * @param control The abstract control containing the value to validate.
+ * @returns A validation error object if the condition is not met, otherwise null.
+ */
 const twoWordsValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const value = control.value || '';
   const parts = value.trim().split(/\s+/);
