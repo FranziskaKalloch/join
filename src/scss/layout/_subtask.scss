@@ -61,17 +61,14 @@
 
 
 .subtasks__list {
-    // margin: 12px 0 0;
-    padding-left: 24px;
-}
-
-.subtasks__list {
     list-style: circle;
+    padding-left: 24px;
 }
 
 .subtasks__item {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 8px;
     min-height: 32px;
     position: relative;
@@ -92,9 +89,35 @@
     }
 }
 
-.subtasks__item-title {
+.subtasks-wrapper {
     flex: 1;
-    word-break: break-word;
+    min-height: 0;
+    display: flex;
+    max-height: 250px;
+    min-width: 0;
+        width: 100%;
+
+    app-subtasks {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+    }
+}
+
+.subtasks__input-row{
+width: 100%;
+}
+
+.subtasks__item-title {
+    display: block;
+    word-break: break-all;
+
+    // @include desktop-s {
+    //     overflow: hidden;
+    //     text-overflow: ellipsis;
+    //     white-space: nowrap;
+
+    // }
 }
 
 .subtasks__actions {
@@ -134,13 +157,14 @@
     width: 100%;
     border-radius: 0;
     position: relative;
+
 }
 
 .form-cell-small input {
     border: 0;
     border-bottom: 1px solid $grey-form-blue;
     width: 100%;
-    padding: 4px 16px;
+    padding: 4px 75px 4px 16px;
 }
 
 .subtasks {
@@ -150,20 +174,7 @@
     flex-direction: column;
 }
 
-.subtasks-wrapper {
-    flex: 1;
-    min-height: 0;
-    display: flex;
-    max-height: 250px;
-    ;
 
-
-    app-subtasks {
-        flex: 1;
-        min-height: 0;
-        display: flex;
-    }
-}
 
 .subtask-scroll {
     flex: 1;
