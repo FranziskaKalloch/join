@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 export class LegalNotice {
   private router = inject(Router);
 
+  /**
+   * Navigate back to the summary page.
+   */
   goBack(): void {
     this.router.navigate(['/summary']);
   }

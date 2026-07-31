@@ -10,7 +10,6 @@ import {
 } from '../../../../utils/task.util/task.util';
 import { UserBubble } from '../../../../components/user-bubble/user-bubble';
 
-
 @Component({
   selector: 'app-task-view-dialog',
   imports: [CommonModule, UserBubble],
@@ -24,17 +23,25 @@ export class TaskViewDialog {
   readonly task = this.taskService.selectedTask;
   readonly contactService = inject(ContactService);
 
-
+  /**
+   * Computed CSS class for the selected task category.
+   */
   get categoryClass(): string {
     const task = this.task();
     return task ? getCategoryClass(task.category as any) : '';
   }
 
+  /**
+   * Display name for the selected task category.
+   */
   get categoryDisplayName(): string {
     const task = this.task();
     return task ? getCategoryDisplayName(task.category as any) : '';
   }
 
+  /**
+   * Path to the priority icon for the selected task.
+   */
   get priorityIcon(): string {
     const task = this.task();
     return task
@@ -42,25 +49,45 @@ export class TaskViewDialog {
       : '';
   }
 
+  /**
+   * Number of completed subtasks for the selected task.
+   */
   get completedSubtasks(): number {
     const task = this.task();
     return task?.subtasks?.filter(subtask => subtask.done).length ?? 0;
   }
 
+  /**
+   * Total number of subtasks for the selected task.
+   */
   get totalSubtasks(): number {
     return this.task()?.subtasks?.length ?? 0;
   }
 
+  /**
+   * Close the task view dialog.
+   */
   closeDialog(): void {
     this.close.emit();
   }
 
+  /**
+   * Get a contact by ID from the contact service.
+   *
+   * @param contactId - ID of the contact to lookup.
+   * @returns The contact or undefined if not found.
+   */
   getContact(contactId: number) {
     return this.contactService
       .contacts()
       .find(contact => contact.id === contactId);
   }
 
+  /**
+   * Toggle the completion state of a subtask.
+   *
+   * @param index - Index of the subtask to toggle.
+   */
   toggleSubtask(index: number): void {
     const task = this.task();
 
@@ -71,6 +98,9 @@ export class TaskViewDialog {
     this.taskService.toggleSubtask(task, index);
   }
 
+  /**
+   * Delete the currently selected task.
+   */
   async deleteTask(): Promise<void> {
     const task = this.task();
 
@@ -90,8 +120,10 @@ export class TaskViewDialog {
   readonly dialogService = inject(DialogService);
   readonly DialogType = DialogType;
 
+  /**
+   * Open edit task dialog for the selected task.
+   */
   editTask(): void {
     this.dialogService.open(DialogType.EditTask);
   }
-
 }

@@ -14,12 +14,18 @@ export class Subtasks {
   editingTitle = signal<string>('');
   subtasksChange = output<Subtask[]>();
 
-  /** Updates the new-subtask input value on keystroke. */
+   /**
+   * Update the value used for the new subtask input.
+   *
+   * @param value - Current input value.
+   */
   onInputChange(value: string): void {
     this.newSubtaskTitle.set(value);
   }
 
-  /** Adds the current input as a new subtask, then clears the input. */
+  /**
+   * Add a new subtask to the list.
+   */
   addSubtask(): void {
     const title = this.newSubtaskTitle().trim();
     if (!title) return;
@@ -28,23 +34,37 @@ export class Subtasks {
     this.emitChange();
   }
 
-  /** Clears the input text without adding a subtask. */
+  /**
+   * Clear the new subtask input value.
+   */
   clearInput(): void {
     this.newSubtaskTitle.set('');
   }
 
-  /** Enters edit mode for a given subtask (triggered by pencil click or double-click). */
+  /**
+   * Begin editing the subtask at the specified index.
+   *
+   * @param index - Index of the subtask to edit.
+   */
   startEdit(index: number): void {
     this.editingIndex.set(index);
     this.editingTitle.set(this.subtasks()[index].title);
   }
 
-  /** Updates the editingTitle value on keystroke while editing. */
+  /**
+   * Update the current edit input value.
+   *
+   * @param value - Current edit input value.
+   */
   onEditInputChange(value: string): void {
     this.editingTitle.set(value);
   }
 
-  /** Confirms the edit and writes the new title back into the subtasks list. */
+  /**
+   * Save the edited title for the subtask at the specified index.
+   *
+   * @param index - Index of the subtask being saved.
+   */
   saveEdit(index: number): void {
     const title = this.editingTitle().trim();
     if (!title) return;
@@ -53,14 +73,20 @@ export class Subtasks {
     this.emitChange();
   }
 
-  /** Removes a subtask by index, whether idle or currently in edit mode. */
+  /**
+   * Remove the subtask at the specified index.
+   *
+   * @param index - Index of the subtask to delete.
+   */
   deleteSubtask(index: number): void {
     this.subtasks.update((list) => list.filter((_, i) => i !== index));
     if (this.editingIndex() === index) this.editingIndex.set(null);
     this.emitChange();
   }
 
-  /** Notifies the parent (AddTask) whenever the subtasks list changes. */
+  /**
+   * Emit the current subtasks list through the output event.
+   */
   private emitChange(): void {
     this.subtasksChange.emit(this.subtasks());
   }
@@ -95,8 +121,14 @@ export class Subtasks {
     this.initialized = false;
   }
 
+  /**
+   * Truncate a text string to a maximum length and append an ellipsis if needed.
+   *
+   * @param text - Text to truncate.
+   * @param max - Maximum length before truncation.
+   * @returns Truncated text.
+   */
   truncate(text: string, max = 30): string {
     return text.length > max ? text.slice(0, max) + '…' : text;
   }
-
 }
