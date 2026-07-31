@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { ContactService } from '../../services/contacts/contact.service';
 import { TaskService } from '../../services/tasks/task.service';
@@ -15,7 +15,7 @@ import { TaskService } from '../../services/tasks/task.service';
  */
 @Component({
   selector: 'app-summary',
-  imports: [DatePipe],
+  imports: [DatePipe, RouterLink],
   templateUrl: './summary.html',
   styleUrl: './summary.scss',
 })
