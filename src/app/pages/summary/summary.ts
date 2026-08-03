@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, computed, inject, signal } from '@angular/core';
+
 import { AuthService } from '../../services/auth/auth.service';
 import { ContactService } from '../../services/contacts/contact.service';
 import { TaskService } from '../../services/tasks/task.service';
@@ -64,59 +64,45 @@ export class Summary {
 
   /**
    * Number of visible tasks with status `'todo'`.
-   *
-   * @returns Number of open tasks.
    */
-  get todoTasks(): number {
-    return this.visibleTasks.filter((task) => task.status === 'todo').length;
-  }
+  todoTasks = computed(() => this.visibleTasks.filter((task) => task.status === 'todo').length);
+
 
   /**
    * Number of visible tasks with status `'done'`.
-   *
-   * @returns Number of completed tasks.
    */
-  get doneTasks(): number {
-    return this.visibleTasks.filter((task) => task.status === 'done').length;
-  }
+  doneTasks = computed(() => this.visibleTasks.filter((task) => task.status === 'done').length);
+
 
   /**
    * Number of visible tasks with status `'inProgress'`.
-   *
-   * @returns Number of tasks in progress.
    */
-  get tasksInProgress(): number {
-    return this.visibleTasks.filter((task) => task.status === 'inProgress').length;
-  }
+  tasksInProgress = computed(
+    () => this.visibleTasks.filter((task) => task.status === 'inProgress').length,
+  );
+
 
   /**
    * Number of visible tasks with status `'awaitFeedback'`.
-   *
-   * @returns Number of tasks awaiting feedback.
    */
-  get awaitingFeedbackTasks(): number {
-    return this.visibleTasks.filter((task) => task.status === 'awaitFeedback').length;
-  }
+  awaitingFeedbackTasks = computed(
+    () => this.visibleTasks.filter((task) => task.status === 'awaitFeedback').length,
+  );
+
 
   /**
    * Number of visible tasks with priority `'urgent'`.
-   *
-   * @returns Number of urgent tasks.
    */
-  get urgentTasks(): number {
-    return this.visibleTasks.filter((task) => {
-      return task.priority === 'urgent';
-    }).length;
-  }
+  urgentTasks = computed(
+    () => this.visibleTasks.filter((task) => task.priority === 'urgent').length,
+  );
+
 
   /**
    * Total number of visible tasks in the board.
-   *
-   * @returns Number of all visible tasks.
    */
-  get tasksInBoard(): number {
-    return this.visibleTasks.length;
-  }
+  tasksInBoard = computed(() => this.visibleTasks.length);
+
 
   /**
    * Full name of the currently logged-in user.
