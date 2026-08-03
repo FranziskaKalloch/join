@@ -23,7 +23,7 @@
           <div class="summary-metrics-toDo summary-metrics-badges">
             <div class="summary-metrics-toDo-icon"><img src="/assets/img/components/summary/summary-edit.svg"></div>
             <div class="summary-metrics-text">
-              <div class="summary-badge-number"> {{ todoTasks }}</div>
+              <div class="summary-badge-number"> {{ todoTasks() }}</div>
               <span>To-do</span>
             </div>
           </div>
@@ -31,7 +31,7 @@
             <div class="summary-metrics-doneTasks-icon"><img src="/assets/img/components/summary/summary-check.svg">
             </div>
             <div class="summary-metrics-text">
-              <div class="summary-badge-number">{{ doneTasks }}</div>
+              <div class="summary-badge-number">{{ doneTasks() }}</div>
               <span>Done</span>
             </div>
           </div>
@@ -42,7 +42,7 @@
               <div class="summary-metrics-urgent-icon"><img src="/assets/img/components/summary/summary-urgent.svg">
               </div>
               <div class="summary-metrics-text">
-                <div class="summary-badge-number">{{ urgentTasks }}</div>
+                <div class="summary-badge-number">{{ urgentTasks() }}</div>
                 <span class="summary-metrics-urgent"> Urgent</span>
               </div>
             </div>
@@ -55,16 +55,16 @@
         </div>
         <div class="summary-metrics-thirdLine">
           <div class="summary-metrics-thirdLine-task summary-metrics-badges summary-metrics-badges--third">
-            <div class="summary-badge-number">{{ tasksInBoard }}
+            <div class="summary-badge-number">{{ tasksInBoard() }}
             </div>
             <span>Tasks in Board</span>
           </div>
           <div class="summary-metrics-thirdLine-task summary-metrics-badges summary-metrics-badges--third">
-            <div class="summary-badge-number">{{ tasksInProgress }}</div>
+            <div class="summary-badge-number">{{ tasksInProgress() }}</div>
             <span>Tasks in Progress</span>
           </div>
           <div class="summary-metrics-thirdLine-task summary-metrics-badges summary-metrics-badges--third">
-            <div class="summary-badge-number">{{ awaitingFeedbackTasks }}</div>
+            <div class="summary-badge-number">{{ awaitingFeedbackTasks() }}</div>
             <span>Awaiting Feedback</span>
           </div>
         </div>
