@@ -48,15 +48,12 @@ dialog::backdrop {
             top: 80px;
         }
 
-
         @include landscape {
             max-height: none;
             height: 100dvh;
             max-width: none;
             width: 100dvw;
         }
-
-
     }
 
     &--task-view-edit {
@@ -114,6 +111,7 @@ dialog::backdrop {
         bottom: 80px;
         animation: dialogInMobile 250ms ease-out forwards;
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+        max-width: 95%;
     }
 
     @include tablet {
@@ -166,7 +164,7 @@ dialog::backdrop {
 
         @include small-mobile {
             flex-direction: column;
-            max-height: calc(100dvh - 340px);
+            max-height: calc(100dvh - 80px);
         }
 
         @include small-mobile-high {
@@ -188,7 +186,7 @@ dialog::backdrop {
     &--edit {
         display: flex;
         flex-direction: column;
-        margin: 30px 0;
+        margin: 40px 0 30px;
         flex: 1;
         min-height: 0;
 
@@ -203,7 +201,8 @@ dialog::backdrop {
 
         @include small-mobile {
             flex-direction: column;
-            max-height: calc(100dvh - 200px);
+            max-height: calc(100dvh - 10px);
+              margin: 30px 0 10px;
         }
 
         @include widesscreen {
@@ -211,8 +210,8 @@ dialog::backdrop {
         }
 
         @include landscape {
-            margin-top: 50px;
-            max-height: calc(100dvh - 170px);
+            // margin-top: 50px;
+            max-height: calc(100dvh - 140px);
         }
 
         @include small-mobile-high {
@@ -489,10 +488,21 @@ dialog::backdrop {
         right: 20px;
     }
 
-            @include tablet {
-            top: 28px;
-            right: 24px;
-        }
+    @include tablet {
+        top: 28px;
+        right: 24px;
+    }
+
+    @include mobile {
+        top: 20px;
+        right: 20px;
+    }
+
+
+    @include small-mobile {
+        top: 40px;
+        right: 20px;
+    }
 
     &--task {
         top: 64px;
@@ -518,6 +528,9 @@ dialog::backdrop {
             right: 24px;
         }
     }
+
+    &--edit {}
+
 }
 
 .dialog-close-btn {

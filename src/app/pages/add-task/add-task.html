@@ -8,7 +8,7 @@
       </h1>
       }
       @if (isDialog) {
-      <div class="dialog-user-close" [class.dialog-user-close--task]="!isEditMode">
+      <div class="dialog-user-close" [class.dialog-user-close--task]="!isEditMode" [class.dialog-user-close--edit]="isEditMode">
         <button type="button" class="dialog-close-btn dialog-close-btn--edit" (click)="closeDialog()">
         </button>
       </div>

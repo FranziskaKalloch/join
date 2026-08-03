@@ -59,9 +59,10 @@
 
     @include small-mobile {
         justify-content: flex-end;
-        width: 90%;
+        width: 100%;
     }
-        @include landscape {
+
+    @include landscape {
         justify-content: flex-end;
         width: 90%;
     }
@@ -90,19 +91,23 @@
     flex-direction: column;
 
     @include tablet {
-      padding: 48px 40px;
+        padding: 48px 40px;
     }
 
     @include mobile {
-        padding: 8px;
+        padding: 40px 8px;
     }
 
     @include landscape {
-       padding: 28px 20px;
+        padding: 28px 20px;
     }
 
     @include desktop-s {
-        padding: 48px 32px;
+        padding: 48px 40px;
+    }
+
+    @include small-mobile {
+        padding: 40px 8px 20px;
     }
 
 
@@ -123,7 +128,7 @@
 
     }
 
-        @include widesscreen {
+    @include widesscreen {
         margin: 0 40px;
 
     }
@@ -181,7 +186,7 @@
         width: 100%;
     }
 
-        @include widesscreen {
+    @include widesscreen {
         width: 100%;
     }
 
@@ -265,7 +270,7 @@
         font-size: 16px;
         padding: 12px 12px;
     }
-    
+
     @include small-mobile {
         font-size: 14px;
         padding: 8px 16px;
