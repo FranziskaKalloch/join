@@ -23,22 +23,16 @@ dialog::backdrop {
         max-height: calc(100dvh - 50px);
 
         @include widesscreen {
-            max-height: calc(67dvh - 80px);
+            max-height: calc(75dvh - 80px);
         }
     }
 
     &--task-view {
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
-        // max-height: calc(100dvh - 80px);
         width: 540px;
 
-        @include desktop-hd {
-            // max-height: calc(100dvh - 80px);
-            // height: 100%;
-        }
-
         @include widesscreen {
-            max-height: calc(70dvh - 80px);
+            max-height: calc(80dvh - 80px);
             width: 820px;
         }
 
@@ -66,7 +60,7 @@ dialog::backdrop {
         }
 
         @include widesscreen {
-            max-height: calc(70dvh - 80px);
+            max-height: calc(80dvh - 80px);
             width: 820px;
 
         }
@@ -202,7 +196,7 @@ dialog::backdrop {
         @include small-mobile {
             flex-direction: column;
             max-height: calc(100dvh - 10px);
-              margin: 30px 0 10px;
+            margin: 30px 0 10px;
         }
 
         @include widesscreen {
