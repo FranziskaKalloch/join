@@ -15,7 +15,14 @@ export function noPastDateValidator(originalDate?: Date): ValidatorFn {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const selectedDate = new Date(control.value);
+    const selectedDate =
+      control.value instanceof Date
+        ? new Date(
+          control.value.getFullYear(),
+          control.value.getMonth(),
+          control.value.getDate()
+        )
+        : parseLocalDate(control.value);
     selectedDate.setHours(0, 0, 0, 0);
 
     if (originalDate && control.value === originalDate) {
@@ -39,3 +46,30 @@ export function getTodayDateString(): string {
 
   return `${year}-${month}-${day}`;
 }
+
+/**
+ * Parse a date string in 'YYYY-MM-DD' format into a Date object using local timezone.
+ *
+ * @param value - Date string in ISO-like local format (YYYY-MM-DD).
+ * @returns A Date instance set to the provided year, month and day (time set to midnight local).
+ */
+export function parseLocalDate(value: string): Date {
+  const [year, month, day] = value.split('-').map(Number);
+  return new Date(year, month - 1, day);
+}
+
+/**
+ * Format a Date object as 'YYYY-MM-DD'.
+ *
+ * @param date - Date to format.
+ * @returns The formatted date string suitable for HTML date inputs.
+ */
+export function formatDate(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
+
+

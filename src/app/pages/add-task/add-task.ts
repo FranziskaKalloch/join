@@ -26,7 +26,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { DialogService, DialogType } from '../../services/dialog/dialog.service';
 import { TaskService } from '../../services/tasks/task.service';
 import { ToastService } from '../../services/toast/toast-service';
-import { getTodayDateString, noPastDateValidator } from '../../utils/date.util/date.util';
+import { formatDate, getTodayDateString, noPastDateValidator, parseLocalDate } from '../../utils/date.util/date.util';
 import { AssignedTo } from './assigned-to/assigned-to';
 import { Subtasks } from './subtasks/subtasks/subtasks';
 
@@ -65,15 +65,18 @@ export class AddTask {
   addTaskForm = new FormGroup({
     title: new FormControl('', Validators.required),
     description: new FormControl(''),
-    dueDate: new FormControl('', [Validators.required, noPastDateValidator()]),
+    dueDate: new FormControl<Date | null>(
+      null,
+      [Validators.required, noPastDateValidator()]
+    ),
     priority: new FormControl('medium', Validators.required),
     category: new FormControl('', Validators.required),
     assignedContactIds: new FormControl<number[]>([]),
   });
 
-   /**
-   * Returns the date form control.
-   */
+  /**
+  * Returns the date form control.
+  */
   get dueDateControl() {
     return this.addTaskForm.get('dueDate');
   }
@@ -167,12 +170,13 @@ export class AddTask {
    * @returns Task payload without id and createdAt.
    */
   private buildCreateTask(): Omit<Task, 'id' | 'createdAt'> {
-    const { title, description, dueDate, priority, category } = this.addTaskForm.getRawValue();
+    const { title, description, dueDate, priority, category } =
+      this.addTaskForm.getRawValue();
 
     return {
       title: title!,
       description: description ?? '',
-      dueDate: dueDate!,
+      dueDate: formatDate(dueDate as Date),
       priority: priority as TaskPriority,
       category: category as TaskCategory,
       status: this.selectedStatus,
@@ -181,7 +185,6 @@ export class AddTask {
       authUserId: this.authService.currentUser()?.id,
     };
   }
-
   /**
    * Build an updated task payload based on the existing selected task and form values.
    *
@@ -194,13 +197,14 @@ export class AddTask {
       throw new Error('No task selected.');
     }
 
-    const { title, description, dueDate, priority, category } = this.addTaskForm.getRawValue();
+    const { title, description, dueDate, priority, category } =
+      this.addTaskForm.getRawValue();
 
     return {
       ...task,
       title: title!,
       description: description ?? '',
-      dueDate: dueDate!,
+      dueDate: formatDate(dueDate as Date),
       priority: priority as TaskPriority,
       category: category as TaskCategory,
       assignedContactIds: this.selectedContacts.map((c) => c.id!),
@@ -346,26 +350,28 @@ export class AddTask {
    */
   private loadTaskIntoForm(): void {
     const task = this.selectedTask();
+
     if (!task) {
       return;
     }
+
+    const dueDate = parseLocalDate(task.dueDate);
+
     this.addTaskForm.patchValue({
       title: task.title,
       description: task.description,
-      dueDate: task.dueDate,
+      dueDate,
       priority: task.priority,
       category: task.category,
       assignedContactIds: task.assignedContactIds,
     });
 
-    const dueDateControl = this.addTaskForm.controls.dueDate;
-
-    dueDateControl.setValidators([
+    this.addTaskForm.controls.dueDate.setValidators([
       Validators.required,
-      noPastDateValidator(new Date(task.dueDate)),
+      noPastDateValidator(dueDate),
     ]);
 
-    dueDateControl.updateValueAndValidity();
+    this.addTaskForm.controls.dueDate.updateValueAndValidity();
 
     this.initialSubtasks = [...task.subtasks];
     this.subtasks.set([...task.subtasks]);
