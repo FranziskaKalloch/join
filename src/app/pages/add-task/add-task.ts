@@ -45,17 +45,18 @@ import { Subtasks } from './subtasks/subtasks/subtasks';
   templateUrl: './add-task.html',
   styleUrl: './add-task.scss',
 })
+
 export class AddTask {
+  minDate = getTodayDateString();
   private taskService = inject(TaskService);
   private authService = inject(AuthService);
   private router = inject(Router);
-  minDate = getTodayDateString();
   private elementRef = inject(ElementRef);
+  private toastService = inject(ToastService);
   isSaving = false;
   initialSubtasks: Subtask[] = [];
   subtasksComponent = viewChild(Subtasks);
   assignedToComponent = viewChild(AssignedTo);
-  private toastService = inject(ToastService);
   today = new Date();
   readonly dialogService = inject(DialogService);
   readonly DialogType = DialogType;
@@ -70,32 +71,38 @@ export class AddTask {
     assignedContactIds: new FormControl<number[]>([]),
   });
 
+   /**
+   * Returns the date form control.
+   */
   get dueDateControl() {
     return this.addTaskForm.get('dueDate');
   }
 
-  // Method to set the priority value in the form
-  setPriority(value: string): void {
-    this.addTaskForm.get('priority')?.setValue(value);
-  }
-  // Method to check if a specific priority is selected
-  isPrioritySelected(value: string): boolean {
-    return this.addTaskForm.get('priority')?.value === value;
-  }
-
   selectedContacts: Contact[] = [];
 
-  // Method to store the contacts selected in the AssignedTo dropdown
+  /**
+   * Callback when assigned contacts change in the child component.
+   *
+   * @param contacts - Selected contacts.
+   */
   onAssignedContactsChange(contacts: Contact[]): void {
     this.selectedContacts = contacts;
   }
 
   subtasks = signal<Subtask[]>([]);
 
+  /**
+   * Callback when subtasks change in the child component.
+   *
+   * @param subtasks - Updated subtask list.
+   */
   onSubtasksChange(subtasks: Subtask[]): void {
     this.subtasks.set(subtasks);
   }
 
+  /**
+   * Create or update a task when the form is submitted.
+   */
   async onSubmit(): Promise<void> {
     this.addTaskForm.markAllAsTouched();
 
@@ -123,19 +130,30 @@ export class AddTask {
     }
   }
 
+  /**
+   * Returns the title form control.
+   */
   get title() {
     return this.addTaskForm.controls.title;
   }
 
+  /**
+   * Returns the due date form control.
+   */
   get dueDate() {
     return this.addTaskForm.controls.dueDate;
   }
 
+  /**
+   * Returns the category form control.
+   */
   get category() {
     return this.addTaskForm.controls.category;
   }
 
-  // Resets the form to its default state (priority back to medium)
+  /**
+   * Reset the form and clear child component state.
+   */
   onClear(): void {
     this.addTaskForm.reset();
     this.addTaskForm.get('priority')?.setValue('medium');
@@ -143,8 +161,11 @@ export class AddTask {
     this.assignedToComponent()?.clear();
   }
 
-  selectedStatus: TaskStatus = 'todo';
-
+  /**
+   * Build a new task payload from the form values.
+   *
+   * @returns Task payload without id and createdAt.
+   */
   private buildCreateTask(): Omit<Task, 'id' | 'createdAt'> {
     const { title, description, dueDate, priority, category } = this.addTaskForm.getRawValue();
 
@@ -160,6 +181,12 @@ export class AddTask {
       authUserId: this.authService.currentUser()?.id,
     };
   }
+
+  /**
+   * Build an updated task payload based on the existing selected task and form values.
+   *
+   * @returns Updated task object.
+   */
   private buildUpdateTask(): Task {
     const task = this.selectedTask();
 
@@ -181,27 +208,71 @@ export class AddTask {
     };
   }
 
+  /**
+   * Available task categories for the category dropdown.
+   */
   categories = [
     { label: 'Technical Task', value: 'technical-task' },
     { label: 'User Story', value: 'user-story' },
   ];
 
+  /**
+   * Set the selected task priority.
+   *
+   * @param value - Priority value.
+   */
+  setPriority(value: string): void {
+    this.addTaskForm.get('priority')?.setValue(value);
+  }
+
+  /**
+   * Determine whether the specified priority is currently selected.
+   *
+   * @param value - Priority value to check.
+   * @returns True when the priority is selected.
+   */
+  isPrioritySelected(value: string): boolean {
+    return this.addTaskForm.get('priority')?.value === value;
+  }
+
+  /**
+   * Set the selected category and close the category dropdown.
+   *
+   * @param value - Category value.
+   */
   setCategory(value: string): void {
     this.addTaskForm.get('category')?.setValue(value);
     this.isCategoryDropdownOpen = false;
   }
-  // Property to track the state of the category dropdown (open or closed)
+
+  /**
+   * Whether the category dropdown is currently open.
+   */
   isCategoryDropdownOpen = false;
+
+  /**
+   * Toggle the category dropdown visibility.
+   */
   toggleCategoryDropdown(): void {
     this.addTaskForm.controls.category.markAsTouched();
     this.isCategoryDropdownOpen = !this.isCategoryDropdownOpen;
   }
 
+  /**
+   * Get the label for the currently selected category.
+   *
+   * @returns Category display label.
+   */
   getCategoryLabel(): string {
     const value = this.addTaskForm.get('category')?.value;
     return this.categories.find((c) => c.value === value)?.label ?? '';
   }
-  // Closes the category dropdown when clicking outside of it
+
+  /**
+   * Close the category dropdown when clicking outside the component.
+   *
+   * @param event - Document click event.
+   */
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event): void {
     const clickedInside = this.elementRef.nativeElement.contains(event.target);
@@ -210,22 +281,27 @@ export class AddTask {
     }
   }
 
+  /**
+   * Update the assigned contact IDs in the form.
+   *
+   * @param ids - Selected contact IDs.
+   */
   setAssignedContactIds(ids: number[]): void {
     this.addTaskForm.get('assignedContactIds')?.setValue(ids);
   }
-
-  // ab hier Marc
-
-
 
   isTaskDialog = computed(() => this.dialogService.current().type === DialogType.AddTask);
 
   @Input() isEditMode = false;
 
   readonly selectedTask = this.taskService.selectedTask;
+
   @Input() isDialog = false;
   @Output() close = new EventEmitter<void>();
 
+  /**
+   * Close the dialog or navigate back to the board.
+   */
   closeDialog() {
     if (this.isDialog) {
       this.close.emit();
@@ -234,15 +310,27 @@ export class AddTask {
     }
   }
 
+  /**
+   * Initial task status provided by the dialog data.
+   */
   get initialStatus(): TaskStatus | undefined {
     return (this.dialogService.current().data as { status: TaskStatus } | undefined)?.status;
   }
 
+  /**
+   * Get the priority icon path for the given priority value.
+   *
+   * @param priority - Task priority.
+   * @returns Image path for the priority icon.
+   */
   getPriorityIcon(priority: 'urgent' | 'medium' | 'low'): string {
     const suffix = this.isPrioritySelected(priority) ? '-white' : '';
     return `/assets/img/components/task/priority-symbol-${priority}${suffix}.svg`;
   }
 
+  /**
+   * Initialize the component state after bindings are set.
+   */
   ngOnInit(): void {
     this.selectedStatus = this.initialStatus ?? 'todo';
 
@@ -253,6 +341,9 @@ export class AddTask {
     }
   }
 
+  /**
+   * Load the selected task details into the form for edit mode.
+   */
   private loadTaskIntoForm(): void {
     const task = this.selectedTask();
     if (!task) {
@@ -279,4 +370,6 @@ export class AddTask {
     this.initialSubtasks = [...task.subtasks];
     this.subtasks.set([...task.subtasks]);
   }
+
+  selectedStatus: TaskStatus = 'todo';
 }

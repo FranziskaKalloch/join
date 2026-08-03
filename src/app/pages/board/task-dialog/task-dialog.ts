@@ -17,7 +17,7 @@ import { TaskService } from '../../../services/tasks/task.service';
   selector: 'app-task-dialog',
   standalone: true,
   imports: [
-    AddTask,TaskViewDialog
+    AddTask, TaskViewDialog
   ],
   templateUrl: './task-dialog.html',
   styleUrl: './task-dialog.scss',
@@ -35,15 +35,22 @@ export class TaskDialog implements AfterViewInit {
   private observer?: MutationObserver;
   private isClosing = false;
 
-ngAfterViewInit(): void {
-  this.dialog.nativeElement.showModal();
-  this.lockBodyScroll();
+  /**
+   * Lifecycle hook that is called after the component view has been initialized.
+   * Opens the dialog and moves the overlay container inside the dialog.
+   */
+  ngAfterViewInit(): void {
+    this.dialog.nativeElement.showModal();
+    this.lockBodyScroll();
 
-  requestAnimationFrame(() => {
-    this.moveOverlayIntoDialog();
-  });
-}
+    requestAnimationFrame(() => {
+      this.moveOverlayIntoDialog();
+    });
+  }
 
+  /**
+   * Start the dialog close animation if not already closing.
+   */
   startCloseAnimation(): void {
     if (this.isClosing) {
       return;
@@ -54,11 +61,21 @@ ngAfterViewInit(): void {
     this.unlockBodyScroll();
   }
 
+  /**
+   * Cancel event handler for closing the dialog.
+   *
+   * @param event - The cancel event from the dialog.
+   */
   onCancel(event: Event): void {
     event.preventDefault();
     this.startCloseAnimation();
   }
 
+  /**
+   * Handle dialog animation end events to finalize closing behavior.
+   *
+   * @param event - Animation event emitted by the dialog element.
+   */
   animationFinished(event: AnimationEvent): void {
     if (event.target !== this.dialog.nativeElement) {
       return;
@@ -83,17 +100,23 @@ ngAfterViewInit(): void {
     this.dialogService.clear();
   }
 
-private moveOverlayIntoDialog(): void {
-  const container = this.overlayContainer.getContainerElement();
+  /**
+   * Move the overlay container element into the dialog for proper overlay rendering.
+   */
+  private moveOverlayIntoDialog(): void {
+    const container = this.overlayContainer.getContainerElement();
 
-  if (container.parentElement !== this.dialog.nativeElement) {
-    this.dialog.nativeElement.appendChild(container);
+    if (container.parentElement !== this.dialog.nativeElement) {
+      this.dialog.nativeElement.appendChild(container);
 
-    this.observer?.disconnect();
-    this.observer = undefined;
+      this.observer?.disconnect();
+      this.observer = undefined;
+    }
   }
-}
 
+  /**
+   * Restore the overlay container to the document body after the dialog closes.
+   */
   private moveOverlayBackToBody(): void {
     const container = this.overlayContainer.getContainerElement();
 
@@ -102,12 +125,17 @@ private moveOverlayIntoDialog(): void {
     }
   }
 
-    private lockBodyScroll(): void {
+  /**
+   * Prevent body scrolling while the dialog is open.
+   */
+  private lockBodyScroll(): void {
     document.body.classList.add('dialog-open');
   }
 
+  /**
+   * Restore body scrolling when the dialog is closing.
+   */
   private unlockBodyScroll(): void {
     document.body.classList.remove('dialog-open');
   }
-
 }

@@ -17,7 +17,6 @@
   color: $blue-color;
 
   @media (max-width: 1320px) and (min-width: 881px) {
-    // padding-top: 80px;
     padding-left: 32px;
   }
 
@@ -38,8 +37,6 @@
   min-height: 73px;
 
   @media (max-width: 1320px) and (min-width: 881px) {
-    // flex-direction: column;
-    // align-items: flex-start;
     gap: 16px;
   }
 }
@@ -66,13 +63,6 @@
   height: 59px;
   border-left: 3px solid $ligth-blue-color;
   flex-shrink: 0;
-
-  // @media (max-width: 1320px) and (min-width: 881px) {
-  //   width: 60px;
-  //   height: 0;
-  //   border-left: none;
-  //   border-top: 3px solid $ligth-blue-color;
-  // }
 }
 
 .contact-details__subtitle {
@@ -108,8 +98,6 @@
   }
 
   @media (max-width: 1320px) and (min-width: 881px) {
-    // flex-direction: column;
-    // align-items: flex-start;
     gap: 16px;
     padding-right: 20px;
   }
@@ -324,8 +312,8 @@
     position: relative;
     margin-bottom: 48px;
 
-    @include small-mobile{
-            margin-bottom: 10px;
+    @include small-mobile {
+      margin-bottom: 10px;
     }
   }
 
@@ -617,7 +605,6 @@
   :host-context(.contacts__main--detail-open) .contact-details__profile,
   :host-context(.contacts__main--detail-open) .contact-details__info {
     width: 100%;
-    // max-width: var(--mobile-detail-content-width);
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -629,12 +616,10 @@
   }
 
   :host-context(.contacts__main--detail-open) .contact-details__mobile-options-button {
-    // right: var(--mobile-detail-right-space);
     z-index: 1100;
   }
 
   :host-context(.contacts__main--detail-open) .contact-details__mobile-options-menu {
-    // right: max(0px, calc((100vw - var(--mobile-detail-shell-width)) / 2));
     z-index: 1101;
   }
 
@@ -651,7 +636,6 @@
   :host-context(.contacts__main--detail-open) .contact-details__profile,
   :host-context(.contacts__main--detail-open) .contact-details__info {
     width: 100%;
-    // max-width: var(--mobile-detail-content-width);
     max-width: 80%;
     margin-left: auto;
     margin-right: auto;
@@ -673,4 +657,35 @@
   :host-context(.contacts__main--detail-open) .contact-details__profile {
     gap: 16px;
   }
+}
+
+.contact-details {
+    overflow-x: hidden;
+}
+
+.user-details__slider {
+    width: 100%;
+    min-width: 0;
+}
+
+.user-details__slider.animate {
+  animation: slideInRight 250ms ease-out;
+}
+
+@include mobile-tablet {
+  .user-details__slider.animate {
+    animation: none;
+  }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+         transform: translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }

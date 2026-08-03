@@ -10,6 +10,9 @@ import { Location } from '@angular/common';
 export class Help {
   private location = inject(Location);
 
+  /**
+   * Navigate back to the previous location.
+   */
   goBack(): void {
     this.location.back();
   }

@@ -94,7 +94,7 @@
     }
 
     @include landscape {
-        padding: 8px;
+       padding: 28px 20px;
     }
 
     @include desktop-s {
@@ -116,6 +116,11 @@
 
     @include desktop-s {
         margin: 0 16px;
+
+    }
+
+        @include widesscreen {
+        margin: 0 40px;
 
     }
 }
@@ -171,6 +176,11 @@
     @include landscape {
         width: 100%;
     }
+
+        @include widesscreen {
+        width: 100%;
+    }
+
 }
 
 .form-cell--task textarea {

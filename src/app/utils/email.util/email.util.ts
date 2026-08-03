@@ -12,7 +12,12 @@ import { catchError, from, map, of } from 'rxjs';
 
 export class EmailUtil {}
 
-
+ /**
+  * Validates an email address format.
+  *
+  * @param control The form control to validate.
+  * @returns A validation error object or null.
+  */
 export function emailValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
@@ -27,6 +32,13 @@ export function emailValidator(): ValidatorFn {
   };
 }
 
+/**
+ * Checks whether an email already exists.
+ *
+ * @param contactService The contact service used for the lookup.
+ * @param getExcludeId The function that returns the current contact id to exclude.
+ * @returns An async validation result or null.
+ */
 export function emailExistsValidator(
   contactService: ContactService,
   getExcludeId: () => number | undefined,
