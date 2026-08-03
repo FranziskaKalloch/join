@@ -90,7 +90,7 @@
     flex-direction: column;
 
     @include tablet {
-        padding: 16px;
+      padding: 48px 40px;
     }
 
     @include mobile {

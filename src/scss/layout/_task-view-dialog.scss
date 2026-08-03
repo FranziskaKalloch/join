@@ -215,11 +215,16 @@
     z-index: 1001;
 
     @include small-mobile {
-        top: 28px;
+        top: 20px;
+          right: 20px;
     }
 
     @include landscape {
         top: 28px;
         right: 20px;
+    }
+        @include tablet{
+        top: 28px;
+        right: 24px;
     }
 }

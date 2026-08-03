@@ -80,7 +80,7 @@ dialog::backdrop {
             top: 80px;
         }
 
-             @include landscape {
+        @include landscape {
             max-height: none;
             height: 100dvh;
             max-width: none;
@@ -481,13 +481,18 @@ dialog::backdrop {
 .dialog-user-close {
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 24px;
     z-index: 1001;
 
     @include landscape {
         top: 28px;
         right: 20px;
     }
+
+            @include tablet {
+            top: 28px;
+            right: 24px;
+        }
 
     &--task {
         top: 64px;
@@ -506,6 +511,11 @@ dialog::backdrop {
         @include landscape {
             top: 28px;
             right: 20px;
+        }
+
+        @include small-mobile {
+            top: 30px;
+            right: 24px;
         }
     }
 }
