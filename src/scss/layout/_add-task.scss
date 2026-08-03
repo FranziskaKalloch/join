@@ -109,16 +109,9 @@
     @include small-mobile {
         padding: 40px 8px 20px;
     }
-
-
-
-
 }
 
 .add-task-stroke {
-    // border-left: 1px solid $grey-task-stroke;
-    // position: relative;
-    // z-index: 1;
     background: $grey-task-stroke;
     width: 1px;
     height: 100%;
