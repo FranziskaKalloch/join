@@ -40,15 +40,22 @@ dialog::backdrop {
         @include widesscreen {
             max-height: calc(70dvh - 80px);
             width: 820px;
-
-
         }
 
-          @include small-mobile-high {
+        @include small-mobile-high {
             flex-direction: column;
             max-height: calc(100dvh - 160px);
             top: 80px;
         }
+
+
+        @include landscape {
+            max-height: none;
+            height: 100dvh;
+            max-width: none;
+            width: 100dvw;
+        }
+
 
     }
 
@@ -67,10 +74,17 @@ dialog::backdrop {
 
         }
 
-          @include small-mobile-high {
+        @include small-mobile-high {
             flex-direction: column;
             max-height: calc(100dvh - 160px);
             top: 80px;
+        }
+
+             @include landscape {
+            max-height: none;
+            height: 100dvh;
+            max-width: none;
+            width: 100dvw;
         }
 
     }
@@ -117,12 +131,12 @@ dialog::backdrop {
         position: fixed;
 
     }
-    
-        @include small-mobile-high {
-            flex-direction: column;
-            max-height: calc(100dvh - 160px);
-            top: 80px;
-        }
+
+    @include small-mobile-high {
+        flex-direction: column;
+        max-height: calc(100dvh - 160px);
+        top: 80px;
+    }
 
 }
 
@@ -166,7 +180,7 @@ dialog::backdrop {
 
         @include landscape {
             margin-top: 10px;
-            max-height: calc(100dvh - 150px);
+            max-height: calc(100dvh - 270px);
         }
 
     }
@@ -203,7 +217,7 @@ dialog::backdrop {
 
         @include small-mobile-high {
             flex-direction: column;
-            max-height: calc(100dvh - 160px);
+            max-height: calc(75dvh - 160px);
         }
     }
 
@@ -1138,8 +1152,17 @@ input.ng-invalid.ng-touched {
             width: 100%;
             gap: 20px;
             right: 0;
+            bottom: 5px;
         }
     }
+
+    &--task-mobile {
+        @include landscape {
+            bottom: 85px;
+        }
+    }
+
+
 }
 
 .form-error-placeholder {
