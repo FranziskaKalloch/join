@@ -2,23 +2,25 @@
   <div class="header-headline hide-mobil">Kanban Project Management Tool</div>
   <div class="mobil-header-logo show-mobil"></div>
   <div class="header-right">
-    <div class="help hide-mobil"><a class="img-help" routerLink="/help"></a></div>
-    <div class="top-menu-right">
-      <button class="user-menu-button" (click)="toggleMenu($event)">
-        <div class="header-user-avatar">
-          @if (currentUserContact(); as contact) {
-            {{ contact.initials }}
-          }
-        </div>
-      </button>
-      @if (menuOpen) {
-        <div class="user-menu" (click)="$event.stopPropagation()">
-          <a routerLink="/help" class="show-mobil" (click)="closeMenu()"> Help </a>
-          <a routerLink="/legal-notice" (click)="closeMenu()"> Legal Notice </a>
-          <a routerLink="/privacy-policy" (click)="closeMenu()"> Privacy Policy </a>
-          <a routerLink="/" (click)="logout()"> Log out </a>
-        </div>
-      }
-    </div>
+    @if (isLoggedIn()) {
+      <div class="help hide-mobil"><a class="img-help" routerLink="/help"></a></div>
+      <div class="top-menu-right">
+        <button class="user-menu-button" (click)="toggleMenu($event)">
+          <div class="header-user-avatar">
+            @if (currentUserContact(); as contact) {
+              {{ contact.initials }}
+            }
+          </div>
+        </button>
+        @if (menuOpen) {
+          <div class="user-menu" (click)="$event.stopPropagation()">
+            <a routerLink="/help" class="show-mobil" (click)="closeMenu()"> Help </a>
+            <a routerLink="/legal-notice" (click)="closeMenu()"> Legal Notice </a>
+            <a routerLink="/privacy-policy" (click)="closeMenu()"> Privacy Policy </a>
+            <a routerLink="/" (click)="logout()"> Log out </a>
+          </div>
+        }
+      </div>
+    }
   </div>
 </div>

@@ -16,6 +16,7 @@ export class Header {
   private router = inject(Router);
 
   currentUser = this.authService.currentUser;
+  isLoggedIn = this.authService.isLoggedIn;
   menuOpen = false;
 
   /**
