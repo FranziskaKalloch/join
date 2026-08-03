@@ -138,11 +138,11 @@ export class AssignedTo implements OnInit {
     }
   }
 
-  visibleBubbles = computed(() => this.selectedContacts().slice(0, 3));
+  visibleBubbles = computed(() => this.selectedContacts().slice(0, 4));
 
   remainingCount = computed(() => {
     const total = this.selectedContacts().length;
-    return total > 3 ? total - 3 : 0;
+    return total > 4 ? total - 4 : 0;
   });
 
   /**
