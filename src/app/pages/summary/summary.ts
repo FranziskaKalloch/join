@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { ContactService } from '../../services/contacts/contact.service';
@@ -67,12 +68,10 @@ export class Summary {
    */
   todoTasks = computed(() => this.visibleTasks.filter((task) => task.status === 'todo').length);
 
-
   /**
    * Number of visible tasks with status `'done'`.
    */
   doneTasks = computed(() => this.visibleTasks.filter((task) => task.status === 'done').length);
-
 
   /**
    * Number of visible tasks with status `'inProgress'`.
@@ -81,14 +80,12 @@ export class Summary {
     () => this.visibleTasks.filter((task) => task.status === 'inProgress').length,
   );
 
-
   /**
    * Number of visible tasks with status `'awaitFeedback'`.
    */
   awaitingFeedbackTasks = computed(
     () => this.visibleTasks.filter((task) => task.status === 'awaitFeedback').length,
   );
-
 
   /**
    * Number of visible tasks with priority `'urgent'`.
@@ -97,12 +94,10 @@ export class Summary {
     () => this.visibleTasks.filter((task) => task.priority === 'urgent').length,
   );
 
-
   /**
    * Total number of visible tasks in the board.
    */
   tasksInBoard = computed(() => this.visibleTasks.length);
-
 
   /**
    * Full name of the currently logged-in user.
