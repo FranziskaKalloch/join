@@ -19,8 +19,9 @@
     @include landscape {
         padding: 28px 20px;
     }
-            @include small-mobile {
-       padding: 40px 8px 20px;
+
+    @include small-mobile {
+        padding: 40px 8px 20px;
     }
 }
 
@@ -222,6 +223,7 @@
     right: 24px;
     z-index: 1001;
 
+
     @include small-mobile {
         top: 40px;
         right: 20px;
@@ -232,8 +234,10 @@
         right: 20px;
     }
 
+
+
     @include tablet {
-        top: 28px;
+        top: 40px;
         right: 24px;
     }
 

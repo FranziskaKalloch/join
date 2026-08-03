@@ -489,13 +489,13 @@ dialog::backdrop {
     }
 
     @include tablet {
-        top: 28px;
+        top: 40px;
         right: 24px;
     }
 
     @include mobile {
-        top: 20px;
-        right: 20px;
+        top: 40px;
+        right: 24px;
     }
 
 
