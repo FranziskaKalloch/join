@@ -6,6 +6,7 @@
 /out-tsc
 /bazel-out
 /src/environments/
+/.github
 
 # Node
 /node_modules
@@ -43,3 +44,4 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+.gitignore

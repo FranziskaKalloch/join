@@ -1,12 +1,5 @@
 @use '../abstract/' as *;
 
-// :host {
-//     display: flex;
-//     flex: 1;
-//     min-height: 0;
-//     height: 100%;
-// }
-
 .task-view-wrapper {
     padding: 48px 40px;
     display: flex;
@@ -16,7 +9,7 @@
     width: 100%;
 
     @include small-mobile {
-        padding: 28px 20px;
+        padding: 18px 10px;
     }
 
     @include landscape {
@@ -227,5 +220,6 @@
 
     @include landscape {
         top: 28px;
+        right: 20px;
     }
 }

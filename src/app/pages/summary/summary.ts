@@ -15,7 +15,7 @@ import { TaskService } from '../../services/tasks/task.service';
  */
 @Component({
   selector: 'app-summary',
-  imports: [DatePipe],
+  imports: [DatePipe, RouterLink],
   templateUrl: './summary.html',
   styleUrl: './summary.scss',
 })

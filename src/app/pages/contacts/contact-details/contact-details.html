@@ -6,17 +6,14 @@
       <p class="contact-details__subtitle">Better with a team</p>
     </div>
 
-    <button
-      class="contact-details__back"
-      type="button"
-      aria-label="Back to contact list"
-      (click)="onRemoveSelectedContact()"
-    >
+    <button class="contact-details__back" type="button" aria-label="Back to contact list"
+      (click)="onRemoveSelectedContact()">
       ←
     </button>
   </header>
 
   @if (contact(); as selectedContact) {
+  <section class="user-details__slider" [class.animate]="animate()">
     <section class="contact-details__profile">
       <div class="contact-details__avatar" [style.background-color]="selectedContact.colors">
         {{ selectedContact.initials }}
@@ -56,48 +53,35 @@
         </p>
       </div>
     </section>
-    <div class="contact-details__mobile-options">
-      @if (!isContactOptionsOpen) {
-        <button
-          class="contact-details__mobile-options-button"
-          type="button"
-          aria-label="Open contact options"
-          (click)="toggleContactOptions()"
-        >
-          <img src="assets/img/components/contacts/edit-more.svg" alt="" />
-        </button>
-      } @else {
-        <button
-          class="contact-details__mobile-options-backdrop"
-          type="button"
-          aria-label="Close contact options"
-          (click)="closeContactOptions()"
-        ></button>
+  </section>
+  <div class="contact-details__mobile-options">
+    @if (!isContactOptionsOpen) {
+    <button class="contact-details__mobile-options-button" type="button" aria-label="Open contact options"
+      (click)="toggleContactOptions()">
+      <img src="assets/img/components/contacts/edit-more.svg" alt="" />
+    </button>
+    } @else {
+    <button class="contact-details__mobile-options-backdrop" type="button" aria-label="Close contact options"
+      (click)="closeContactOptions()"></button>
 
-        <div class="contact-details__mobile-options-menu">
-          <button
-            class="contact-details__mobile-options-action contact-details__mobile-options-action--edit"
-            type="button"
-            (click)="editContact(); closeContactOptions()"
-          >
-            <img src="assets/img/components/general/edit.svg" alt="" />
-            <span>Edit</span>
-          </button>
+    <div class="contact-details__mobile-options-menu">
+      <button class="contact-details__mobile-options-action contact-details__mobile-options-action--edit" type="button"
+        (click)="editContact(); closeContactOptions()">
+        <img src="assets/img/components/general/edit.svg" alt="" />
+        <span>Edit</span>
+      </button>
 
-          <button
-            class="contact-details__mobile-options-action contact-details__mobile-options-action--delete"
-            type="button"
-            (click)="onRemoveSelectedContact()"
-          >
-            <img src="assets/img/components/general/delete.svg" alt="" />
-            <span>Delete</span>
-          </button>
-        </div>
-      }
+      <button class="contact-details__mobile-options-action contact-details__mobile-options-action--delete"
+        type="button" (click)="onRemoveSelectedContact()">
+        <img src="assets/img/components/general/delete.svg" alt="" />
+        <span>Delete</span>
+      </button>
     </div>
+    }
+  </div>
   } @else {
-    <section class="contact-details__empty">
-      <p class="contact-details__empty-text">Select a contact to see the details.</p>
-    </section>
+  <section class="contact-details__empty">
+    <p class="contact-details__empty-text">Select a contact to see the details.</p>
+  </section>
   }
 </section>

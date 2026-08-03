@@ -31,18 +31,6 @@ export class AssignedTo implements OnInit {
   private initialized = false;
 
   constructor() {
-    // effect(() => {
-    //   const ids = this.preselectedIds();
-    //   const contacts = this.contacts();
-
-    //   if (!ids.length || !contacts.length) {
-    //     return;
-    //   }
-
-    //   this.selectedContacts.set(
-    //     contacts.filter(contact => ids.includes(contact.id!))
-    //   );
-    // });
     effect(() => {
       if (this.initialized) {
         return;
@@ -51,7 +39,6 @@ export class AssignedTo implements OnInit {
       const ids = this.preselectedIds();
       const contacts = this.contacts();
 
-      // Warten bis die Kontakte geladen sind
       if (!contacts.length) {
         return;
       }
@@ -61,15 +48,14 @@ export class AssignedTo implements OnInit {
       );
 
       this.selectedContacts.set(selected);
-
-      // Parent (AddTask) über den Initialzustand informieren
       this.selectedContactsChange.emit(selected);
-
       this.initialized = true;
     });
   }
 
-  // Loads the contact list when the component is created
+  /**
+   * Lifecycle hook to load contacts after component initialization.
+   */
   ngOnInit(): void {
     this.contactService.loadContacts();
   }
@@ -88,16 +74,26 @@ export class AssignedTo implements OnInit {
     );
   });
 
+  /**
+   * Update the search term based on user input.
+   *
+   * @param event - Input event from the search field.
+   */
   onSearchInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.searchTerm.set(input.value);
   }
 
+  /**
+   * Toggle the visibility of the contact selection dropdown.
+   */
   toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
-  // Opens the dropdown when the search input is focused/clicked
+  /**
+   * Open the contact selection dropdown if it is not already open.
+   */
   openDropdown(): void {
     if (this.isDropdownOpen) return;
 
@@ -105,11 +101,22 @@ export class AssignedTo implements OnInit {
       this.isDropdownOpen = true;
     });
   }
-  // Method to check if a contact is selected. It returns true if the contact is present in the selectedContacts signal; otherwise, it returns false.
+
+  /**
+   * Check whether a contact is currently selected.
+   *
+   * @param contact - Contact to test.
+   * @returns True when the contact is selected.
+   */
   isSelected(contact: Contact): boolean {
     return this.selectedContacts().some((c) => c.id === contact.id);
   }
-  // Method to toggle the selection of a contact. If the contact is already selected, it removes it from the selectedContacts signal; otherwise, it adds it to the selectedContacts signal.
+
+  /**
+   * Toggle the selected state of a contact.
+   *
+   * @param contact - Contact to add or remove from the selected list.
+   */
   toggleContact(contact: Contact): void {
     if (this.isSelected(contact)) {
       this.selectedContacts.update((contacts) => contacts.filter((c) => c.id !== contact.id));
@@ -119,6 +126,11 @@ export class AssignedTo implements OnInit {
     this.selectedContactsChange.emit(this.selectedContacts());
   }
 
+  /**
+   * Close the dropdown when clicking outside of the component.
+   *
+   * @param event - Click event from the document.
+   */
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event): void {
     if (!this.elementRef.nativeElement.contains(event.target)) {
@@ -133,6 +145,9 @@ export class AssignedTo implements OnInit {
     return total > 3 ? total - 3 : 0;
   });
 
+  /**
+   * Clear all selected contacts, reset the search term, and close the dropdown.
+   */
   clear(): void {
     this.selectedContacts.set([]);
     this.searchTerm.set('');

@@ -1,4 +1,5 @@
 @use '../abstract/' as *;
+@use "sass:color";
 
 
 
@@ -111,13 +112,6 @@ width: 100%;
 .subtasks__item-title {
     display: block;
     word-break: break-all;
-
-    // @include desktop-s {
-    //     overflow: hidden;
-    //     text-overflow: ellipsis;
-    //     white-space: nowrap;
-
-    // }
 }
 
 .subtasks__actions {
@@ -221,7 +215,7 @@ width: 100%;
     }
 
     &::-webkit-scrollbar-thumb:hover {
-        background: darken($dark-grey-color, 10%);
+        background: color.scale($dark-grey-color, $lightness: -10%);
     }
 
 }

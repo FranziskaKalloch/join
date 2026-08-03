@@ -20,14 +20,14 @@
     <div class="summary-metrics">
       <div class="summary-metrics-wrapper">
         <div class="summary-metrics-firstLine">
-          <div class="summary-metrics-toDo summary-metrics-badges">
+          <div class="summary-metrics-toDo summary-metrics-badges" routerLink="/board">
             <div class="summary-metrics-toDo-icon"><img src="/assets/img/components/summary/summary-edit.svg"></div>
             <div class="summary-metrics-text">
               <div class="summary-badge-number"> {{ todoTasks() }}</div>
               <span>To-do</span>
             </div>
           </div>
-          <div class="summary-metrics-done summary-metrics-badges">
+          <div class="summary-metrics-done summary-metrics-badges" routerLink="/board">
             <div class="summary-metrics-doneTasks-icon"><img src="/assets/img/components/summary/summary-check.svg">
             </div>
             <div class="summary-metrics-text">
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="summary-metrics-secondLine">
-          <div class="summary-urgent-wrapper summary-metrics-badges">
+          <div class="summary-urgent-wrapper summary-metrics-badges" routerLink="/board">
             <div class="summary-urgent-inner">
               <div class="summary-metrics-urgent-icon"><img src="/assets/img/components/summary/summary-urgent.svg">
               </div>

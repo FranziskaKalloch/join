@@ -1,8 +1,5 @@
-import { from, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-
 import { AfterViewInit, Component, computed, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ContactService } from '../../../../services/contacts/contact.service';
 import { DialogService } from '../../../../services/dialog/dialog.service';
@@ -16,6 +13,7 @@ import { emailValidator, emailExistsValidator } from '../../../../utils/email.ut
   templateUrl: './contact-dialog.html',
   styleUrl: './contact-dialog.scss',
 })
+
 export class ContactDialog implements AfterViewInit, OnInit {
   private readonly dialogService = inject(DialogService);
   private readonly contactService = inject(ContactService);
@@ -30,10 +28,20 @@ export class ContactDialog implements AfterViewInit, OnInit {
 
   private isClosing = false;
 
+  /**
+   * Shows the dialog modal after the view is initialized.
+   * 
+   * @returns {void} Nothing.
+   */
   ngAfterViewInit(): void {
     this.dialog.nativeElement.showModal();
   }
 
+  /**
+   * Initializes the form with the selected contact.
+   * 
+   * @returns {void} Nothing.
+   */
   ngOnInit(): void {
     const contact = this.selectedContact();
 
@@ -48,11 +56,20 @@ export class ContactDialog implements AfterViewInit, OnInit {
     });
   }
 
+  /**
+   * Starts the dialog close animation.
+   * 
+   * @returns {void} Nothing.
+   */
   closeDialog(): void {
     this.startCloseAnimation();
   }
 
-  //protected
+  /**
+   * Adds the closing class to begin the dialog close animation.
+   * 
+   * @returns {void} Nothing.
+   */
   private startCloseAnimation(): void {
     if (this.isClosing) {
       return;
@@ -62,11 +79,23 @@ export class ContactDialog implements AfterViewInit, OnInit {
     this.dialog.nativeElement.classList.add('closing');
   }
 
+  /**
+   * Cancels the dialog when the user dismisses it.
+   * 
+   * @param event The cancel event.
+   * @returns {void} Nothing.
+   */
   onCancel(event: Event): void {
     event.preventDefault();
     this.startCloseAnimation();
   }
 
+  /**
+   * Closes the dialog when the user clicks outside its bounds.
+   * 
+   * @param event The mouse event.
+   * @returns {void} Nothing.
+   */
   onDialogClick(event: MouseEvent): void {
     const dialog = this.dialog.nativeElement;
     const rect = dialog.getBoundingClientRect();
@@ -82,6 +111,12 @@ export class ContactDialog implements AfterViewInit, OnInit {
     }
   }
 
+  /**
+   * Finishes closing the dialog after the exit animation ends.
+   * 
+   * @param event The animation event.
+   * @returns {void} Nothing.
+   */
   animationFinished(event: AnimationEvent): void {
     if (event.target !== this.dialog.nativeElement) {
       return;
@@ -102,8 +137,7 @@ export class ContactDialog implements AfterViewInit, OnInit {
     name: new FormControl('', {
       validators: [
         Validators.required,
-        Validators.pattern(/^[A-Za-zÄÖÜäöüß\s'-]+$/),
-        fullNameValidator(),
+        Validators.pattern(/^[A-Za-zÄÖÜäöüß\s'-]+$/), fullNameValidator(),
       ],
       updateOn: 'blur',
     }),
@@ -138,6 +172,11 @@ export class ContactDialog implements AfterViewInit, OnInit {
   formMessage = '';
   messageType: 'success' | 'error' | '' = '';
 
+  /**
+   * Submits the form and saves a new or updated contact.
+   * 
+   * @returns {Promise<void>} A promise that resolves after the submit completes.
+   */
   async onSubmit(): Promise<void> {
     if (this.newUserForm.invalid) {
       this.newUserForm.markAllAsTouched();
@@ -176,6 +215,11 @@ export class ContactDialog implements AfterViewInit, OnInit {
     }
   }
 
+  /**
+   * Removes the selected contact and closes the dialog.
+   * 
+   * @returns {void} Nothing.
+   */
   onRemoveSelectedContact() {
     this.contactService.deleteSelectedContact();
     this.closeDialog();

@@ -1,5 +1,11 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-// This function returns a ValidatorFn that checks if the selected date is in the past. It compares the selected date with today's date and returns a validation error if the selected date is earlier than today. If the control value is empty, it returns null, indicating no validation error.
+
+/**
+ * Returns a validator function that checks whether the selected date is in the past.
+ *
+ * @param originalDate - Optional original date value that should be considered valid.
+ * @returns A ValidatorFn that returns a validation error when the selected date is before today.
+ */
 export function noPastDateValidator(originalDate?: Date): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     if (!control.value) {
@@ -19,7 +25,12 @@ export function noPastDateValidator(originalDate?: Date): ValidatorFn {
     return selectedDate < today ? { pastDate: true } : null;
   };
 }
-// This function returns the current date in the format 'YYYY-MM-DD', which is suitable for use as a minimum date in date input fields. It ensures that the date is always formatted correctly, with leading zeros for single-digit months and days.
+
+/**
+ * Returns the current date as a string in the format 'YYYY-MM-DD'.
+ *
+ * @returns The current date formatted for HTML date inputs.
+ */
 export function getTodayDateString(): string {
   const today = new Date();
   const year = today.getFullYear();

@@ -494,6 +494,13 @@
     }
 }
 
+.greeting {
+    @include desktop-md {
+        margin-left: 10px;
+        text-align: center;
+    }
+}
+
 .greeting-headline {
     font-size: 47px;
     font-weight: 500;
@@ -505,6 +512,7 @@
     font-weight: 700;
     line-height: 120%;
     color: $header-avatar;
+    text-align: center;
 }
 
 .summary-greeting-overlay {
