@@ -30,39 +30,53 @@ dialog::backdrop {
     &--task-view {
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
         // max-height: calc(100dvh - 80px);
-        width: 520px;
+        width: 540px;
 
         @include desktop-hd {
             // max-height: calc(100dvh - 80px);
-           height: 100%;
+            // height: 100%;
         }
 
         @include widesscreen {
             max-height: calc(70dvh - 80px);
             width: 820px;
-            height: 100%;
-     
+
+
         }
+
+          @include small-mobile-high {
+            flex-direction: column;
+            max-height: calc(100dvh - 160px);
+            top: 80px;
+        }
+
     }
 
     &--task-view-edit {
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
         height: calc(100dvh - 80px);
-        width: 520px;
+        width: 540px;
 
         @include desktop-hd {
-            height: calc(100dvh - 80px);
+            max-height: calc(100dvh - 80px);
         }
 
         @include widesscreen {
-            height: calc(70dvh - 80px);
-             width: 820px;
-     
+            max-height: calc(70dvh - 80px);
+            width: 820px;
+
         }
+
+          @include small-mobile-high {
+            flex-direction: column;
+            max-height: calc(100dvh - 160px);
+            top: 80px;
+        }
+
     }
 
-    &--contact{
-    height: 592px;
+    &--contact {
+        height: 592px;
     }
 
     @include mobile-tablet {
@@ -103,6 +117,12 @@ dialog::backdrop {
         position: fixed;
 
     }
+    
+        @include small-mobile-high {
+            flex-direction: column;
+            max-height: calc(100dvh - 160px);
+            top: 80px;
+        }
 
 }
 
@@ -154,7 +174,6 @@ dialog::backdrop {
     &--edit {
         display: flex;
         flex-direction: column;
-        //  gap: 24px;
         margin: 30px 0;
         flex: 1;
         min-height: 0;
@@ -174,12 +193,17 @@ dialog::backdrop {
         }
 
         @include widesscreen {
-            flex: unset;
+            flex: 1;
         }
 
         @include landscape {
             margin-top: 50px;
             max-height: calc(100dvh - 170px);
+        }
+
+        @include small-mobile-high {
+            flex-direction: column;
+            max-height: calc(100dvh - 160px);
         }
     }
 
@@ -341,7 +365,7 @@ dialog::backdrop {
     height: 100%;
 
     &--task {
-        padding: 64px 74px;
+        padding: 60px 74px;
         display: flex;
         flex-direction: column;
         min-height: 0;
@@ -555,7 +579,6 @@ dialog::backdrop {
         @include desktop-s {
             align-items: flex-start;
             justify-content: flex-start;
-            // max-width: 99%;
         }
 
 
@@ -564,9 +587,16 @@ dialog::backdrop {
             position: unset;
             padding: 0;
         }
+
         @include widesscreen {
             width: 100%;
         }
+
+        @include small-mobile {
+            height: 100%;
+            padding: 0;
+        }
+
     }
 }
 
@@ -581,7 +611,6 @@ dialog::backdrop {
     @include desktop-s {
         align-items: center;
         justify-content: center;
-        // width: 55%;
     }
 
     @include landscape {
@@ -597,7 +626,6 @@ dialog::backdrop {
         @include desktop-s {
             align-items: flex-start;
             justify-content: flex-start;
-            // width: 99%;
         }
 
         @include landscape {
@@ -608,8 +636,8 @@ dialog::backdrop {
             margin-top: 25px;
         }
 
-            @include widesscreen {
-           width: 100%;
+        @include widesscreen {
+            width: 100%;
         }
 
     }
@@ -883,7 +911,7 @@ dialog::backdrop {
 
 .form-cell {
     padding-bottom: 12px;
-     width: 100%;
+    width: 100%;
 
     @include small-mobile {
         padding-bottom: 8px;
@@ -947,7 +975,7 @@ dialog::backdrop {
 
     @include widesscreen {
         width: 100%;
-    
+
     }
 
     &:focus {
@@ -958,8 +986,38 @@ dialog::backdrop {
 
 }
 
+.user-dialog--task-view-edit .form-cell input {
+    @include desktop-plus {
+        width: 100%;
+    }
+
+    @include desktop-s {
+        width: 100%;
+    }
+
+    @include desktop-md {
+        width: 100%;
+    }
+}
+
+.user-dialog--task-view-edit .form-cell textarea {
+    @include desktop-plus {
+        width: 100%;
+    }
+
+    @include desktop-s {
+        width: 100%;
+    }
+
+    @include desktop-md {
+        width: 100%;
+    }
+}
+
+
 .form-cell--subtask input {
     padding: 13px 80px 13px 21px;
+    width: 100%;
 }
 
 .form-cell--task input {

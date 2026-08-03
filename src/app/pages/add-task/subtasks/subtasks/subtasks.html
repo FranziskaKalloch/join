@@ -1,77 +1,76 @@
-
 <div class="subtasks">
 
   <div class="subtasks__input-row">
     <div class="form-cell form-cell--subtask form-cell--task form-cell--subtask">
 
-    <input type="text" class="subtasks__input" placeholder="Add new subtask" [value]="newSubtaskTitle()"
-      (input)="onInputChange($any($event.target).value)" (keydown.enter)="$event.preventDefault(); addSubtask()" />
-    @if (newSubtaskTitle()) {
-    <div class="buttons-new-subtask">
-    <button type="button" class="subtasks-icon subtasks-icon--clear" (click)="clearInput()">
-      <img [src]="isClearHover()
+      <input type="text" class="subtasks__input" placeholder="Add new subtask" [value]="newSubtaskTitle()"
+        (input)="onInputChange($any($event.target).value)" (keydown.enter)="$event.preventDefault(); addSubtask()" />
+      @if (newSubtaskTitle()) {
+      <div class="buttons-new-subtask">
+        <button type="button" class="subtasks-icon subtasks-icon--clear" (click)="clearInput()">
+          <img [src]="isClearHover()
     ? '/assets/img/components/task/task-close-hover.svg'
     : '/assets/img/components/task/task-close.svg'">
 
-    </button>
-      <div class="subtask-stroke"></div>
+        </button>
+        <div class="subtask-stroke"></div>
 
-    <button type="button" class="subtasks-icon subtasks-icon--add" (click)="addSubtask()">
-      <img [src]="isClearHover()
+        <button type="button" class="subtasks-icon subtasks-icon--add" (click)="addSubtask()">
+          <img [src]="isClearHover()
     ? '/assets/img/components/task/task-check-hover.svg'
     : '/assets/img/components/task/task-check.svg'">
-    </button>
-</div>
+        </button>
+      </div>
 
-    }
+      }
+    </div>
   </div>
-  </div>
- <div class="subtask-scroll">
-  <ul class="subtasks__list">
-    @for (subtask of subtasks(); track $index) {
-         
-    <li class="subtasks__item">
-      @if (editingIndex() === $index) {
-         
-      <div class="form-cell-small">
-      <input type="text" class="subtasks__edit-input" [value]="editingTitle()"
-        (input)="onEditInputChange($any($event.target).value)"
-        (keydown.enter)="$event.preventDefault(); saveEdit($index)" />
-         <div class="subtasks__actions subtasks__actions--visible">
-      <button type="button" class="subtasks-icon subtasks-icon--delete" (click)="deleteSubtask($index)">
-                  <img [src]="isClearHover()
-    ? '/assets/img/components/task/task-delete-hover.svg'
-    : '/assets/img/components/task/task-delete.svg'">
-      </button>
-       <div class="subtasks__divider"></div>
-      <button type="button" class="subtasks-icon subtasks-icon--confirm" (click)="saveEdit($index)">
-               <img [src]="isClearHover()
-    ? '/assets/img/components/task/task-check-hover.svg'
-    : '/assets/img/components/task/task-check.svg'">
-      </button>
-      </div>
-      </div>
-      } @else {
-      
-      <span class="subtasks__item-title" (dblclick)="startEdit($index)">
-         {{ truncate(subtask.title) }}
-      </span>
-          <div class="subtasks__actions">
-      <button type="button" class="subtasks-icon subtasks-icon--edit" (click)="startEdit($index)">
-        <img [src]="isClearHover()
-    ? '/assets/img/components/task/task-edit-hover.svg'
-    : '/assets/img/components/task/task-edit.svg'">
-      </button>
-       <div class="subtasks__divider"></div>
-      <button type="button" class="subtasks-icon subtasks-icon--delete" (click)="deleteSubtask($index)">
+  <div class="subtask-scroll">
+    <ul class="subtasks__list">
+      @for (subtask of subtasks(); track $index) {
+
+      <li class="subtasks__item" [class.subtasks__item--editing]="editingIndex() === $index">
+        @if (editingIndex() === $index) {
+        <div class="form-cell-small">
+          <input type="text" class="subtasks__edit-input" [value]="editingTitle()"
+            (input)="onEditInputChange($any($event.target).value)"
+            (keydown.enter)="$event.preventDefault(); saveEdit($index)" />
+          <div class="subtasks__actions subtasks__actions--visible">
+            <button type="button" class="subtasks-icon subtasks-icon--delete" (click)="deleteSubtask($index)">
               <img [src]="isClearHover()
     ? '/assets/img/components/task/task-delete-hover.svg'
     : '/assets/img/components/task/task-delete.svg'">
-      </button>
-      </div>
+            </button>
+            <div class="subtasks__divider"></div>
+            <button type="button" class="subtasks-icon subtasks-icon--confirm" (click)="saveEdit($index)">
+              <img [src]="isClearHover()
+    ? '/assets/img/components/task/task-check-hover.svg'
+    : '/assets/img/components/task/task-check.svg'">
+            </button>
+          </div>
+        </div>
+        } @else {
+
+        <span class="subtasks__item-title" (dblclick)="startEdit($index)">
+          <span class="subtasks__bullet">•</span>
+          {{ truncate(subtask.title) }}
+        </span>
+        <div class="subtasks__actions">
+          <button type="button" class="subtasks-icon subtasks-icon--edit" (click)="startEdit($index)">
+            <img [src]="isClearHover()
+    ? '/assets/img/components/task/task-edit-hover.svg'
+    : '/assets/img/components/task/task-edit.svg'">
+          </button>
+          <div class="subtasks__divider"></div>
+          <button type="button" class="subtasks-icon subtasks-icon--delete" (click)="deleteSubtask($index)">
+            <img [src]="isClearHover()
+    ? '/assets/img/components/task/task-delete-hover.svg'
+    : '/assets/img/components/task/task-delete.svg'">
+          </button>
+        </div>
+        }
+      </li>
       }
-    </li>
-    }
-  </ul>
-</div>
+    </ul>
+  </div>
 </div>

@@ -65,7 +65,7 @@
 }
 
 @mixin small-mobile-high {
-  @media (width <=380px) and (min-height: 900px) {
+  @media (width <=568px) and (min-height: 900px) {
     @content;
   }
 }
