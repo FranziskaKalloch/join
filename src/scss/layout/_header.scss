@@ -4,6 +4,11 @@
     font-size: 20px;
     line-height: 120%;
     @include page-padding;
+
+    @include board{
+        padding-inline: 16px;
+
+    }
 }
 
 .header-content {
