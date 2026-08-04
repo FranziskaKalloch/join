@@ -8,7 +8,7 @@
   box-sizing: border-box;
   overflow: hidden;
 
-  @include mobile-tablet {
+  @media (max-width: 1370px) {
     width: 100%;
     flex: 0 0 100%;
     max-width: 100%;
@@ -24,7 +24,7 @@
   width: 100%;
   box-sizing: border-box;
 
-  @include mobile-tablet {
+  @media (max-width: 1370px) {
     width: 100%;
     height: auto;
   }
@@ -90,7 +90,7 @@
     border-radius: 3px;
   }
 
-  @include mobile-tablet {
+  @media (max-width: 1370px) {
     flex-direction: row;
     align-items: stretch;
     overflow-x: auto;

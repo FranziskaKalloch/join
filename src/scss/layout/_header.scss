@@ -144,7 +144,6 @@
 }
 
 @include mobile-tablet {
-
     .show-mobil {
         display: block;
     }
@@ -158,13 +157,30 @@
     }
 
     .header-content {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1000;
         height: 80px;
         background-color: white;
         box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
+    }
+}
+
+::ng-deep body.board-early-mobile {
+    @media (max-width: 1370px) {
+        .show-mobil {
+            display: block;
+        }
+
+        .hide-mobil {
+            display: none;
+        }
+
+        .hamburger {
+            display: block;
+        }
+
+        .header-content {
+            height: 80px;
+            background-color: white;
+            box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
+        }
     }
 }
