@@ -79,46 +79,119 @@ export class SignUp {
   }
 
   /**
-   * Handles the form submission for registering a new user.
-   * Validates the form, checks for password matching, and attempts registration via the auth service.
-   * Shows a success message and redirects to login upon success, or displays an error message upon failure.
+   * Handles the form submission process by validating data, executing registration, and triggering navigation.
    */
   async onSubmit(): Promise<void> {
-    this.errorMessage = '';
-    this.isSubmitting = true;
-    this.cdr.detectChanges();
+    this.resetSubmissionState();
 
-    if (this.signUpForm.invalid) {
-      this.signUpForm.markAllAsTouched();
-      this.isSubmitting = false;
-      this.cdr.detectChanges();
+    if (this.isFormInvalid()) {
       return;
     }
 
-    const fullName = this.signUpForm.controls.fullName.value;
-    const email = this.signUpForm.controls.email.value;
+    if (this.isPasswordMismatch()) {
+      return;
+    }
+
+    await this.processRegistration();
+  }
+
+  /**
+   * Resets error messages and sets the submission state to active.
+   */
+  private resetSubmissionState(): void {
+    this.errorMessage = '';
+    this.isSubmitting = true;
+    this.cdr.detectChanges();
+  }
+
+  /**
+   * Checks if the form is invalid, marks all fields as touched, and handles state cleanup if true.
+   * 
+   * @returns True if form is invalid, otherwise false.
+   */
+  private isFormInvalid(): boolean {
+    if (this.signUpForm.invalid) {
+      this.signUpForm.markAllAsTouched();
+      this.finalizeSubmissionFailure();
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Validates if the password and confirmation password fields match.
+   * 
+   * @returns True if passwords mismatch, otherwise false.
+   */
+  private isPasswordMismatch(): boolean {
     const password = this.signUpForm.controls.password.value;
     const confirmedPassword = this.signUpForm.controls.confirmedPassword.value;
 
     if (password !== confirmedPassword) {
       this.signUpForm.controls.confirmedPassword.setErrors({ mismatch: true });
-      this.isSubmitting = false;
-      this.cdr.detectChanges();
-      return;
+      this.finalizeSubmissionFailure();
+      return true;
     }
+    return false;
+  }
 
+  /**
+   * Sends the user registration request to the authentication service and handles the result.
+   */
+  private async processRegistration(): Promise<void> {
+    const { fullName, email, password } = this.extractFormValues();
     const signUpSuccessful = await this.authService.signUpNewUser(fullName, email, password);
 
     if (!signUpSuccessful) {
-      this.errorMessage = 'Registration failed. Email might already be in use or contact exists.';
-      this.isSubmitting = false;
-      this.cdr.detectChanges();
+      this.handleRegistrationFailure();
       return;
     }
 
+    this.handleRegistrationSuccess();
+  }
+
+  /**
+   * Extracts raw values from the sign-up form controls.
+   * 
+   * @returns An object containing form field values.
+   */
+  private extractFormValues() {
+    return {
+      fullName: this.signUpForm.controls.fullName.value,
+      email: this.signUpForm.controls.email.value,
+      password: this.signUpForm.controls.password.value,
+    };
+  }
+
+  /**
+   * Sets error state variables when registration fails.
+   */
+  private handleRegistrationFailure(): void {
+    this.errorMessage = 'Registration failed. Email might already be in use or contact exists.';
+    this.finalizeSubmissionFailure();
+  }
+
+  /**
+   * Reverts submission loading state and triggers change detection.
+   */
+  private finalizeSubmissionFailure(): void {
+    this.isSubmitting = false;
+    this.cdr.detectChanges();
+  }
+
+  /**
+   * Handles successful registration by displaying the success popup and starting the redirect timer.
+   */
+  private handleRegistrationSuccess(): void {
     this.showSuccessPopup = true;
     this.cdr.detectChanges();
+    this.scheduleRedirectToLogin();
+  }
 
+  /**
+   * Schedules a delayed navigation redirection to the login view.
+   */
+  private scheduleRedirectToLogin(): void {
     setTimeout(() => {
       this.router.navigate(['/login']);
     }, 2000);

@@ -10,6 +10,9 @@ import { TaskService } from '../../services/tasks/task.service';
 import { TaskDialog } from './task-dialog/task-dialog';
 import { TaskView } from './task-view/task-view';
 
+/**
+ * Component responsible for managing and displaying the Kanban task board.
+ */
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -30,20 +33,32 @@ export class BoardComponent implements OnInit, OnDestroy {
     { title: 'Done', status: 'done' },
   ];
 
+  readonly dialogService = inject(DialogService);
+  readonly DialogType = DialogType;
+  private router = inject(Router);
+
+  /**
+   * Lifecycle hook that runs upon component initialization.
+   * Subscribes to task updates and adds the early mobile class to the body.
+   */
   ngOnInit(): void {
     this.taskService.subscribeToTaskChanges();
     this.renderer.addClass(document.body, 'board-early-mobile');
   }
 
+  /**
+   * Lifecycle hook that runs when the component is destroyed.
+   * Unsubscribes from task changes and removes the early mobile body class.
+   */
   ngOnDestroy(): void {
     this.taskService.unsubscribeFromTaskChanges();
     this.renderer.removeClass(document.body, 'board-early-mobile');
   }
 
-  readonly dialogService = inject(DialogService);
-  readonly DialogType = DialogType;
-  private router = inject(Router);
-
+  /**
+   * Opens the task creation dialog on desktop viewports or navigates 
+   * to the dedicated add-task route on mobile viewports.
+   */
   openDialog(): void {
     const isDesktop = window.matchMedia('(min-width: 569px)').matches;
 
