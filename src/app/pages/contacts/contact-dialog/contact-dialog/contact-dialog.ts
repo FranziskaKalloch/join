@@ -251,6 +251,8 @@ export class ContactDialog implements AfterViewInit, OnInit {
 
   /**
    * Removes the selected contact and closes the dialog.
+   *
+   * @returns void
    */
   onRemoveSelectedContact() {
     this.contactService.deleteSelectedContact();

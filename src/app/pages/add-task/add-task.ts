@@ -114,23 +114,39 @@ export class AddTask {
     this.isSaving = true;
 
     try {
-      if (this.isEditMode) {
-        await this.taskService.updateTask(this.buildUpdateTask());
-        this.dialogService.open(DialogType.TaskDetails);
-        return;
-      } else {
-        await this.taskService.createTask(this.buildCreateTask());
-        this.toastService.success('Task added to board.');
-      }
-
-      if (this.isDialog) {
-        this.close.emit();
-      } else {
-        await this.router.navigate(['/board']);
-      }
+      await this.saveTask();
     } finally {
       this.isSaving = false;
     }
+  }
+
+  private async saveTask(): Promise<void> {
+    if (this.isEditMode) {
+      await this.updateTask();
+      return;
+    }
+
+    await this.createTask();
+    await this.finishCreateTask();
+  }
+
+  private async updateTask(): Promise<void> {
+    await this.taskService.updateTask(this.buildUpdateTask());
+    this.dialogService.open(DialogType.TaskDetails);
+  }
+
+  private async createTask(): Promise<void> {
+    await this.taskService.createTask(this.buildCreateTask());
+    this.toastService.success('Task added to board.');
+  }
+
+  private async finishCreateTask(): Promise<void> {
+    if (this.isDialog) {
+      this.close.emit();
+      return;
+    }
+
+    await this.router.navigate(['/board']);
   }
 
   /**
@@ -348,6 +364,7 @@ export class AddTask {
   /**
    * Load the selected task details into the form for edit mode.
    */
+
   private loadTaskIntoForm(): void {
     const task = this.selectedTask();
 
@@ -357,6 +374,12 @@ export class AddTask {
 
     const dueDate = parseLocalDate(task.dueDate);
 
+    this.patchTaskForm(task, dueDate);
+    this.updateDueDateValidator(dueDate);
+    this.loadSubtasks(task.subtasks);
+  }
+
+  private patchTaskForm(task: Task, dueDate: Date): void {
     this.addTaskForm.patchValue({
       title: task.title,
       description: task.description,
@@ -365,16 +388,20 @@ export class AddTask {
       category: task.category,
       assignedContactIds: task.assignedContactIds,
     });
+  }
 
+  private updateDueDateValidator(dueDate: Date): void {
     this.addTaskForm.controls.dueDate.setValidators([
       Validators.required,
       noPastDateValidator(dueDate),
     ]);
 
     this.addTaskForm.controls.dueDate.updateValueAndValidity();
+  }
 
-    this.initialSubtasks = [...task.subtasks];
-    this.subtasks.set([...task.subtasks]);
+  private loadSubtasks(subtasks: Subtask[]): void {
+    this.initialSubtasks = [...subtasks];
+    this.subtasks.set([...subtasks]);
   }
 
   selectedStatus: TaskStatus = 'todo';
