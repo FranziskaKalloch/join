@@ -71,7 +71,6 @@ export class TaskService {
         auth_user_id: task.authUserId,
       },
     ]);
-    console.log('insert result:', data, error);
     if (!error) {
       await this.loadTasks();
     }

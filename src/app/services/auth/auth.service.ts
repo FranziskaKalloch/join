@@ -88,7 +88,6 @@ export class AuthService {
    * @returns A promise that resolves with true when the logout was successful.
    */
   async signOut(): Promise<boolean> {
-    console.log('AuthService signOut started');
     const { error } = await this.supabaseService.supabase.auth.signOut();
 
     if (error) {
