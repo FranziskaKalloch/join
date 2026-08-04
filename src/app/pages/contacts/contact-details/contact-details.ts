@@ -18,6 +18,7 @@ export class ContactDetails {
   readonly contactService = inject(ContactService);
   readonly DialogType = DialogType;
   animate = signal(false);
+  private lastId: number | undefined;
 
   isContactOptionsOpen = false;
 
@@ -60,8 +61,17 @@ export class ContactDetails {
 
   constructor() {
     effect(() => {
-      this.contactService.selectedContact();
+      const contact = this.contactService.selectedContact();
 
+      if (!contact) {
+        return;
+      }
+
+      if (this.lastId === contact.id) {
+        return;
+      }
+
+      this.lastId = contact.id;
       this.animate.set(false);
 
       requestAnimationFrame(() => {
