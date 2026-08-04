@@ -34,11 +34,11 @@ body.dialog-open {
         flex-direction: column;
     }
 
-    body.board-early-mobile & {
-        @media (max-width: 1370px) {
-            flex-direction: column;
-        }
-    }
+    // body.board-early-mobile & {
+    //     @media (max-width: 1370px) {
+    //         flex-direction: column;
+    //     }
+    // }
 }
 
 .wrapper-header {
@@ -80,13 +80,13 @@ body.dialog-open {
         width: 100%;
     }
 
-    body.board-early-mobile & {
-        @media (max-width: 1370px) {
-            order: 3;
-            flex: 0 0 80px;
-            width: 100%;
-        }
-    }
+    // body.board-early-mobile & {
+    //     @media (max-width: 1370px) {
+    //         order: 3;
+    //         flex: 0 0 80px;
+    //         width: 100%;
+    //     }
+    // }
 }
 
 .main {
