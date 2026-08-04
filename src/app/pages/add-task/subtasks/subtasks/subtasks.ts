@@ -14,7 +14,7 @@ export class Subtasks {
   editingTitle = signal<string>('');
   subtasksChange = output<Subtask[]>();
 
-   /**
+  /**
    * Update the value used for the new subtask input.
    *
    * @param value - Current input value.
@@ -87,38 +87,60 @@ export class Subtasks {
   /**
    * Emit the current subtasks list through the output event.
    */
-  private emitChange(): void {
-    this.subtasksChange.emit(this.subtasks());
-  }
-
   initialSubtasks = input<Subtask[]>([]);
   private initialized = false;
 
   constructor() {
-    effect(() => {
-      if (this.initialized) {
-        return;
-      }
+    effect(() => this.initializeSubtasks());
+  }
 
-      const initial = this.initialSubtasks();
+  private initializeSubtasks(): void {
+    if (this.initialized) {
+      return;
+    }
 
-      this.subtasks.set([...initial]);
-      this.subtasksChange.emit([...initial]);
+    const initial = this.initialSubtasks();
 
-      this.initialized = true;
-    });
+    this.setInitialSubtasks(initial);
+    this.initialized = true;
+  }
+
+  /**
+   * Set the initial subtasks and emit the initial change event.
+   *
+   * @param subtasks - Initial subtask list.
+   */
+  private setInitialSubtasks(subtasks: Subtask[]): void {
+    this.subtasks.set([...subtasks]);
+    this.subtasksChange.emit([...subtasks]);
+  }
+
+  /**
+   * Emit the current subtasks list through the output event.
+   */
+  private emitChange(): void {
+    this.subtasksChange.emit(this.subtasks());
   }
 
   isClearHover = signal(false);
   isAddHover = signal(false);
 
+  /**
+   * Clear all subtasks and reset the component state.
+   */
   clear(): void {
+    this.resetSubtasks();
+    this.emitChange();
+    this.initialized = false;
+  }
+
+  /**
+   * Reset all subtask-related state to defaults.
+   */
+  private resetSubtasks(): void {
     this.subtasks.set([]);
     this.newSubtaskTitle.set('');
     this.editingIndex.set(null);
-
-    this.emitChange();
-    this.initialized = false;
   }
 
   /**
