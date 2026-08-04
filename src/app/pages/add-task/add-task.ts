@@ -395,8 +395,8 @@ export class AddTask {
       Validators.required,
       noPastDateValidator(dueDate),
     ]);
-
     this.addTaskForm.controls.dueDate.updateValueAndValidity();
+    const control = this.addTaskForm.controls.dueDate;
   }
 
   private loadSubtasks(subtasks: Subtask[]): void {

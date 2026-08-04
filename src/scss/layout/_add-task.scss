@@ -29,13 +29,13 @@
             max-width: 80dvw;
         }
 
-        @include tablet {
-            padding-top: 96px;
-        }
+        // @include tablet {
+        //     padding-top: 96px;
+        // }
 
-        @include landscape {
-            padding-top: 80px;
-        }
+        // @include landscape {
+        //     padding-top: 80px;
+        // }
     }
 }
 
@@ -107,7 +107,7 @@
     }
 
     @include small-mobile {
-        padding: 40px 8px 20px;
+        padding: 20px 8px 20px;
     }
 }
 

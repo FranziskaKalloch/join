@@ -24,6 +24,10 @@
     display: none;
     padding-left: 0px;
   }
+
+    @include landscape {
+    padding-top: 0px;
+  }
 }
 
 .contact-details__header {
