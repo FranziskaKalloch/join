@@ -149,6 +149,12 @@
         gap: 8px;
         margin-top: 80px
     }
+        @include landscape {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-top: 0px
+    }
 }
 
 .summary-title {

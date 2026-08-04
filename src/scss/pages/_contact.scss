@@ -240,6 +240,13 @@
   }
 }
 
+
+  @include landscape {
+    .contact-list-container {
+  padding-top: 0;
+  }
+  }
+
 .contacts-scroll-area::-webkit-scrollbar {
   width: 14px;
 

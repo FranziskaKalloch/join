@@ -33,6 +33,12 @@
   }
 }
 
+@mixin board {
+  @media (min-width: 921px) and (max-width: 1370px) {
+    @content;
+  }
+}
+
 @mixin desktop-s {
   @media (min-width: 921px) and (max-width: 1200px) {
     @content;
@@ -56,7 +62,6 @@
     @content;
   }
 }
-
 
 @mixin small-mobile {
   @media (width <=380px) {

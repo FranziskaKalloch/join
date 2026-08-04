@@ -89,6 +89,7 @@
         flex-direction: column;
         justify-content: center;
         gap: 24px;
+        margin-top: 16px;
     }
 
     @include landscape {
@@ -245,7 +246,8 @@
         box-sizing: border-box;
     }
 
-    .input-icon, .password-icon {
+    .input-icon,
+    .password-icon {
         position: absolute;
         top: 14px;
         right: 18px;
@@ -271,7 +273,7 @@
     min-height: 24px;
     display: flex;
     align-items: center;
-    
+
     .form-error {
         color: $red-form-color;
         font-size: 12px;
@@ -285,7 +287,7 @@
     align-items: center;
     justify-content: center;
     padding-bottom: 8px;
-  
+
     .global-error {
         color: $red-form-color;
         text-align: center;
@@ -325,7 +327,7 @@
             border-color: #a8a8a8;
             cursor: not-allowed;
             box-shadow: none;
-            
+
             &:hover {
                 background-color: #a8a8a8;
                 border-color: #a8a8a8;
@@ -402,7 +404,7 @@ input.signup-error {
     &:hover:not(:disabled) {
         background-color: #ebebeb;
     }
-    
+
     &:disabled {
         cursor: not-allowed;
         opacity: 0.5;
@@ -451,15 +453,31 @@ input.signup-error {
             display: none;
         }
 
-        input:not(:checked) ~ .cb-empty { display: block; }
-        &:hover input:not(:checked) ~ .cb-empty { display: none; }
-        &:hover input:not(:checked) ~ .cb-empty-hover { display: block; }
+        input:not(:checked)~.cb-empty {
+            display: block;
+        }
 
-        input:checked ~ .cb-checked { display: block; }
-        &:hover input:checked ~ .cb-checked { display: none; }
-        &:hover input:checked ~ .cb-checked-hover { display: block; }
+        &:hover input:not(:checked)~.cb-empty {
+            display: none;
+        }
 
-        input:disabled ~ img {
+        &:hover input:not(:checked)~.cb-empty-hover {
+            display: block;
+        }
+
+        input:checked~.cb-checked {
+            display: block;
+        }
+
+        &:hover input:checked~.cb-checked {
+            display: none;
+        }
+
+        &:hover input:checked~.cb-checked-hover {
+            display: block;
+        }
+
+        input:disabled~img {
             opacity: 0.5;
             cursor: not-allowed;
         }
@@ -485,7 +503,9 @@ input.signup-error {
     }
 }
 
-.btn-primary--login { font-size: 16px; }
+.btn-primary--login {
+    font-size: 16px;
+}
 
 .popup-overlay {
     position: fixed;
@@ -521,6 +541,7 @@ input.signup-error {
         transform: translateY(100px);
         opacity: 0;
     }
+
     to {
         transform: translateY(0);
         opacity: 1;

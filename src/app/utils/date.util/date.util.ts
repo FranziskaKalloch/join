@@ -25,10 +25,6 @@ export function noPastDateValidator(originalDate?: Date): ValidatorFn {
         : parseLocalDate(control.value);
     selectedDate.setHours(0, 0, 0, 0);
 
-    if (originalDate && control.value === originalDate) {
-      return null;
-    }
-
     return selectedDate < today ? { pastDate: true } : null;
   };
 }

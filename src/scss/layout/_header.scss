@@ -110,7 +110,7 @@
 
 
     @include landscape {
-          padding: 0px 0;
+        padding: 0px 0;
     }
 }
 
@@ -120,8 +120,8 @@
     color: $light-grey-color;
     margin: 0 8px;
 
-        @include landscape {
-          padding: 10px 16px;
+    @include landscape {
+        padding: 10px 16px;
     }
 
     &:hover {
@@ -161,6 +161,7 @@
         background-color: white;
         box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
     }
+
 }
 
 ::ng-deep body.board-early-mobile {

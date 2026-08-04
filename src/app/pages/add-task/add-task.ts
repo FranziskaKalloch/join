@@ -75,8 +75,8 @@ export class AddTask {
   });
 
   /**
-  * Returns the date form control.
-  */
+   * Returns the due date form control.
+   */
   get dueDateControl() {
     return this.addTaskForm.get('dueDate');
   }
@@ -114,23 +114,51 @@ export class AddTask {
     this.isSaving = true;
 
     try {
-      if (this.isEditMode) {
-        await this.taskService.updateTask(this.buildUpdateTask());
-        this.dialogService.open(DialogType.TaskDetails);
-        return;
-      } else {
-        await this.taskService.createTask(this.buildCreateTask());
-        this.toastService.success('Task added to board.');
-      }
-
-      if (this.isDialog) {
-        this.close.emit();
-      } else {
-        await this.router.navigate(['/board']);
-      }
+      await this.saveTask();
     } finally {
       this.isSaving = false;
     }
+  }
+
+  /**
+   * Persist the task using the appropriate create or update flow.
+   */
+  private async saveTask(): Promise<void> {
+    if (this.isEditMode) {
+      await this.updateTask();
+      return;
+    }
+
+    await this.createTask();
+    await this.finishCreateTask();
+  }
+
+  /**
+   * Update the current task.
+   */
+  private async updateTask(): Promise<void> {
+    await this.taskService.updateTask(this.buildUpdateTask());
+    this.dialogService.open(DialogType.TaskDetails);
+  }
+
+  /**
+   * Create a new task.
+   */
+  private async createTask(): Promise<void> {
+    await this.taskService.createTask(this.buildCreateTask());
+    this.toastService.success('Task added to board.');
+  }
+
+  /**
+   * Finish the task creation flow by closing the dialog or navigating.
+   */
+  private async finishCreateTask(): Promise<void> {
+    if (this.isDialog) {
+      this.close.emit();
+      return;
+    }
+
+    await this.router.navigate(['/board']);
   }
 
   /**
@@ -185,6 +213,7 @@ export class AddTask {
       authUserId: this.authService.currentUser()?.id,
     };
   }
+
   /**
    * Build an updated task payload based on the existing selected task and form values.
    *
@@ -357,6 +386,18 @@ export class AddTask {
 
     const dueDate = parseLocalDate(task.dueDate);
 
+    this.patchTaskForm(task, dueDate);
+    this.updateDueDateValidator(dueDate);
+    this.loadSubtasks(task.subtasks);
+  }
+
+  /**
+   * Patch the form values with the selected task.
+   *
+   * @param task - Selected task.
+   * @param dueDate - Parsed due date.
+   */
+  private patchTaskForm(task: Task, dueDate: Date): void {
     this.addTaskForm.patchValue({
       title: task.title,
       description: task.description,
@@ -365,16 +406,29 @@ export class AddTask {
       category: task.category,
       assignedContactIds: task.assignedContactIds,
     });
+  }
 
+  /**
+   * Update the due date validator to allow the current task due date when editing.
+   *
+   * @param dueDate - Existing task due date.
+   */
+  private updateDueDateValidator(dueDate: Date): void {
     this.addTaskForm.controls.dueDate.setValidators([
       Validators.required,
       noPastDateValidator(dueDate),
     ]);
-
     this.addTaskForm.controls.dueDate.updateValueAndValidity();
+  }
 
-    this.initialSubtasks = [...task.subtasks];
-    this.subtasks.set([...task.subtasks]);
+  /**
+   * Load the task subtasks into the component state.
+   *
+   * @param subtasks - Subtasks from the selected task.
+   */
+  private loadSubtasks(subtasks: Subtask[]): void {
+    this.initialSubtasks = [...subtasks];
+    this.subtasks.set([...subtasks]);
   }
 
   selectedStatus: TaskStatus = 'todo';
