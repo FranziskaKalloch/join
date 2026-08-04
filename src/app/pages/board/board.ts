@@ -1,5 +1,5 @@
 import { CdkDropListGroup } from '@angular/cdk/drag-drop';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -17,9 +17,10 @@ import { TaskView } from './task-view/task-view';
   templateUrl: './board.html',
   styleUrl: './board.scss',
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
   taskService = inject(TaskService);
   private contactService = inject(ContactService);
+  private renderer = inject(Renderer2);
   searchTerm = '';
 
   boardColumns: { title: string; status: TaskStatus }[] = [
@@ -29,29 +30,20 @@ export class BoardComponent implements OnInit {
     { title: 'Done', status: 'done' },
   ];
 
-  /**
-   * Lifecycle hook that is called after Angular has initialized all data-bound properties.
-   * Loads tasks, contacts, and sets up real-time task synchronization.
-   */
   ngOnInit(): void {
     this.taskService.subscribeToTaskChanges();
+    this.renderer.addClass(document.body, 'board-early-mobile');
   }
 
-  /**
-   * Lifecycle hook that is called when the component is destroyed.
-   * Cleans up subscriptions to prevent memory leaks.
-   */
   ngOnDestroy(): void {
     this.taskService.unsubscribeFromTaskChanges();
+    this.renderer.removeClass(document.body, 'board-early-mobile');
   }
 
   readonly dialogService = inject(DialogService);
   readonly DialogType = DialogType;
   private router = inject(Router);
 
-  /**
-   * Opens the add task dialog on desktop viewports or navigates to the add-task route on mobile screens.
-   */
   openDialog(): void {
     const isDesktop = window.matchMedia('(min-width: 569px)').matches;
 
