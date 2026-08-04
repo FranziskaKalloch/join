@@ -31,17 +31,17 @@ export class ContactDialog implements AfterViewInit, OnInit {
 
   /**
    * Shows the dialog modal after the view is initialized.
-   * 
-   * @returns {void} Nothing.
+   *
+   * @returns void
    */
   ngAfterViewInit(): void {
     this.dialog.nativeElement.showModal();
   }
 
   /**
-   * Initializes the form with the selected contact.
-   * 
-   * @returns {void} Nothing.
+   * Initializes the form with the selected contact if edit mode is active.
+   *
+   * @returns void
    */
   ngOnInit(): void {
     const contact = this.selectedContact();
@@ -59,8 +59,8 @@ export class ContactDialog implements AfterViewInit, OnInit {
 
   /**
    * Starts the dialog close animation.
-   * 
-   * @returns {void} Nothing.
+   *
+   * @returns void
    */
   closeDialog(): void {
     this.startCloseAnimation();
@@ -68,8 +68,8 @@ export class ContactDialog implements AfterViewInit, OnInit {
 
   /**
    * Adds the closing class to begin the dialog close animation.
-   * 
-   * @returns {void} Nothing.
+   *
+   * @returns void
    */
   private startCloseAnimation(): void {
     if (this.isClosing) {
@@ -82,9 +82,9 @@ export class ContactDialog implements AfterViewInit, OnInit {
 
   /**
    * Cancels the dialog when the user dismisses it.
-   * 
-   * @param event The cancel event.
-   * @returns {void} Nothing.
+   *
+   * @param event - The cancel event triggered by the dialog.
+   * @returns void
    */
   onCancel(event: Event): void {
     event.preventDefault();
@@ -93,9 +93,9 @@ export class ContactDialog implements AfterViewInit, OnInit {
 
   /**
    * Closes the dialog when the user clicks outside its bounds.
-   * 
-   * @param event The mouse event.
-   * @returns {void} Nothing.
+   *
+   * @param event - Mouse event from the dialog backdrop click.
+   * @returns void
    */
   onDialogClick(event: MouseEvent): void {
     const dialog = this.dialog.nativeElement;
@@ -114,9 +114,9 @@ export class ContactDialog implements AfterViewInit, OnInit {
 
   /**
    * Finishes closing the dialog after the exit animation ends.
-   * 
-   * @param event The animation event.
-   * @returns {void} Nothing.
+   *
+   * @param event - Animation event emitted by the dialog.
+   * @returns void
    */
   animationFinished(event: AnimationEvent): void {
     if (event.target !== this.dialog.nativeElement) {
@@ -134,11 +134,15 @@ export class ContactDialog implements AfterViewInit, OnInit {
     this.dialogService.clear();
   }
 
+  /**
+   * Reactive form group for contact data entry.
+   */
   newUserForm = new FormGroup({
     name: new FormControl('', {
       validators: [
         Validators.required,
-        Validators.pattern(/^[A-Za-zÄÖÜäöüß\s'-]+$/), fullNameValidator(),
+        Validators.pattern(/^[A-Za-zÄÖÜäöüß\s'-]+$/),
+        fullNameValidator(),
       ],
       updateOn: 'blur',
     }),
@@ -158,14 +162,23 @@ export class ContactDialog implements AfterViewInit, OnInit {
     }),
   });
 
+  /**
+   * Getter for the name control.
+   */
   get name() {
     return this.newUserForm.controls.name;
   }
 
+  /**
+   * Getter for the email control.
+   */
   get email() {
     return this.newUserForm.controls.email;
   }
 
+  /**
+   * Getter for the phone control.
+   */
   get phone() {
     return this.newUserForm.controls.phone;
   }
@@ -175,8 +188,8 @@ export class ContactDialog implements AfterViewInit, OnInit {
 
   /**
    * Submits the form and saves a new or updated contact.
-   * 
-   * @returns {Promise<void>} A promise that resolves after the submit completes.
+   *
+   * @returns A promise that resolves after submit completes.
    */
   async onSubmit(): Promise<void> {
     if (this.newUserForm.invalid) {
@@ -184,42 +197,60 @@ export class ContactDialog implements AfterViewInit, OnInit {
       return;
     }
 
-    const { firstname, lastname } = splitFullName(this.name.value!);
     const editMode = this.isEditMode();
-
-    let success = false;
-
-    if (this.isEditMode()) {
-      success = await this.contactService.updateContact({
-        id: this.selectedContact()!.id,
-        firstname,
-        lastname,
-        email: this.email.value!,
-        phone: this.phone.value!,
-      });
-    } else {
-      success = await this.contactService.addContact({
-        firstname,
-        lastname,
-        email: this.email.value!,
-        phone: this.phone.value!,
-      });
-    }
+    const success = await this.saveContact();
 
     if (success) {
-      this.newUserForm.reset();
-      this.closeDialog();
+      this.handleSuccess(editMode);
+    }
+  }
 
-      if (!editMode) {
-        this.toastService.success('Contact successfully created.');
-      }
+  /**
+   * Saves contact data via the contact service.
+   *
+   * @returns True when the save succeeded.
+   */
+  private async saveContact(): Promise<boolean> {
+    const contact = this.buildContactData();
+
+    return this.isEditMode()
+      ? this.contactService.updateContact(contact)
+      : this.contactService.addContact(contact);
+  }
+
+  /**
+   * Build contact payload from form values.
+   *
+   * @returns Contact object ready for persistence.
+   */
+  private buildContactData() {
+    const { firstname, lastname } = splitFullName(this.name.value!);
+
+    return {
+      id: this.selectedContact()?.id,
+      firstname,
+      lastname,
+      email: this.email.value!,
+      phone: this.phone.value!,
+    };
+  }
+
+  /**
+   * Handles successful contact save actions.
+   *
+   * @param editMode - Whether the contact was updated rather than created.
+   */
+  private handleSuccess(editMode: boolean): void {
+    this.newUserForm.reset();
+    this.closeDialog();
+
+    if (!editMode) {
+      this.toastService.success('Contact successfully created.');
     }
   }
 
   /**
    * Removes the selected contact and closes the dialog.
-   * 
-   * @returns {void} Nothing.
    */
   onRemoveSelectedContact() {
     this.contactService.deleteSelectedContact();

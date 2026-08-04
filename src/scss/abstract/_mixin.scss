@@ -57,7 +57,6 @@
   }
 }
 
-
 @mixin small-mobile {
   @media (width <=380px) {
     @content;
