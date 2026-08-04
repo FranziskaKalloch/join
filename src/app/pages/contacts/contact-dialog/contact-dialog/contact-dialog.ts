@@ -6,6 +6,7 @@ import { DialogService } from '../../../../services/dialog/dialog.service';
 import { ToastService } from '../../../../services/toast/toast-service';
 import { fullNameValidator, splitFullName } from '../../../../utils/name.util/name.util';
 import { emailValidator, emailExistsValidator } from '../../../../utils/email.util/email.util';
+import { phoneValidator } from '../../../../utils/phone.util/phone.util/phone.util';
 
 @Component({
   selector: 'app-contact-dialog',
@@ -152,7 +153,7 @@ export class ContactDialog implements AfterViewInit, OnInit {
       updateOn: 'blur',
     }),
     phone: new FormControl('', {
-      validators: [Validators.required, Validators.pattern(/^[0-9+\s()-]+$/)],
+      validators: [Validators.required, phoneValidator()],
       updateOn: 'blur',
     }),
   });

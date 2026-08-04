@@ -23,46 +23,65 @@ dialog::backdrop {
         max-height: calc(100dvh - 50px);
 
         @include widesscreen {
-            max-height: calc(67dvh - 80px);
+            max-height: calc(75dvh - 80px);
         }
     }
 
     &--task-view {
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
-        // max-height: calc(100dvh - 80px);
-        width: 520px;
-
-        @include desktop-hd {
-            // max-height: calc(100dvh - 80px);
-           height: 100%;
-        }
+        width: 540px;
 
         @include widesscreen {
-            max-height: calc(70dvh - 80px);
+            max-height: calc(80dvh - 80px);
             width: 820px;
-            height: 100%;
-     
+        }
+
+        @include small-mobile-high {
+            flex-direction: column;
+            max-height: calc(100dvh - 160px);
+            top: 80px;
+        }
+
+        @include landscape {
+            max-height: none;
+            height: 100dvh;
+            max-width: none;
+            width: 100dvw;
         }
     }
 
     &--task-view-edit {
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
         height: calc(100dvh - 80px);
-        width: 520px;
+        width: 540px;
 
         @include desktop-hd {
-            height: calc(100dvh - 80px);
+            max-height: calc(100dvh - 80px);
         }
 
         @include widesscreen {
-            height: calc(70dvh - 80px);
-             width: 820px;
-     
+            max-height: calc(80dvh - 80px);
+            width: 820px;
+
         }
+
+        @include small-mobile-high {
+            flex-direction: column;
+            max-height: calc(100dvh - 160px);
+            top: 80px;
+        }
+
+        @include landscape {
+            max-height: none;
+            height: 100dvh;
+            max-width: none;
+            width: 100dvw;
+        }
+
     }
 
-    &--contact{
-    height: 592px;
+    &--contact {
+        height: 592px;
     }
 
     @include mobile-tablet {
@@ -86,6 +105,7 @@ dialog::backdrop {
         bottom: 80px;
         animation: dialogInMobile 250ms ease-out forwards;
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+        max-width: 95%;
     }
 
     @include tablet {
@@ -102,6 +122,12 @@ dialog::backdrop {
         height: 100dvh;
         position: fixed;
 
+    }
+
+    @include small-mobile-high {
+        flex-direction: column;
+        max-height: calc(100dvh - 160px);
+        top: 80px;
     }
 
 }
@@ -132,7 +158,7 @@ dialog::backdrop {
 
         @include small-mobile {
             flex-direction: column;
-            max-height: calc(100dvh - 340px);
+            max-height: calc(100dvh - 80px);
         }
 
         @include small-mobile-high {
@@ -146,7 +172,7 @@ dialog::backdrop {
 
         @include landscape {
             margin-top: 10px;
-            max-height: calc(100dvh - 150px);
+            max-height: calc(100dvh - 270px);
         }
 
     }
@@ -154,8 +180,7 @@ dialog::backdrop {
     &--edit {
         display: flex;
         flex-direction: column;
-        //  gap: 24px;
-        margin: 30px 0;
+        margin: 40px 0 30px;
         flex: 1;
         min-height: 0;
 
@@ -170,16 +195,22 @@ dialog::backdrop {
 
         @include small-mobile {
             flex-direction: column;
-            max-height: calc(100dvh - 200px);
+            max-height: calc(100dvh - 10px);
+            margin: 30px 0 10px;
         }
 
         @include widesscreen {
-            flex: unset;
+            flex: 1;
         }
 
         @include landscape {
-            margin-top: 50px;
-            max-height: calc(100dvh - 170px);
+            // margin-top: 50px;
+            max-height: calc(100dvh - 140px);
+        }
+
+        @include small-mobile-high {
+            flex-direction: column;
+            max-height: calc(75dvh - 160px);
         }
     }
 
@@ -341,7 +372,7 @@ dialog::backdrop {
     height: 100%;
 
     &--task {
-        padding: 64px 74px;
+        padding: 60px 74px;
         display: flex;
         flex-direction: column;
         min-height: 0;
@@ -443,11 +474,27 @@ dialog::backdrop {
 .dialog-user-close {
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 24px;
     z-index: 1001;
 
     @include landscape {
         top: 28px;
+        right: 20px;
+    }
+
+    @include tablet {
+        top: 40px;
+        right: 24px;
+    }
+
+    @include mobile {
+        top: 40px;
+        right: 24px;
+    }
+
+
+    @include small-mobile {
+        top: 40px;
         right: 20px;
     }
 
@@ -469,7 +516,15 @@ dialog::backdrop {
             top: 28px;
             right: 20px;
         }
+
+        @include small-mobile {
+            top: 30px;
+            right: 24px;
+        }
     }
+
+    &--edit {}
+
 }
 
 .dialog-close-btn {
@@ -555,7 +610,6 @@ dialog::backdrop {
         @include desktop-s {
             align-items: flex-start;
             justify-content: flex-start;
-            // max-width: 99%;
         }
 
 
@@ -564,9 +618,16 @@ dialog::backdrop {
             position: unset;
             padding: 0;
         }
+
         @include widesscreen {
             width: 100%;
         }
+
+        @include small-mobile {
+            height: 100%;
+            padding: 0;
+        }
+
     }
 }
 
@@ -581,7 +642,6 @@ dialog::backdrop {
     @include desktop-s {
         align-items: center;
         justify-content: center;
-        // width: 55%;
     }
 
     @include landscape {
@@ -597,7 +657,6 @@ dialog::backdrop {
         @include desktop-s {
             align-items: flex-start;
             justify-content: flex-start;
-            // width: 99%;
         }
 
         @include landscape {
@@ -608,8 +667,8 @@ dialog::backdrop {
             margin-top: 25px;
         }
 
-            @include widesscreen {
-           width: 100%;
+        @include widesscreen {
+            width: 100%;
         }
 
     }
@@ -883,7 +942,7 @@ dialog::backdrop {
 
 .form-cell {
     padding-bottom: 12px;
-     width: 100%;
+    width: 100%;
 
     @include small-mobile {
         padding-bottom: 8px;
@@ -947,7 +1006,7 @@ dialog::backdrop {
 
     @include widesscreen {
         width: 100%;
-    
+
     }
 
     &:focus {
@@ -958,8 +1017,38 @@ dialog::backdrop {
 
 }
 
+.user-dialog--task-view-edit .form-cell input {
+    @include desktop-plus {
+        width: 100%;
+    }
+
+    @include desktop-s {
+        width: 100%;
+    }
+
+    @include desktop-md {
+        width: 100%;
+    }
+}
+
+.user-dialog--task-view-edit .form-cell textarea {
+    @include desktop-plus {
+        width: 100%;
+    }
+
+    @include desktop-s {
+        width: 100%;
+    }
+
+    @include desktop-md {
+        width: 100%;
+    }
+}
+
+
 .form-cell--subtask input {
     padding: 13px 80px 13px 21px;
+    width: 100%;
 }
 
 .form-cell--task input {
@@ -1080,8 +1169,17 @@ input.ng-invalid.ng-touched {
             width: 100%;
             gap: 20px;
             right: 0;
+            bottom: 5px;
         }
     }
+
+    &--task-mobile {
+        @include landscape {
+            bottom: 85px;
+        }
+    }
+
+
 }
 
 .form-error-placeholder {

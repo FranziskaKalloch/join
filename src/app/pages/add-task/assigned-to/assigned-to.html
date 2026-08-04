@@ -35,13 +35,14 @@
     </div>
 
   </ng-template>
-
-    <div class="assigned-to__bubbles">
+<div class="wrapper-task-card-edit">
+   <div class="task-card__assignees-edit">
       @for (contact of visibleBubbles(); track contact.id) {
       <app-user-bubble [initials]="contact.initials ?? ''" [color]="contact.colors ?? ''" />
       }
       @if (remainingCount() > 0) {
       <div class="assignee-badge extra-badge">+{{ remainingCount() }}</div>
       }
+  </div>
   </div>
 </div>

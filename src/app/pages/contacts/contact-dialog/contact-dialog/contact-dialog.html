@@ -87,9 +87,9 @@
                                             </p>
                                             }
                                             @else if (newUserForm.controls.email.hasError('emailExists')) {
-                                             <p class="form-error">
+                                            <p class="form-error">
                                                 This email address already exists.
-                                             </p>
+                                            </p>
                                             }
                                             }
                                         </div>
@@ -106,9 +106,9 @@
                                                 Your phone number is required.
                                             </p>
                                             }
-                                            @else if (phone.hasError('pattern')){
+                                            @else if (phone.hasError('phone')) {
                                             <p class="form-error">
-                                                The phone number can only contain numbers.
+                                              Please enter a valid phone number.
                                             </p>
                                             }
 
