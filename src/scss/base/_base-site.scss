@@ -16,10 +16,8 @@ body.dialog-open {
     touch-action: none;
 }
 
-
 #wrapper-join {
     width: 100%;
-    // max-width: 1440px;
     margin: 0 auto;
 
     @include widesscreen {
@@ -30,9 +28,16 @@ body.dialog-open {
 .layout {
     display: flex;
     height: 100dvh;
+    overflow: hidden;
 
     @include mobile-tablet {
         flex-direction: column;
+    }
+
+    body.board-early-mobile & {
+        @media (max-width: 1370px) {
+            flex-direction: column;
+        }
     }
 }
 
@@ -41,15 +46,23 @@ body.dialog-open {
     background: white;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
     z-index: 10;
+    flex-shrink: 0;
 
     @include mobile-tablet {
         order: 0;
+    }
+
+    body.board-early-mobile & {
+        @media (max-width: 1370px) {
+            order: 0;
+        }
     }
 }
 
 .wrapper-navbar {
     flex: 0 0 232px;
     background-color: $blue-color;
+    flex-shrink: 0;
 
     @include mobile-tablet {
         order: 3;
@@ -66,6 +79,14 @@ body.dialog-open {
         flex: 0 0 180px;
         width: 100%;
     }
+
+    body.board-early-mobile & {
+        @media (max-width: 1370px) {
+            order: 3;
+            flex: 0 0 80px;
+            width: 100%;
+        }
+    }
 }
 
 .main {
@@ -73,20 +94,26 @@ body.dialog-open {
     min-width: 0;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    overflow: hidden;
     min-height: 0;
 
     @include mobile-tablet {
         order: 1;
         flex: 1;
     }
+
+    body.board-early-mobile & {
+        @media (max-width: 1370px) {
+            order: 1;
+            flex: 1;
+        }
+    }
 }
 
 .wrapper-content {
     flex: 1;
     min-height: 0;
-
-    @include mobile {
-        padding-top: 80px;
-    }
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
