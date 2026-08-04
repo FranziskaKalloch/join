@@ -28,6 +28,9 @@
 
     @include landscape {
         padding: 20px 8px;
+        height: auto;
+        min-height: 100dvh;
+        justify-content: flex-start;
     }
 }
 
@@ -51,9 +54,14 @@
     }
 
     @include landscape {
-        padding-top: 0px;
-        // position: absolute;
-        bottom: 0;
+        padding-top: 24px;
+        position: relative;
+        bottom: auto;
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
     }
 }
 
@@ -81,17 +89,20 @@
         flex-direction: column;
         justify-content: center;
         gap: 24px;
-        padding-top: 20px;
     }
 
     @include landscape {
+        position: relative;
+        bottom: auto;
+        left: auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 8px;
-        position: absolute;
-        bottom: 8px;
-        left: 8px;
+        align-items: center;
+        gap: 16px;
+        margin-top: 16px;
+        padding-bottom: 12px;
+        width: 100%;
     }
 }
 
@@ -111,7 +122,7 @@
 
     @include landscape {
         height: 46px;
-        padding-left: 20%;
+        padding-left: 20px;
     }
 }
 
@@ -125,12 +136,7 @@
     }
 
     @include landscape {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: absolute;
-        bottom: 8px;
-        right: 8px;
+        display: none;
     }
 }
 
@@ -145,7 +151,6 @@
     @include landscape {
         font-size: 16px;
         padding-right: 0px;
-        padding-bottom: 8px;
     }
 }
 
@@ -159,7 +164,10 @@
     }
 
     @include landscape {
-        display: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
     }
 }
 
@@ -185,6 +193,12 @@
     @include mobile {
         width: 100%;
         padding: 20px 8px;
+    }
+
+    @include landscape {
+        width: 100%;
+        max-width: 450px;
+        padding: 20px 16px;
     }
 }
 
@@ -231,8 +245,7 @@
         box-sizing: border-box;
     }
 
-    .input-icon,
-    .password-icon {
+    .input-icon, .password-icon {
         position: absolute;
         top: 14px;
         right: 18px;
@@ -258,7 +271,7 @@
     min-height: 24px;
     display: flex;
     align-items: center;
-
+    
     .form-error {
         color: $red-form-color;
         font-size: 12px;
@@ -272,7 +285,7 @@
     align-items: center;
     justify-content: center;
     padding-bottom: 8px;
-
+  
     .global-error {
         color: $red-form-color;
         text-align: center;
@@ -312,7 +325,7 @@
             border-color: #a8a8a8;
             cursor: not-allowed;
             box-shadow: none;
-
+            
             &:hover {
                 background-color: #a8a8a8;
                 border-color: #a8a8a8;
@@ -328,14 +341,9 @@
     gap: 32px;
     color: $grey-task-stroke;
 
-
     @include landscape {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    @include desktop-min {
-        padding-top: 10px;
+        flex-direction: row;
+        gap: 16px;
     }
 }
 
@@ -394,7 +402,7 @@ input.signup-error {
     &:hover:not(:disabled) {
         background-color: #ebebeb;
     }
-
+    
     &:disabled {
         cursor: not-allowed;
         opacity: 0.5;
@@ -443,31 +451,15 @@ input.signup-error {
             display: none;
         }
 
-        input:not(:checked)~.cb-empty {
-            display: block;
-        }
+        input:not(:checked) ~ .cb-empty { display: block; }
+        &:hover input:not(:checked) ~ .cb-empty { display: none; }
+        &:hover input:not(:checked) ~ .cb-empty-hover { display: block; }
 
-        &:hover input:not(:checked)~.cb-empty {
-            display: none;
-        }
+        input:checked ~ .cb-checked { display: block; }
+        &:hover input:checked ~ .cb-checked { display: none; }
+        &:hover input:checked ~ .cb-checked-hover { display: block; }
 
-        &:hover input:not(:checked)~.cb-empty-hover {
-            display: block;
-        }
-
-        input:checked~.cb-checked {
-            display: block;
-        }
-
-        &:hover input:checked~.cb-checked {
-            display: none;
-        }
-
-        &:hover input:checked~.cb-checked-hover {
-            display: block;
-        }
-
-        input:disabled~img {
+        input:disabled ~ img {
             opacity: 0.5;
             cursor: not-allowed;
         }
@@ -493,9 +485,7 @@ input.signup-error {
     }
 }
 
-.btn-primary--login {
-    font-size: 16px;
-}
+.btn-primary--login { font-size: 16px; }
 
 .popup-overlay {
     position: fixed;
@@ -531,7 +521,6 @@ input.signup-error {
         transform: translateY(100px);
         opacity: 0;
     }
-
     to {
         transform: translateY(0);
         opacity: 1;
