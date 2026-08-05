@@ -115,7 +115,7 @@ dialog::backdrop {
     overflow-y: auto;
 
     @include mobile {
-        max-height: calc(100dvh - 240px);
+        max-height: calc(100dvh - 250px);
     }
 
     @include landscape {
@@ -187,9 +187,16 @@ dialog::backdrop {
         flex: 1;
         min-height: 0;
 
-        @include mobile-tablet {
+        @include mobile {
             flex-direction: column;
             margin: 50px 0 30px;
+
+        }
+
+        @include tablet {
+            flex-direction: column;
+            margin: 50px 0 30px;
+            max-height: calc(100dvh - 300px);
         }
 
         @include small-mobile {
@@ -494,16 +501,16 @@ dialog::backdrop {
     }
 
     &--task {
-        top: 64px;
+        top: 74px;
         right: 60px;
 
         @include mobile {
-            top: 30px;
-            right: 30px;
+            top: 24px;
+            right: 16px;
         }
 
         @include tablet {
-            top: 74px;
+            top: 64px;
             right: 64px;
         }
 
@@ -513,8 +520,8 @@ dialog::backdrop {
         }
 
         @include small-mobile {
-            top: 30px;
-            right: 24px;
+            top: 24px;
+            right: 8px;
         }
     }
 }
@@ -684,6 +691,18 @@ dialog::backdrop {
             width: 60%;
         }
 
+
+        @include mobile-tablet {
+            margin-top: 40px;
+        }
+
+        @include small-mobile {
+            margin-top: 25px;
+        }
+
+        @include landscape {
+            margin-top: 0px;
+        }
     }
 }
 
