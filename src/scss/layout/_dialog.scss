@@ -25,18 +25,10 @@ dialog::backdrop {
 
     @include mobile {
         width: 100dvw;
-        // height: calc(100dvh - 80px);
-        // top: 0;
-        // bottom: 80px;
-        // transform: translate(-50%, 0);
-
     }
 
     @include small-mobile {
         width: 100dvw;
-        // height: calc(100dvh - 80px);
-        // top: 0;
-        // bottom: 80px;
         animation: dialogInMobile 250ms ease-out forwards;
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
         max-width: 95%;
@@ -44,33 +36,18 @@ dialog::backdrop {
 
     @include tablet {
         width: 100dvw;
-        // height: calc(100dvh - 160px);
-
     }
 
     @include landscape {
         width: 100dvw;
-        // height: calc(100dvh - 80px);
         animation: dialogInMobile 250ms ease-out forwards;
-        // bottom: 80px;
         height: 100dvh;
         position: fixed;
 
     }
 
-
-    // @include small-mobile-high {
-    //     flex-direction: column;
-    //     max-height: calc(100dvh - 160px);
-    //     top: 80px;
-    //     transform: translate(-50%, 0);
-    // }
     @include small-mobile-high {
         flex-direction: column;
-        max-height: calc(100dvh - 160px);
-        // top: 50%;
-        // transform: translate(-50%, -50%) !important;
-        // height: 70%;
     }
 
     &--task {
@@ -87,16 +64,7 @@ dialog::backdrop {
         width: 540px;
 
         @include widesscreen {
-            // max-height: calc(80dvh - 80px);
             width: 820px;
-        }
-
-        @include small-mobile-high {
-            // flex-direction: column;
-            // max-height: calc(100dvh - 160px);
-            // height: auto;
-            // height: 75%;
-
         }
 
         @include landscape {
@@ -109,23 +77,15 @@ dialog::backdrop {
 
     &--task-view-edit {
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
-        // height: calc(100dvh - 80px);
         width: 540px;
 
-        @include desktop-hd {
-            // max-height: calc(100dvh - 80px);
-        }
-
         @include widesscreen {
-            // max-height: calc(80dvh - 80px);
             width: 820px;
 
         }
 
         @include small-mobile-high {
             flex-direction: column;
-            // max-height: calc(100dvh - 160px);
-            // height: 70%;
         }
 
         @include landscape {
@@ -144,30 +104,11 @@ dialog::backdrop {
             height: 592px;
         }
 
-        @include mobile {
-            // height: 100%;
-        }
-
-        @include tablet {
-            // height: fit-content;
-        }
-
-        @include small-mobile-high {
-            // height: 75%;
-        }
-
-
         @include landscape {
             max-height: none;
             height: 100dvh;
             max-width: none;
             width: 100dvw;
-        }
-
-        @include small-mobile {
-            // height: calc(100dvh - 80px);
-            // top: 0;
-            // bottom: 80px;
         }
     }
 
@@ -177,7 +118,6 @@ dialog::backdrop {
 
 .form-scroll {
     overflow-y: auto;
-
     @include mobile {
         max-height: calc(100dvh - 240px);
     }
@@ -233,12 +173,11 @@ dialog::backdrop {
         flex: 1;
         min-height: 0;
 
-        max-height: calc(100dvh - 320px);
+        // max-height: calc(100dvh - 320px);
 
         @include mobile-tablet {
             flex-direction: column;
             margin: 40px 0 30px;
-
         }
 
         @include small-mobile {
@@ -258,7 +197,7 @@ dialog::backdrop {
 
         @include small-mobile-high {
             flex-direction: column;
-            max-height: calc(75dvh - 160px);
+            max-height: calc(100dvh - 160px);
         }
     }
 
@@ -462,11 +401,6 @@ dialog::backdrop {
         min-height: 0;
     }
 
-    @include widesscreen {
-        justify-content: space-evenly;
-    }
-
-
     &--task {
         flex: 1;
         min-height: 0;
@@ -528,10 +462,7 @@ dialog::backdrop {
     right: 24px;
     z-index: 1001;
 
-    @include landscape {
-        top: 28px;
-        right: 20px;
-    }
+
 
     @include tablet {
         top: 40px;
@@ -541,6 +472,11 @@ dialog::backdrop {
     @include mobile {
         top: 40px;
         right: 24px;
+    }
+
+    @include landscape {
+        top: 28px;
+        right: 20px;
     }
 
 
@@ -635,7 +571,7 @@ dialog::backdrop {
         align-items: flex-start;
         height: 280px;
         position: relative;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
 
 
     }
@@ -726,7 +662,6 @@ dialog::backdrop {
     &--task {
         flex-direction: column;
 
-
         @include desktop-s {
             align-items: flex-start;
             justify-content: flex-start;
@@ -742,6 +677,17 @@ dialog::backdrop {
 
         @include widesscreen {
             width: 100%;
+        }
+
+    }
+
+    &--contact {
+        @include desktop-s {
+            width: 60%;
+        }
+
+        @include widesscreen {
+            width: 60%;
         }
 
     }
@@ -1030,7 +976,7 @@ dialog::backdrop {
     width: 120px;
     height: auto;
 
-    @include mobile{
+    @include mobile {
         width: 100px;
     }
 

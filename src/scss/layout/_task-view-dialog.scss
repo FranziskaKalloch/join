@@ -229,17 +229,13 @@
         right: 20px;
     }
 
-    @include landscape {
-        top: 28px;
-        right: 20px;
-    }
-
-
-
     @include tablet {
         top: 40px;
         right: 24px;
     }
 
-
+        @include landscape {
+        top: 28px;
+        right: 20px;
+    }
 }
