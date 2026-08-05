@@ -10,11 +10,19 @@
   height: calc(100vh - 96px);
   overflow: hidden;
 
-  @media (max-width: 1370px) {
+  
+  @include mobile-tablet{
     padding: 16px;
     height: auto;
     min-height: calc(100vh - 80px);
     padding-top: 20px;
+    overflow-y: visible;
+  }
+
+
+  @include board {
+    height: auto;
+    min-height: calc(100vh - 80px);
     overflow-y: visible;
   }
 
@@ -58,7 +66,7 @@
   margin: 0;
   color: #000000;
 
-  @media (max-width: 1370px) {
+   @include mobile-tablet {
     font-size: 47px;
   }
 }

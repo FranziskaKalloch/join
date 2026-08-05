@@ -49,8 +49,13 @@
   align-self: flex-start;
   font-weight: 400;
 
-  &.technicalTask { background-color: #1fd7c1; }
-  &.userStory { background-color: #0038ff; }
+  &.technicalTask {
+    background-color: #1fd7c1;
+  }
+
+  &.userStory {
+    background-color: #0038ff;
+  }
 }
 
 .task-card__content {
@@ -123,20 +128,21 @@
   display: flex;
   align-items: center;
 
-  &--edit{
-   &:first-child{
-     margin-left: 0px
-   }
+  &--edit {
+    &:first-child {
+      margin-left: 0px
     }
   }
+}
 
-  .task-card__assignees-edit {
+.task-card__assignees-edit {
   display: flex;
   align-items: center;
-   &:first-child{
-     margin-left: 0px
-    }
+
+  &:first-child {
+    margin-left: 0px
   }
+}
 
 .assignee-badge {
   width: 32px;
@@ -152,8 +158,8 @@
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.16);
   margin-left: -8px;
 
-  &:first-child { 
-    margin-left: 0; 
+  &:first-child {
+    margin-left: 0;
   }
 
   &.extra-badge {
@@ -176,7 +182,7 @@
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.16);
   margin-left: -8px;
   margin-top: 8px;
-  
+
 
   &.extra-badge {
     background-color: #f4f4f4;
@@ -190,7 +196,9 @@
   flex-shrink: 0;
 }
 
-.wrapper-task-card-edit{
+.wrapper-task-card-edit {
   margin-left: 8px;
   height: 36px;
+  display: flex;
+  align-items: center;
 }

@@ -3,12 +3,12 @@
 .header-headline {
     font-size: 20px;
     line-height: 120%;
-    @include page-padding;
+     padding-inline: 48px;
 
-    @include board{
-        padding-inline: 16px;
+    // @include board{
+    //     padding-inline: 16px;
 
-    }
+    // }
 }
 
 .header-content {
