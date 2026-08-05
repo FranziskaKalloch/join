@@ -28,14 +28,6 @@
         @include desktop-md {
             max-width: 80dvw;
         }
-
-        // @include tablet {
-        //     padding-top: 96px;
-        // }
-
-        // @include landscape {
-        //     padding-top: 80px;
-        // }
     }
 }
 
@@ -81,7 +73,7 @@
     }
 }
 
-.content-add-task {
+.content--add-task {
     padding: 48px;
     display: flex;
     flex: 1;
@@ -95,11 +87,11 @@
     }
 
     @include mobile {
-        padding: 40px 8px;
+        padding: 16px 8px;
     }
 
     @include landscape {
-        padding: 28px 20px;
+        padding: 8px 20px;
     }
 
     @include desktop-s {

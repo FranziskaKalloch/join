@@ -35,24 +35,24 @@
             <div class="task-view-assigned-to-list">
 
                 <span class="task-view-label">Assigned to:</span>
-  <div class="assigned-scroll">
-                @for (contactId of task.assignedContactIds; track contactId) {
+                <div class="assigned-scroll">
+                    @for (contactId of task.assignedContactIds; track contactId) {
 
-                @if (getContact(contactId); as contact) {
+                    @if (getContact(contactId); as contact) {
 
-                <div class="task-view-assigned-user">
+                    <div class="task-view-assigned-user">
 
-                    <app-user-bubble [initials]="contact.initials ?? ''" [color]="contact.colors ?? ''" />
+                        <app-user-bubble [initials]="contact.initials ?? ''" [color]="contact.colors ?? ''" />
 
-                    <span>
-                        {{ contact.firstname }} {{ contact.lastname }}
-                    </span>
+                        <span>
+                            {{ contact.firstname }} {{ contact.lastname }}
+                        </span>
 
-                </div>
+                    </div>
 
-                }
+                    }
 
-                }
+                    }
                 </div>
 
             </div>

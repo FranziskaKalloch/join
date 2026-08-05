@@ -22,7 +22,6 @@ dialog::backdrop {
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
     }
 
-
     @include mobile {
         width: 100dvw;
     }
@@ -111,13 +110,11 @@ dialog::backdrop {
             width: 100dvw;
         }
     }
-
-
-
 }
 
 .form-scroll {
     overflow-y: auto;
+
     @include mobile {
         max-height: calc(100dvh - 240px);
     }
@@ -135,13 +132,13 @@ dialog::backdrop {
 
         @include mobile {
             flex-direction: column;
-            max-height: calc(100dvh - 360px);
+            // max-height: calc(100dvh - 405px);
 
         }
 
         @include tablet {
             flex-direction: column;
-            max-height: calc(100dvh - 410px);
+            // max-height: calc(100dvh - 405px);
 
         }
 
@@ -150,17 +147,37 @@ dialog::backdrop {
             max-height: calc(100dvh - 315px);
         }
 
-        @include small-mobile-high {
-            flex-direction: column;
-            max-height: calc(100dvh - 390px);
-        }
-
         @include widesscreen {
             flex: unset;
         }
 
         @include landscape {
             margin-top: 10px;
+            max-height: calc(100dvh - 270px);
+        }
+
+    }
+
+    &--task-dialog {
+        @include mobile {
+            flex-direction: column;
+            // max-height: calc(100dvh - 405px);
+
+        }
+
+        @include tablet {
+            flex-direction: column;
+            max-height: calc(100dvh - 405px);
+
+        }
+
+        @include small-mobile {
+            flex-direction: column;
+            max-height: calc(100dvh - 315px);
+        }
+
+
+        @include landscape {
             max-height: calc(100dvh - 270px);
         }
 
@@ -177,7 +194,7 @@ dialog::backdrop {
 
         @include mobile-tablet {
             flex-direction: column;
-            margin: 40px 0 30px;
+            margin: 50px 0 30px;
         }
 
         @include small-mobile {
@@ -193,11 +210,6 @@ dialog::backdrop {
 
         @include landscape {
             max-height: calc(100dvh - 140px);
-        }
-
-        @include small-mobile-high {
-            flex-direction: column;
-            max-height: calc(100dvh - 160px);
         }
     }
 
@@ -368,13 +380,15 @@ dialog::backdrop {
             padding: 14px 12px;
         }
 
+        @include tablet {
+            padding: 48px 74px;
+        }
 
         @include landscape {
             padding: 14px 12px;
         }
-
-
     }
+
 }
 
 .dialog-wrapper-inner {
@@ -785,7 +799,7 @@ dialog::backdrop {
         }
 
         @include mobile {
-            font-size: 47px;
+            font-size: 36px;
             padding-top: 0px;
             padding-bottom: 20px;
         }

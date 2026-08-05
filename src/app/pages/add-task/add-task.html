@@ -1,6 +1,6 @@
 <section class="add-tasks" [class.add-tasks--page]="!isDialog">
   <div [class.dialog-content]="isTaskDialog()" [class.dialog-content--task]="isTaskDialog()"
-    [class.content-add-task]="!isTaskDialog()">
+    [class.content--add-task]="!isTaskDialog()">
     <div class="add-task-top">
       @if (!isEditMode) {
       <h1 class="dialog-headline dialog-headline--task" [class.dialog-headline--page]="!isDialog">
@@ -17,7 +17,7 @@
     <div class="dialog-wrapper-inner dialog-wrapper-inner--task">
       <div class="dialog-form dialog-form--task">
         <form [formGroup]="addTaskForm" class="add-tasks__form" (ngSubmit)="onSubmit()">
-          <div class="form-scroll form-scroll--task" [class.form-scroll--edit]="isEditMode">
+          <div class="form-scroll form-scroll--task" [class.form-scroll--edit]="isEditMode"  [class.form-scroll--task-dialog]="!isTaskDialog()">
             <div class="dialog-left dialog-left--task">
               <div class="form-cell form-cell--task">
                 <div class="form-cell-label">
