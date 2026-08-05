@@ -138,13 +138,13 @@ dialog::backdrop {
 
         @include tablet {
             flex-direction: column;
-            // max-height: calc(100dvh - 405px);
+            max-height: calc(100dvh - 310px);
 
         }
 
         @include small-mobile {
             flex-direction: column;
-            max-height: calc(100dvh - 315px);
+            // max-height: calc(100dvh - 315px);
         }
 
         @include widesscreen {
@@ -153,7 +153,8 @@ dialog::backdrop {
 
         @include landscape {
             margin-top: 10px;
-            max-height: calc(100dvh - 270px);
+            max-height: calc(100dvh - 170px);
+
         }
 
     }
@@ -161,7 +162,7 @@ dialog::backdrop {
     &--task-dialog {
         @include mobile {
             flex-direction: column;
-            // max-height: calc(100dvh - 405px);
+            max-height: calc(100dvh - 330px);
 
         }
 
@@ -200,7 +201,7 @@ dialog::backdrop {
         @include small-mobile {
             flex-direction: column;
             max-height: calc(100dvh - 200px);
-            margin: 30px 0 10px;
+            margin: 40px 0 10px;
         }
 
         @include widesscreen {
@@ -210,6 +211,20 @@ dialog::backdrop {
 
         @include landscape {
             max-height: calc(100dvh - 140px);
+        }
+
+        @include desktop-md {
+            max-height: calc(100dvh - 300px);
+
+        }
+        
+        @include desktop-hd {
+            max-height: calc(100dvh - 290px);
+
+        }
+
+        @include desktop-s {
+            max-height: calc(100dvh - 300px);
         }
     }
 

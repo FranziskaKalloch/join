@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject, input } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { DialogService, DialogType } from '../../../../services/dialog/dialog.service';
 import { ContactService } from '../../../../services/contacts/contact.service';
 import { Task } from '../../../../interfaces/task/task';

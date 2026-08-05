@@ -17,7 +17,7 @@
     <div class="dialog-wrapper-inner dialog-wrapper-inner--task">
       <div class="dialog-form dialog-form--task">
         <form [formGroup]="addTaskForm" class="add-tasks__form" (ngSubmit)="onSubmit()">
-          <div class="form-scroll form-scroll--task" [class.form-scroll--edit]="isEditMode"  [class.form-scroll--task-dialog]="!isTaskDialog()">
+          <div class="form-scroll form-scroll--task" [class.form-scroll--edit]="isEditMode" [class.form-scroll--task-dialog]="!isDialog">
             <div class="dialog-left dialog-left--task">
               <div class="form-cell form-cell--task">
                 <div class="form-cell-label">
