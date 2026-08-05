@@ -147,10 +147,8 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
-        margin-top: 80px
     }
-
-    @include landscape {
+        @include landscape {
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
@@ -513,7 +511,7 @@
     font-weight: 500;
     line-height: 120%;
 
-    @include small-mobile {
+    @include small-mobile{
         text-align: center;
         font-size: 36px;
     }
@@ -525,8 +523,8 @@
     line-height: 120%;
     color: $header-avatar;
     text-align: center;
-
-    @include small-mobile {
+    
+    @include small-mobile{
         font-size: 48px;
     }
 }

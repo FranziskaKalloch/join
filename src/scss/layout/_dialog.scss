@@ -80,7 +80,6 @@ dialog::backdrop {
 
         @include widesscreen {
             width: 820px;
-
         }
 
         @include small-mobile-high {
@@ -132,8 +131,6 @@ dialog::backdrop {
 
         @include mobile {
             flex-direction: column;
-            // max-height: calc(100dvh - 405px);
-
         }
 
         @include tablet {
@@ -144,7 +141,6 @@ dialog::backdrop {
 
         @include small-mobile {
             flex-direction: column;
-            // max-height: calc(100dvh - 315px);
         }
 
         @include widesscreen {
@@ -191,8 +187,6 @@ dialog::backdrop {
         flex: 1;
         min-height: 0;
 
-        // max-height: calc(100dvh - 320px);
-
         @include mobile-tablet {
             flex-direction: column;
             margin: 50px 0 30px;
@@ -217,7 +211,7 @@ dialog::backdrop {
             max-height: calc(100dvh - 300px);
 
         }
-        
+
         @include desktop-hd {
             max-height: calc(100dvh - 290px);
 
@@ -310,21 +304,6 @@ dialog::backdrop {
     }
 
 }
-
-// @include small-mobile {
-//     @keyframes dialogInMobile {
-//         from {
-//             transform: translate(-50%, calc(-50% + 100vh));
-//             opacity: 0;
-//         }
-
-//         to {
-//             transform: translate(-50%, -50%);
-//             opacity: 1;
-//         }
-
-//     }
-// }
 
 @include mobile {
     @keyframes dialogInMobile {
@@ -587,8 +566,7 @@ dialog::backdrop {
         align-items: flex-start;
         height: 280px;
         position: relative;
-        margin-bottom: 40px;
-
+        // margin-bottom: 40px;
     }
 
 
@@ -600,26 +578,13 @@ dialog::backdrop {
         align-items: flex-start;
         height: 280px;
         position: relative;
-        margin-bottom: 40px;
-
-
+        // margin-bottom: 40px;
     }
-
-    // @include tablet {
-    //     padding: 16px;
-    //     width: 100%;
-    //     border-top-left-radius: 0px;
-    //     border-bottom-left-radius: 0px;
-    //     align-items: flex-start;
-    //     height: 351px;
-    //     position: relative;
-    // }
-
 
     @include small-mobile {
         height: 180px;
         width: 100%;
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
     }
 
     @include desktop-md {
@@ -701,7 +666,7 @@ dialog::backdrop {
         }
 
         @include small-mobile {
-            margin-top: 25px;
+            // margin-top: 25px;
         }
 
         @include widesscreen {
@@ -894,22 +859,16 @@ dialog::backdrop {
         display: flex;
         justify-self: unset;
         justify-content: space-between;
-        // align-items: flex-start;
 
         @include small-mobile {
             padding-top: 10px;
-            // width: calc(100dvw - 16px);
         }
 
         @include landscape {
             padding-top: 0px;
             width: calc(100dvw - 16px);
         }
-
     }
-
-
-
 }
 
 .dialog-form form {
@@ -1093,8 +1052,6 @@ dialog::backdrop {
         border-color: $grey-form-blue;
         outline: none;
     }
-
-
 }
 
 .user-dialog--task-view-edit .form-cell input {
@@ -1179,7 +1136,6 @@ dialog::backdrop {
 
     @include small-mobile {
         font-size: 16px;
-
     }
 }
 

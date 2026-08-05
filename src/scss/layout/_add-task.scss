@@ -98,6 +98,15 @@
         padding: 48px 40px;
     }
 
+    @include desktop-md {
+        padding: 48px 48px 40px;
+    }
+
+    @include desktop-hd {
+        padding: 48px 48px 30px;
+    }
+
+
     @include small-mobile {
         padding: 20px 8px 20px;
     }
@@ -117,7 +126,8 @@
         margin: 0 40px;
 
     }
-    @include mobile{
+
+    @include mobile {
         display: none;
     }
 }
