@@ -9,6 +9,8 @@
           <div class="header-user-avatar">
             @if (currentUserContact(); as contact) {
               {{ contact.initials }}
+            } @else {
+              G
             }
           </div>
         </button>
