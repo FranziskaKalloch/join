@@ -1,38 +1,49 @@
 name: Deploy Join
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Repository herunterladen
-              uses: actions/checkout@v4
+    steps:
+      - name: Repository herunterladen
+        uses: actions/checkout@v4
 
-            - name: Node.js einrichten
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 22
-                  cache: npm
+      - name: Node.js einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
 
-            - name: Abhängigkeiten installieren
-              run: npm ci
+      - name: Abhängigkeiten installieren
+        run: npm ci
 
-            - name: Join bauen
-              run: npm run build
+      - name: Environment-Datei erstellen
+        run: |
+          mkdir -p src/environments
+          cat > src/environments/environment.ts <<EOF
+          export const environment = {
+            production: true,
+            supabaseUrl: '${{ secrets.SUPABASE_URL }}',
+            supabaseKey: '${{ secrets.SUPABASE_KEY }}',
+          };
+          EOF
 
-            - name: Join auf Netcup übertragen
-              uses: appleboy/scp-action@v1
-              with:
-                  host: ${{ secrets.HOST }}
-                  username: ${{ secrets.USERNAME }}
-                  password: ${{ secrets.PASSWORD }}
-                  port: 22
-                  source: dist/join/browser/*
-                  target: join.franziska-kalloch.de/httpdocs
-                  strip_components: 3
-                  overwrite: true
+      - name: Join bauen
+        run: npm run build
+
+      - name: Join auf Netcup übertragen
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: 22
+          source: dist/join/browser/*
+          target: join.franziska-kalloch.de/httpdocs
+          strip_components: 3
+          overwrite: true
