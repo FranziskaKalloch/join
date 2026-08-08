@@ -2,7 +2,7 @@ Join – Kanban Project Management Tool
 
 A modern Kanban-based task management application developed as a collaborative team project during my web development training.
 
-✨ Features
+Features
 
 * User authentication
 * Kanban board with drag & drop
@@ -13,7 +13,7 @@ A modern Kanban-based task management application developed as a collaborative t
 * Responsive design
 * Guest login
 
-🛠️ Built With
+Built With
 
 * Angular
 * TypeScript
@@ -22,7 +22,7 @@ A modern Kanban-based task management application developed as a collaborative t
 * SCSS
 * RxJS
 
-🤝 Team Project
+Team Project
 
 This project was developed collaboratively as part of the Developer Akademie.
 
