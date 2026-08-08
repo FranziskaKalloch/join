@@ -6,7 +6,6 @@
 /out-tsc
 /bazel-out
 /src/environments/
-/.github
 
 # Node
 /node_modules
